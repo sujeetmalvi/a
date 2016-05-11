@@ -29,6 +29,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d-M-Y',
+            'datetimeFormat' => 'php:d-M-Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
+            
+        ]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -39,4 +46,5 @@ return [
         */
     ],
     'params' => $params,
+    
 ];

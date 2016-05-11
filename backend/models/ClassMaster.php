@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "_class_master".
@@ -18,6 +20,7 @@ use Yii;
  */
 class ClassMaster extends \yii\db\ActiveRecord
 {
+    
     /**
      * @inheritdoc
      */
@@ -26,15 +29,27 @@ class ClassMaster extends \yii\db\ActiveRecord
         return '_class_master';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'status', 'created_at', 'updated_at'], 'required'],
+            [['name',], 'required'],
             [['status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+           
             [['name'], 'string', 'max' => 9],
             [['name'], 'unique'],
         ];
