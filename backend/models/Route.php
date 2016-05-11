@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_route".
@@ -37,6 +39,21 @@ class Route extends \yii\db\ActiveRecord
             [['starting_point', 'end_point'], 'string', 'max' => 90],
         ];
     }
+
+    /**
+     * timestamp Behaviour
+     */
+
+    public function behaviours(){
+        return [
+            'class'=>TimestampBehavior::classname(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+        ]
+
+    }
+
 
     /**
      * @inheritdoc

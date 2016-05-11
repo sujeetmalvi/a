@@ -3,7 +3,8 @@
 namespace backend\models;
 
 use Yii;
-
+use yii\db\Expression;
+use yii\behaviours\TimestampBehavior;
 /**
  * This is the model class for table "_fee_master".
  *
@@ -25,6 +26,21 @@ class FeeMaster extends \yii\db\ActiveRecord
     {
         return '_fee_master';
     }
+
+    /**
+     * timestamp Behaviour
+     */
+
+    public function behaviours(){
+        return [
+            'class'=>TimestampBehavior::classname(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+        ]
+
+    }
+
 
     /**
      * @inheritdoc

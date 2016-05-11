@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_class_section_relation".
@@ -25,6 +27,22 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
     {
         return '_class_section_relation';
     }
+
+    /**
+     * timestamp Behaviour
+     */
+
+    public function behaviours(){
+        return [
+            'class'=>TimestampBehavior::classname(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+        ]
+
+    }
+
+
 
     /**
      * @inheritdoc

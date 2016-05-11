@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_district".
@@ -38,6 +40,22 @@ class District extends \yii\db\ActiveRecord
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state_id' => 'id']],
         ];
     }
+
+    /**
+     * timestamp Behaviour
+     */
+
+    public function behaviours(){
+        return [
+            'class'=>TimestampBehavior::classname(),
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+            'value' => new Expression('NOW()'),
+        ]
+
+    }
+
+
 
     /**
      * @inheritdoc
