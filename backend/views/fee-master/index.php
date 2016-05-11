@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use backend\models\ClassMaster;
+use backend\models\FeeType;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FeeMasterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,11 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'class_id',
+          //  'id',
+             [
+                'attribute'=>'class_id',
+                'value'=>'class.name',
+                'filter' => Html::activeDropDownList($searchModel, 'class_id', ArrayHelper::map(ClassMaster::find()->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Class To Filter']),
+            ],
             'name',
-            'type_id',
-            'created_at',
+            [
+                'attribute'=>'type_id',
+                'value'=>'type.name',
+                'filter' => Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(FeeType::find()->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Fee Type To Filter']),
+            ],
+          //  'created_at',
             // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],

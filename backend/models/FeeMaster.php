@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\db\Expression;
 use yii\behaviours\TimestampBehavior;
+use backend\models\ClassMaster;
 /**
  * This is the model class for table "_fee_master".
  *
@@ -77,5 +78,12 @@ class FeeMaster extends \yii\db\ActiveRecord
     public function getType()
     {
         return $this->hasOne(FeeType::className(), ['id' => 'type_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClass()
+    {
+        return $this->hasOne(ClassMaster::className(), ['id' => 'class_id']);
     }
 }

@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use backend\models\ClassMaster;
+use yii\helpers\ArrayHelper;
+use backend\models\Section;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ClassSectionRelationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,11 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'class_id',
             [
                 'attribute'=>'class_id',
-                'value'=>'class.name'
+                'value'=>'class.name',
+                'filter' => Html::activeDropDownList($searchModel, 'class_id', ArrayHelper::map(ClassMaster::find()->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Class To Filter']),
             ],
             [
                 'attribute'=>'section_id',
-                'value'=>'section.name'
+                'value'=>'section.name',
+                'filter' => Html::activeDropDownList($searchModel, 'section_id', ArrayHelper::map(Section::find()->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Section To Filter']),
             ],
            // 'section_id',
           //  'created_at',
