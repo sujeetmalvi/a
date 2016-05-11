@@ -38,7 +38,7 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
             'createdAtAttribute' => 'created_at',
             'updatedAtAttribute' => 'updated_at',
             'value' => new Expression('NOW()'),
-        ]
+        ];
 
     }
 
@@ -66,8 +66,8 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'class_id' => Yii::t('app', 'Class ID'),
-            'section_id' => Yii::t('app', 'Section ID'),
+            'class_id' => Yii::t('app', 'Class'),
+            'section_id' => Yii::t('app', 'Section'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

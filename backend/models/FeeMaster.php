@@ -37,7 +37,7 @@ class FeeMaster extends \yii\db\ActiveRecord
             'createdAtAttribute' => 'created_at',
             'updatedAtAttribute' => 'updated_at',
             'value' => new Expression('NOW()'),
-        ]
+        ];
 
     }
 
@@ -63,9 +63,9 @@ class FeeMaster extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'class_id' => Yii::t('app', 'Class ID'),
-            'name' => Yii::t('app', 'Name'),
-            'type_id' => Yii::t('app', 'Type ID'),
+            'class_id' => Yii::t('app', 'Class '),
+            'name' => Yii::t('app', 'Amount'),
+            'type_id' => Yii::t('app', 'Type'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

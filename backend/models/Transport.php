@@ -37,7 +37,7 @@ class Transport extends \yii\db\ActiveRecord
             'createdAtAttribute' => 'created_at',
             'updatedAtAttribute' => 'updated_at',
             'value' => new Expression('NOW()'),
-        ]
+        ];
 
     }
 

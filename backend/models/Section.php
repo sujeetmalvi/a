@@ -11,8 +11,8 @@ use yii\behaviours\TimestampBehavior;
  *
  * @property integer $id
  * @property string $name
- * @property integer $updated_at
- * @property integer $created_at
+ * @property string $updated_at
+ * @property string $created_at
  *
  * @property ClassSectionRelation[] $classSectionRelations
  * @property ClassMaster[] $classes
@@ -37,7 +37,7 @@ class Section extends \yii\db\ActiveRecord
             'createdAtAttribute' => 'created_at',
             'updatedAtAttribute' => 'updated_at',
             'value' => new Expression('NOW()'),
-        ]
+        ];
 
     }
 

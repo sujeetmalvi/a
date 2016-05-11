@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use backend\models\ClassMaster;
+use backend\models\FeeType;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\FeeMaster */
@@ -12,11 +15,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'class_id')->textInput() ?>
+    <?= $form->field($model, 'class_id')->dropDownList(ArrayHelper::map(ClassMaster::find()->all(),'id','name'),['prompt'=>'Select Class']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type_id')->textInput() ?>
+    <?= $form->field($model, 'type_id')->dropDownList(ArrayHelper::map(FeeType::find()->all(),'id','name'),
+    ['prompt'=>'Please Select Fee Type']) ?>
 
   
 
