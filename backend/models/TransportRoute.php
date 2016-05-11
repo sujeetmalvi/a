@@ -48,9 +48,9 @@ class TransportRoute extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['transport_id', 'route_id', 'created_at', 'updated_at'], 'required'],
+            [['transport_id', 'route_id'], 'required'],
             [['transport_id', 'route_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            
             [['route_id'], 'exist', 'skipOnError' => true, 'targetClass' => Route::className(), 'targetAttribute' => ['route_id' => 'id']],
             [['transport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Transport::className(), 'targetAttribute' => ['transport_id' => 'id']],
         ];

@@ -34,8 +34,8 @@ class Route extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['starting_point', 'end_point', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['starting_point', 'end_point'], 'required'],
+           
             [['starting_point', 'end_point'], 'string', 'max' => 90],
         ];
     }

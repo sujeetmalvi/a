@@ -50,10 +50,10 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['class_id', 'section_id', 'created_at', 'updated_at'], 'required'],
+            [['class_id', 'section_id'], 'required'],
             [['class_id', 'section_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['class_id', 'section_id'], 'unique', 'targetAttribute' => ['class_id', 'section_id'], 'message' => 'The combination of Class ID and Section ID has already been taken.'],
+          
+            [['class_id', 'section_id'], 'unique', 'targetAttribute' => ['class_id', 'section_id'], 'message' => 'The combination of Class  and Section  has already exists.'],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['class_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClassMaster::className(), 'targetAttribute' => ['class_id' => 'id']],
         ];

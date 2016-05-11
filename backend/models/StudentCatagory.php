@@ -47,8 +47,8 @@ class StudentCatagory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'discount_in_fee', 'discount_in_adm', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['name', 'discount_in_fee', 'discount_in_adm'], 'required'],
+           
             [['name'], 'string', 'max' => 60],
             [['discount_in_fee', 'discount_in_adm'], 'string', 'max' => 11],
             [['name'], 'unique'],

@@ -33,9 +33,9 @@ class District extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['state_id', 'name', 'created_at', 'updated_at'], 'required'],
+            [['state_id', 'name'], 'required'],
             [['state_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+           
             [['name'], 'string', 'max' => 100],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => State::className(), 'targetAttribute' => ['state_id' => 'id']],
         ];

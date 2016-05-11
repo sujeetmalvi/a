@@ -48,8 +48,8 @@ class PaymentMode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['mode', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['mode'], 'required'],
+           
             [['mode'], 'string', 'max' => 90],
         ];
     }

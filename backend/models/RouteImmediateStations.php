@@ -48,9 +48,9 @@ class RouteImmediateStations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['route_id', 'name', 'created_at', 'updated_at'], 'required'],
+            [['route_id', 'name'], 'required'],
             [['route_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+          
             [['name'], 'string', 'max' => 90],
             [['route_id'], 'exist', 'skipOnError' => true, 'targetClass' => Route::className(), 'targetAttribute' => ['route_id' => 'id']],
         ];

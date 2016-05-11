@@ -47,8 +47,8 @@ class State extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['name'], 'required'],
+           
             [['name'], 'string', 'max' => 90],
             [['name'], 'unique'],
         ];

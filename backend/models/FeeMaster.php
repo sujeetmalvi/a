@@ -48,9 +48,9 @@ class FeeMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['class_id', 'name', 'type_id', 'created_at', 'updated_at'], 'required'],
+            [['class_id', 'name', 'type_id',], 'required'],
             [['class_id', 'type_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            
             [['name'], 'string', 'max' => 90],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => FeeType::className(), 'targetAttribute' => ['type_id' => 'id']],
         ];

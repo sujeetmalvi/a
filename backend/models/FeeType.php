@@ -33,9 +33,9 @@ class FeeType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'status', 'created_at', 'updated_at'], 'required'],
+            [['name', 'status'], 'required'],
             [['status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+           
             [['name'], 'string', 'max' => 90],
         ];
     }
