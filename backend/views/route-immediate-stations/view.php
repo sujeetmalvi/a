@@ -29,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'route_id',
+           // 'route_id',
+            [
+                'attribute'=>'route_id',
+                'value'=>$model->route->end_point,
+            ],
             'name',
            // 'created_at',
            // 'updated_at',

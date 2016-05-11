@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use backend\models\Route;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\RouteImmediateStationsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,8 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'route_id',
+            [
+                'attribute'=>'route_id',
+                'value'=>'route.end_point',
+                'filter'=>Html::activeDropDownList($searchModel,'route_id',ArrayHelper::map(Route::find()->all(),'id','end_point'),[
+                        'prompt'=>'Please Select Route For Filter',
+                        'class'=>'form-control'
+                    ]),
+            ],
             'name',
             'created_at',
             'updated_at',

@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use backend\models\State;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\DistrictSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create District'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Add New District'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,11 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'state_id',
+            //'id',
+          //  'state_id',
+            [
+                'attribute'=>'state_id',
+                'value'=>'state.name',
+                'filter'=>Html::activeDropDownList($searchModel,'state_id',ArrayHelper::map(State::find()->all(),'id','name'),
+                    [
+                        'prompt'=>'Please Select State To Filter',
+                        'class'=>'form-control'
+                    ]),
+            ],
             'name',
-            'created_at',
-            'updated_at',
+           // 'created_at',
+          //  'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
