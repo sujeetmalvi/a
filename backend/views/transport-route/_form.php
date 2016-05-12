@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Arrayhelper;
+use backend\models\Transport;
+use backend\models\Route;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\TransportRoute */
@@ -12,9 +15,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'transport_id')->textInput() ?>
+    <?= $form->field($model, 'transport_id')->dropDownList(Arrayhelper::map(Transport::find()->all(),'id','number_plate'),['prompt'=>'Select Transport Number']) ?>
 
-    <?= $form->field($model, 'route_id')->textInput() ?>
+    <?= $form->field($model, 'route_id')->dropDownList(Arrayhelper::map(Route::find()->all(),'id','end_point'),['prompt'=>'Select Route']) ?>
 
    
     <div class="form-group">

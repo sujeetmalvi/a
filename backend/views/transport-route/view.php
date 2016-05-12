@@ -29,8 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'transport_id',
-            'route_id',
+           // 'transport_id',
+            [
+                'attribute'=>'transport_id',
+                'value'=>$model->transport->number_plate,
+            ],
+            [
+                'attribute'=>'route_id',
+                'value'=>$model->route->end_point,
+            ],
+           // 'route_id',
             //'created_at',
            // 'updated_at',
         ],
