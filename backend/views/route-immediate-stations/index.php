@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel backend\models\RouteImmediateStationsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Route Immediate Stations');
+$this->title = Yii::t('app', 'Route Intermediate Stations');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="route-immediate-stations-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Route Immediate Stations'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Add Route Intermediate Stations'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
            // 'id',
-            'route_id',
+           // 'route_id',
             [
                 'attribute'=>'route_id',
                 'value'=>'route.end_point',
