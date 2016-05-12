@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
 $this->title = Yii::t('app', 'Route Intermediate Stations');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="route-immediate-stations-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d189ff2b68d4936afcd5d816113178dc",
-    "content-hash": "4283ebd2d7eb52612af641ff7c24686d",
+    "hash": "e89d374f1de2d568965685834515fa6a",
+    "content-hash": "41df8b42f7a997cf9c009919c6c66fa7",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -131,6 +131,52 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/pace",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HubSpot/pace.git",
+                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HubSpot/pace/zipball/c6846cbf6b928e9903b569269fa9fbf32f2554f4",
+                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "pace.js",
+                "bower-asset-ignore": [
+                    ".*",
+                    "Gruntfile.coffee",
+                    "bower_components",
+                    "docs",
+                    "node_modules",
+                    "package.json",
+                    "templates",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Automatic page load progress bar",
+            "keywords": [
+                "activity",
+                "ajax",
+                "automatic",
+                "bar",
+                "client-side",
+                "load",
+                "loading",
+                "pageload",
+                "progress",
+                "progress",
+                "spinner"
             ]
         },
         {
@@ -493,6 +539,52 @@
                 "mailer"
             ],
             "time": "2016-05-01 08:45:47"
+        },
+        {
+            "name": "uran1980/yii2-pace-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uran1980/yii2-pace-widget.git",
+                "reference": "ecb8596fed3d70646015a26773f6c9cade0d7b81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uran1980/yii2-pace-widget/zipball/ecb8596fed3d70646015a26773f6c9cade0d7b81",
+                "reference": "ecb8596fed3d70646015a26773f6c9cade0d7b81",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/pace": "*",
+                "yiisoft/yii2": "~2"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "uran1980\\yii\\widgets\\pace\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Yakovlev",
+                    "email": "uran1980@gmail.com",
+                    "homepage": "https://github.com/uran1980",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An Yii2 widget for automatic web page progress bar.",
+            "homepage": "https://github.com/uran1980/yii2-pace-widget",
+            "keywords": [
+                "PACE",
+                "widgets",
+                "yii2",
+                "yii2-pace-widget"
+            ],
+            "time": "2015-03-12 23:32:34"
         },
         {
             "name": "yiisoft/yii2",
@@ -1046,7 +1138,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-datecontrol": 20
+        "kartik-v/yii2-datecontrol": 20,
+        "uran1980/yii2-pace-widget": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

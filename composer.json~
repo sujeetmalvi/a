@@ -19,7 +19,7 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
-	"uran1980/yii2-pace-widget": "dev-master"
+	"ercling/yii2-pace": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

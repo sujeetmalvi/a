@@ -12,6 +12,10 @@ use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
+<?php echo uran1980\yii\widgets\pace\Pace::widget([
+    'color' => 'blue',
+    'theme' => 'flash',
+]); ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
