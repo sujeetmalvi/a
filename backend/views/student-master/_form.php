@@ -53,7 +53,7 @@ use backend\models\District;
             <div class="panel-body">
             <?= $form->field($model, 'class')->textInput() ?>
             <?= $form->field($model, 'section')->textInput() ?>
-            <?= $form->field($model, 'transport_status')->dropDownList([ 'school' => 'School', 'self' => 'Self', ], ['prompt' => '']) ?>
+            <?= $form->field($model, 'transport_status')->dropDownList([ 'school' => 'School', 'self' => 'Self', ], ['prompt' => 'Please Select']) ?>
             <?= $form->field($model, 'catagory')->textInput() ?>
             <?= $form->field($model, 'physically_disabled')->textInput() ?>
             <?= $form->field($model, 'special_discount')->textInput() ?>
@@ -77,9 +77,12 @@ use backend\models\District;
             </div>
             <div class="col-md-6">
             <?= $form->field($model, 'cur_state')->dropDownList(Arrayhelper::map(State::find()->all(),'id','name'),[
-                'prompt'=>'Please Select State'
+                'prompt'=>'Please Select State',
+                'onchange'=>'$.post( "index.php?r=district/lists&id='.'"+$(this).val(), function( data ){
+                                         $( "select#studentmaster-cur_district" ).html( data );
+                                           });'
             ]) ?>
-            <?= $form->field($model, 'cur_district')->textInput() ?>
+            <?= $form->field($model, 'cur_district')->dropDownList(ArrayHelper::map(District::find()->all(),'id','name'),['prompt'=>'Select District'])  ?>
             <?= $form->field($model, 'cur_po')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'cur_pincode')->textInput() ?>
             <?= $form->field($model, 'cur_contact')->textInput(['maxlength' => true]) ?>
@@ -102,9 +105,12 @@ use backend\models\District;
             </div>
             <div class="col-md-6">
             <?= $form->field($model, 'per_state')->dropDownList(Arrayhelper::map(State::find()->all(),'id','name'),[
-                'prompt'=>'Please Select State'
+                'prompt'=>'Please Select State',
+                'onchange'=>'$.post( "index.php?r=district/lists&id='.'"+$(this).val(), function( data ){
+                                         $( "select#studentmaster-per_district" ).html( data );
+                                           });'
             ]) ?>
-            <?= $form->field($model, 'per_district')->textInput() ?>
+            <?= $form->field($model, 'per_district')->dropDownList(ArrayHelper::map(District::find()->all(),'id','name'),['prompt'=>'Select District'])  ?>
             <?= $form->field($model, 'per_po')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'per_pincode')->textInput() ?>
             <?= $form->field($model, 'per_contact')->textInput(['maxlength' => true]) ?>

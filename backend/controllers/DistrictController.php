@@ -106,6 +106,28 @@ class DistrictController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionLists($id)
+    {
+        $countBranches = District::find()
+                ->where(['state_id' => $id])
+                ->count();
+ 
+        $branches = District::find()
+                ->where(['state_id' => $id])
+                ->all();
+ 
+        if($countBranches > 0 )
+        {
+            foreach($branches as $branch ){
+                echo "<option value='".$branch->id."'>".$branch->name."</option>";
+            }
+        }
+        else{
+            echo "<option> - </option>";
+        }
+ 
+    }
+
     /**
      * Finds the District model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
