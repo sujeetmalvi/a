@@ -46,6 +46,8 @@ AppAsset::register($this);
     } else {
         //configuration menu starts here
 
+        $menuItems[]='<li><a href="index.php?r=student-master">Admission</a></li>';
+
          $menuItems[]='
          <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Configuration <b class="caret"></b></a>
             <ul class="dropdown-menu">
