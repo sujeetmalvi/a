@@ -56,6 +56,9 @@ class StudentInitial extends \yii\db\ActiveRecord
         return 'student_initial';
     }
 
+
+    
+
     /**
      * @inheritdoc
      */

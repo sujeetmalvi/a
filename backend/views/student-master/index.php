@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Student Master'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'New Admission'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,15 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'adm_no',
-            'dob',
+           // 'dob',
             'gender',
             // 'bloog_group',
             // 'stu_email:email',
             // 'photo',
-            // 'fname',
+             'fname',
             // 'mname',
             // 'f_occupation',
             // 'm_occupation',
@@ -54,9 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'per_state',
             // 'per_pincode',
             // 'per_contact',
-            // 'class',
-            // 'section',
-            // 'roll_no',
+             'class',
+             'section',
+             'roll_no',
             // 'transport_status',
             // 'catagory',
             // 'physically_disabled',

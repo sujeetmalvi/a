@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Section;
-use backend\models\SectionSearch;
+use backend\models\StudentAdmission;
+use backend\models\StudentAdmissionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\ClassSectionRelation;
+
 /**
- * SectionController implements the CRUD actions for Section model.
+ * StudentAdmissionController implements the CRUD actions for StudentAdmission model.
  */
-class SectionController extends Controller
+class StudentAdmissionController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class SectionController extends Controller
     }
 
     /**
-     * Lists all Section models.
+     * Lists all StudentAdmission models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SectionSearch();
+        $searchModel = new StudentAdmissionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Displays a single Section model.
+     * Displays a single StudentAdmission model.
      * @param integer $id
      * @return mixed
      */
@@ -57,25 +57,26 @@ class SectionController extends Controller
     }
 
     /**
-     * Creates a new Section model.
+     * Creates a new StudentAdmission model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Section();
+        $model = new StudentAdmission();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'id'=>$id
             ]);
         }
     }
 
     /**
-     * Updates an existing Section model.
+     * Updates an existing StudentAdmission model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +95,7 @@ class SectionController extends Controller
     }
 
     /**
-     * Deletes an existing Section model.
+     * Deletes an existing StudentAdmission model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -105,40 +106,17 @@ class SectionController extends Controller
 
         return $this->redirect(['index']);
     }
-    public function actionLists($id)
-    {
-        $countBranches = ClassSectionRelation::find()
-                ->where(['class_id' => $id])
-                ->count();
- 
-        $branches = Section::find()
-                ->select('_section.name as name,_section.id as id')
-                ->leftJoin('_class_section_relation', '`_class_section_relation`.`section_id` = `_section`.`id`')
-                ->where(['_class_section_relation.class_id' => $id])
-                ->all();
- 
-        if($countBranches > 0 )
-        {
-            foreach($branches as $branch ){
-                echo "<option value='".$branch->id."'>".$branch->name."</option>";
-            }
-        }
-        else{
-            echo "<option> - </option>";
-        }
- 
-    }
 
     /**
-     * Finds the Section model based on its primary key value.
+     * Finds the StudentAdmission model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Section the loaded model
+     * @return StudentAdmission the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Section::findOne($id)) !== null) {
+        if (($model = StudentAdmission::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

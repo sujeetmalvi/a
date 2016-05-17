@@ -56,6 +56,45 @@ class StudentMaster extends \yii\db\ActiveRecord
         return 'student_master';
     }
 
+
+    /**
+     * before save event
+     */
+    public function beforeSave($insert){
+        if(parent::beforeSave($insert)){
+             if($this->isNewRecord){
+                $y=date("Y");
+                $this->adm_no=$y.$this->getAdmno();
+                $this->created_at=date("Y-m-d H:i:s");
+                $this->roll_no=$this->getRollno($this->class,$this->section);
+                return TRUE;
+            }else{
+                return TRUE;
+            }
+        }else{
+            return FALSE;
+        }
+    }
+
+    /**
+    * get admission number  
+    */
+
+    private function getAdmno(){
+         $all=$this->find()->all();
+         $ret=count($all);
+         return $ret+1;
+    }
+
+    /**
+    * get roll number  
+    */
+    private function getRollno($class,$section){
+        $all=$this->find()->where(['class'=>$class,'section'=>$section])->all();
+        $ret=count($all);
+        return $ret+1;
+    }
+
     /**
      * @inheritdoc
      */
@@ -89,7 +128,7 @@ class StudentMaster extends \yii\db\ActiveRecord
             'adm_no' => Yii::t('app', 'Adm No'),
             'dob' => Yii::t('app', 'Date Of Birth'),
             'gender' => Yii::t('app', 'Gender'),
-            'bloog_group' => Yii::t('app', 'Bloog Group'),
+            'bloog_group' => Yii::t('app', 'Blood Group'),
             'stu_email' => Yii::t('app', 'Stu Email'),
             'photo' => Yii::t('app', 'Photo'),
             'fname' => Yii::t('app', 'Father name'),

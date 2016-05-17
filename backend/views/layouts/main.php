@@ -13,7 +13,7 @@ use common\widgets\Alert;
 AppAsset::register($this);
 ?>
 <?php echo uran1980\yii\widgets\pace\Pace::widget([
-    'color' => 'blue',
+    'color' => 'red',
     'theme' => 'flash',
 ]); ?>
 <?php $this->beginPage() ?>

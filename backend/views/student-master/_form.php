@@ -2,9 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+//use kartik\widgets\ActiveForm;
 use yii\helpers\Arrayhelper;
 use backend\models\State;
 use backend\models\District;
+use kartik\widgets\DatePicker;
+use backend\models\ClassMaster;
+use backend\models\Section;
+
 
 
 /* @var $this yii\web\View */
@@ -23,9 +28,16 @@ use backend\models\District;
           <div class="panel-heading">Student Personal Details</div>
           <div class="panel-body">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'dob')->textInput() ?>
-            <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'bloog_group')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'dob')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Enter birth date ...'],
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]); ?>
+            <?= $form->field($model, 'gender')->dropDownList(['Male'=>'Male','Female'=>'Female']) ?>
+            <?= $form->field($model, 'bloog_group')->dropDownList([''=>'Please Select Blood Group','A1-'=>'A1-',
+                    'A1+'=>'A1+','A2-'=>'A2-','A2+'=>'A2+','B-'=>'B-','B+'=>'B+','O-'=>'O-','O+'=>'0+']) ?>
             <?= $form->field($model, 'stu_email')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
               </div>
@@ -41,7 +53,7 @@ use backend\models\District;
             <?= $form->field($model, 'mname')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'f_occupation')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'm_occupation')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'parent_contact')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'parent_contact')->textInput(['maxlength' => 10]) ?>
             <?= $form->field($model, 'parent_email')->textInput(['maxlength' => true]) ?>
 
           </div>
@@ -51,8 +63,14 @@ use backend\models\District;
             <div class="panel panel-success">
             <div class="panel-heading">Other Details</div>
             <div class="panel-body">
-            <?= $form->field($model, 'class')->textInput() ?>
-            <?= $form->field($model, 'section')->textInput() ?>
+            <?= $form->field($model, 'class')->dropDownList(Arrayhelper::map(ClassMaster::find()->all(),'id','name'),['prompt'=>'
+                Please Select',
+                'onchange'=>'$.post( "index.php?r=section/lists&id='.'"+$(this).val(), function( data ){
+                                         $( "select#studentmaster-section" ).html( data );
+                                           });',
+                ]) ?>
+            <?= $form->field($model, 'section')->dropDownList(Arrayhelper::map(Section::find()->all(),'id','name'),['prompt'=>'
+                Please Select']) ?>
             <?= $form->field($model, 'transport_status')->dropDownList([ 'school' => 'School', 'self' => 'Self', ], ['prompt' => 'Please Select']) ?>
             <?= $form->field($model, 'catagory')->textInput() ?>
             <?= $form->field($model, 'physically_disabled')->textInput() ?>
@@ -84,8 +102,8 @@ use backend\models\District;
             ]) ?>
             <?= $form->field($model, 'cur_district')->dropDownList(ArrayHelper::map(District::find()->all(),'id','name'),['prompt'=>'Select District'])  ?>
             <?= $form->field($model, 'cur_po')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'cur_pincode')->textInput() ?>
-            <?= $form->field($model, 'cur_contact')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'cur_pincode')->textInput(['maxlength'=>6]) ?>
+            <?= $form->field($model, 'cur_contact')->textInput(['maxlength' => 10]) ?>
             
             </div>
             </div>
@@ -112,8 +130,8 @@ use backend\models\District;
             ]) ?>
             <?= $form->field($model, 'per_district')->dropDownList(ArrayHelper::map(District::find()->all(),'id','name'),['prompt'=>'Select District'])  ?>
             <?= $form->field($model, 'per_po')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'per_pincode')->textInput() ?>
-            <?= $form->field($model, 'per_contact')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'per_pincode')->textInput(['maxlength'=>'6']) ?>
+            <?= $form->field($model, 'per_contact')->textInput(['maxlength' => '10']) ?>
             </div>
 
             </div>
