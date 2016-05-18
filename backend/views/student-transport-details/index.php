@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\StudentAdmissionSearch */
+/* @var $searchModel backend\models\StudentTransportDetailsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Student Admissions');
+$this->title = Yii::t('app', 'Student Transport Details');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="student-admission-index">
+<div class="student-transport-details-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Student Admission'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Student Transport Details'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -25,13 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'route_id',
+            'station_id',
             'student_id',
-            'fee_amt',
-            'paid_fee',
-            'discount_amt',
-            // 'pay_mode',
-            // 'created_on',
-            // 'discount',
+            'start_date',
+            // 'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

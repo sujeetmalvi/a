@@ -9,6 +9,7 @@ use backend\models\District;
 use kartik\widgets\DatePicker;
 use backend\models\ClassMaster;
 use backend\models\Section;
+use backend\models\StudentCatagory;
 
 
 
@@ -72,8 +73,12 @@ use backend\models\Section;
             <?= $form->field($model, 'section')->dropDownList(Arrayhelper::map(Section::find()->all(),'id','name'),['prompt'=>'
                 Please Select']) ?>
             <?= $form->field($model, 'transport_status')->dropDownList([ 'school' => 'School', 'self' => 'Self', ], ['prompt' => 'Please Select']) ?>
-            <?= $form->field($model, 'catagory')->textInput() ?>
-            <?= $form->field($model, 'physically_disabled')->textInput() ?>
+            <?= $form->field($model, 'catagory')->dropDownList(Arrayhelper::map(StudentCatagory::find()->all(),'id','name'),
+                [
+                'prompt' => 'Please Select catagory'
+                ]
+            ) ?>
+            <?= $form->field($model, 'physically_disabled')->dropDownList(['0'=>'No','1'=>'Yes']) ?>
             <?= $form->field($model, 'special_discount')->textInput() ?>
 
             </div>

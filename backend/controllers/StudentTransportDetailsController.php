@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\StudentAdmission;
-use backend\models\StudentAdmissionSearch;
+use backend\models\StudentTransportDetails;
+use backend\models\StudentTransportDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * StudentAdmissionController implements the CRUD actions for StudentAdmission model.
+ * StudentTransportDetailsController implements the CRUD actions for StudentTransportDetails model.
  */
-class StudentAdmissionController extends Controller
+class StudentTransportDetailsController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class StudentAdmissionController extends Controller
     }
 
     /**
-     * Lists all StudentAdmission models.
+     * Lists all StudentTransportDetails models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StudentAdmissionSearch();
+        $searchModel = new StudentTransportDetailsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class StudentAdmissionController extends Controller
     }
 
     /**
-     * Displays a single StudentAdmission model.
+     * Displays a single StudentTransportDetails model.
      * @param integer $id
      * @return mixed
      */
@@ -57,26 +57,25 @@ class StudentAdmissionController extends Controller
     }
 
     /**
-     * Creates a new StudentAdmission model.
+     * Creates a new StudentTransportDetails model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new StudentAdmission();
+        $model = new StudentTransportDetails();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'id'=>$id
             ]);
         }
     }
 
     /**
-     * Updates an existing StudentAdmission model.
+     * Updates an existing StudentTransportDetails model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +94,7 @@ class StudentAdmissionController extends Controller
     }
 
     /**
-     * Deletes an existing StudentAdmission model.
+     * Deletes an existing StudentTransportDetails model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,15 +107,15 @@ class StudentAdmissionController extends Controller
     }
 
     /**
-     * Finds the StudentAdmission model based on its primary key value.
+     * Finds the StudentTransportDetails model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return StudentAdmission the loaded model
+     * @return StudentTransportDetails the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = StudentAdmission::findOne($id)) !== null) {
+        if (($model = StudentTransportDetails::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

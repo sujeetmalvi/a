@@ -75,9 +75,29 @@ class StudentAdmission extends \yii\db\ActiveRecord
         else{
             return 0;
         }
- 
-
     }
+    public function getTransport($id){
+        $countBranches=StudentMaster::find()->where(['id'=>$id,'transport_status'=>'school'])->count();
+        
+        if($countBranches > 0 )
+        {
+        $branches = FeeMaster::find()
+                ->select('_fee_master.name as name')
+                ->leftJoin('student_master', '`student_master`.`class` = `_fee_master`.`class_id`')
+                ->where(['student_master.id' => $id,'_fee_master.type_id'=>'2'])
+                ->all();
+ 
+        
+            foreach($branches as $branch ){
+                    return $branch->name;
+            }
+        }
+        else{
+            return 0;
+        }
+ 
+    }
+
 
     public function getDiscount($id){
 

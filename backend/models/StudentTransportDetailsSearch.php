@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\StudentAdmission;
+use backend\models\StudentTransportDetails;
 
 /**
- * StudentAdmissionSearch represents the model behind the search form about `backend\models\StudentAdmission`.
+ * StudentTransportDetailsSearch represents the model behind the search form about `backend\models\StudentTransportDetails`.
  */
-class StudentAdmissionSearch extends StudentAdmission
+class StudentTransportDetailsSearch extends StudentTransportDetails
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class StudentAdmissionSearch extends StudentAdmission
     public function rules()
     {
         return [
-            [['id', 'student_id', 'fee_amt', 'paid_fee', 'discount_amt', 'pay_mode', 'discount'], 'integer'],
-            [['created_on'], 'safe'],
+            [['id', 'route_id', 'station_id', 'student_id'], 'integer'],
+            [['start_date', 'created_at'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class StudentAdmissionSearch extends StudentAdmission
      */
     public function search($params)
     {
-        $query = StudentAdmission::find();
+        $query = StudentTransportDetails::find();
 
         // add conditions that should always apply here
 
@@ -60,13 +60,11 @@ class StudentAdmissionSearch extends StudentAdmission
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'route_id' => $this->route_id,
+            'station_id' => $this->station_id,
             'student_id' => $this->student_id,
-            'fee_amt' => $this->fee_amt,
-            'paid_fee' => $this->paid_fee,
-            'discount_amt' => $this->discount_amt,
-            'pay_mode' => $this->pay_mode,
-            'created_on' => $this->created_on,
-            'discount' => $this->discount,
+            'start_date' => $this->start_date,
+            'created_at' => $this->created_at,
         ]);
 
         return $dataProvider;

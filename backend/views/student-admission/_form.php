@@ -22,13 +22,23 @@ $sta=new StudentAdmission();
           <div class="panel-heading">Admission Fee Details</div>
           <div class="panel-body">
             <?= $form->field($model, 'student_id')->hiddenInput(['value'=>$id])->label(false) ?>
-            <?php $per=$sta->getStudent($id); ?>
-            <?= $form->field($model, 'fee_amt')->textInput(['readonly'=>'readonly','value'=>$per]) ?>
+            <?php $per=$sta->getStudent($id);
+                  $hint='Admission = '.$per;
+
+                  $transport=$sta->getTransport($id);
+                //  echo $transport;
+                  if($transport != 0){
+                   $hint ='Admission = '.$per.' + Transport = '.$transport ; 
+                  }
+                  $total_amount=$per+$transport;
+
+             ?>
+            <?= $form->field($model, 'fee_amt')->textInput(['readonly'=>'readonly','value'=>$total_amount])->hint($hint) ?>
             <?php 
                     $discount=$sta->getDiscount($id);
-                    $perc=($per*$discount)/100;
+                    $perc=($total_amount*$discount)/100;
 
-                    $total=$per-$perc;
+                    $total=$total_amount-$perc;
 
 
             ?>
@@ -44,7 +54,9 @@ $sta=new StudentAdmission();
         <div class="panel panel-primary">
           <div class="panel-heading">Payment Details</div>
           <div class="panel-body">
+          <input type="checkbox" id="full"> &nbsp;&nbsp;&nbsp;&nbsp;Full</input>
             <?= $form->field($model, 'paid_fee')->textInput() ?>
+
             <?= $form->field($model, 'pay_mode')->dropdownList(Arrayhelper::map(PaymentMode::find()->all(),'id','mode'),[
                 'prompt'=>'Please Select'
             ]) ?>
@@ -64,3 +76,15 @@ $sta=new StudentAdmission();
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php $this->registerJS(" $(document).ready(function () {
+    $('#full').change(function () { 
+        if($(this).is(':checked')){
+            $('#studentadmission-paid_fee').val($('#studentadmission-discount_amt').val());
+        }else{
+             $('#studentadmission-paid_fee').val('');
+        }
+
+
+    })
+        
+   })");

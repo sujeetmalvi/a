@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\StudentAdmission */
+/* @var $model backend\models\StudentTransportDetails */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Student Admissions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Student Transport Details'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="student-admission-view">
+<div class="student-transport-details-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,13 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'route_id',
+            'station_id',
             'student_id',
-            'fee_amt',
-            'paid_fee',
-            'discount_amt',
-            'pay_mode',
-            'created_on',
-            'discount',
+            'start_date',
+            'created_at',
         ],
     ]) ?>
 
