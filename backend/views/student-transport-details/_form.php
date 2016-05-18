@@ -21,9 +21,14 @@ use kartik\datecontrol\DateControl;
 
    
    <?= $form->field($model, 'student_id')->hiddenInput(['value'=>$id,'readonly'=>'readonly'])->label(false) ?>
-    <?= $form->field($model, 'route_id')->dropDownList(Arrayhelper::map(Route::find()->all(),'id','end_point'),['prompt'=>'Please Select Route']) ?>
+    <?= $form->field($model, 'route_id')->dropDownList(Arrayhelper::map(Route::find()->all(),'id','end_point'),[
+                'prompt'=>'Please Select Route',
+                'onchange'=>'$.post( "index.php?r=route-immediate-stations/lists&id='.'"+$(this).val(), function( data ){
+                                         $( "select#studenttransportdetails-station_id" ).html( data );
+                                           });'
+    ]) ?>
 
-    <?= $form->field($model, 'station_id')->dropDownList(Arrayhelper::map(RouteImmediateStations::find()->all(),'id','name')) ?>
+    <?= $form->field($model, 'station_id')->dropDownList(Arrayhelper::map(RouteImmediateStations::find()->all(),'id','name'),['prompt'=>'Please Select']) ?>
 
  
 

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AdmissionPaymentDetails */
@@ -12,17 +13,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'stu_id')->textInput() ?>
+    <?= $form->field($model, 'stu_id')->hiddenInput(['value'=>$id])->label(false) ?>
 
-    <?= $form->field($model, 'adm_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'adm_id')->hiddenInput(['value' => $id])->label(false) ?>
 
     <?= $form->field($model, 'cheq_no')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cheq_dt')->textInput() ?>
+    <?= $form->field($model, 'cheq_dt')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Enter cheque date ...'],
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]); ?>
 
     <?= $form->field($model, 'bank_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+   
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

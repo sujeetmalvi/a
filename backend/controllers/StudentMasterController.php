@@ -167,4 +167,10 @@ class StudentMasterController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSuccess()
+    {
+        
+        return $this->render('success');
+    }
 }

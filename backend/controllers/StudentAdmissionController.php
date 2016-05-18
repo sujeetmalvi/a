@@ -70,11 +70,21 @@ class StudentAdmissionController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
         
             $countBranches=StudentMaster::find()->where(['id'=>$id,'transport_status'=>'school'])->count();
+            $student_adm=StudentMaster::find()->where(['id'=>$id])->one();
+            $adm=$student_adm->adm_no;
+            $pay=StudentAdmission::find()->where(['id'=>$id])->one();
+            $pay_mode=$pay->pay_mode;
 
         if($countBranches > 0){
-            return Yii::$app->response->redirect(Url::to(['student-transport-details/create', 'id' => $model->id]));
+            return Yii::$app->response->redirect(Url::to(['student-transport-details/create', 'id' => $id]));
         }else{
-            return Yii::$app->response->redirect(Url::to(['admission-payment-details/create', 'id' => $model->id])); 
+            if($pay_mode==2){
+                 return Yii::$app->response->redirect(Url::to(['student-master/success', 'id' => $id,'adm'=>$adm]));
+            }
+            
+        else{
+            return Yii::$app->response->redirect(Url::to(['admission-payment-details/create', 'id' => $id,'adm'=>$adm]));
+        }
 
         }
 

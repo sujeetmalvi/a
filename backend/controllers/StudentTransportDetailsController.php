@@ -8,7 +8,9 @@ use backend\models\StudentTransportDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use backend\models\StudentMaster;
+use yii\helpers\Url;
+use backend\models\StudentAdmission;
 /**
  * StudentTransportDetailsController implements the CRUD actions for StudentTransportDetails model.
  */
@@ -67,10 +69,17 @@ class StudentTransportDetailsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            
+            $adm=StudentMaster::find()->where(['id'=>$id])->one();
+            $adm_id=$adm->adm_no;
 
-            return $this->redirect(['view', 'id' => $model->id]);
-
+            $student_pay=StudentAdmission::find()->where(['student_id'=>$id])->one();
+            $student_paymode=$student_pay->pay_mode;
+            if($student_paymode!=2){
+            return Yii::$app->response->redirect(Url::to(['admission-payment-details/create', 'id' => $id,'adm'=>$adm_id]));
+            }
+            else{
+                 return Yii::$app->response->redirect(Url::to(['student-master/success', 'id' => $id,'adm'=>$adm_id]));
+            } 
 
         } else {
             return $this->render('create', [
