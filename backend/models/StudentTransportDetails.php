@@ -28,13 +28,31 @@ class StudentTransportDetails extends \yii\db\ActiveRecord
         return 'student_transport_details';
     }
 
+
+    /**
+     * before save event
+     */
+    public function beforeSave($insert){
+        if(parent::beforeSave($insert)){
+             if($this->isNewRecord){
+                $this->created_at=date("Y-m-d H:i:s");
+               
+                return TRUE;
+            }else{
+                return TRUE;
+            }
+        }else{
+            return FALSE;
+        }
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'route_id', 'station_id', 'student_id', 'start_date'], 'required'],
+            [['route_id', 'station_id', 'student_id', 'start_date'], 'required'],
             [['id', 'route_id', 'station_id', 'student_id'], 'integer'],
             [['start_date', 'created_at'], 'safe'],
             [['route_id', 'station_id', 'student_id'], 'unique', 'targetAttribute' => ['route_id', 'station_id', 'student_id'], 'message' => 'The combination of Route ID, Station ID and Student ID has already been taken.'],
@@ -51,9 +69,9 @@ class StudentTransportDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'route_id' => Yii::t('app', 'Route ID'),
-            'station_id' => Yii::t('app', 'Station ID'),
-            'student_id' => Yii::t('app', 'Student ID'),
+            'route_id' => Yii::t('app', 'Route '),
+            'station_id' => Yii::t('app', 'Station '),
+            'student_id' => Yii::t('app', 'Student '),
             'start_date' => Yii::t('app', 'Start Date'),
             'created_at' => Yii::t('app', 'Created At'),
         ];

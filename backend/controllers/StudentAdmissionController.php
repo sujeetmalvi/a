@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use backend\models\StudentAdmission;
 use backend\models\StudentAdmissionSearch;
+use backend\models\StudentMaster;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * StudentAdmissionController implements the CRUD actions for StudentAdmission model.
@@ -66,7 +68,17 @@ class StudentAdmissionController extends Controller
         $model = new StudentAdmission();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        
+            $countBranches=StudentMaster::find()->where(['id'=>$id,'transport_status'=>'school'])->count();
+
+        if($countBranches > 0){
+            return Yii::$app->response->redirect(Url::to(['student-transport-details/create', 'id' => $model->id]));
+        }else{
+            return Yii::$app->response->redirect(Url::to(['admission-payment-details/create', 'id' => $model->id])); 
+
+        }
+
+
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -35,7 +35,7 @@ class StudentAdmission extends \yii\db\ActiveRecord
         return [
             [['student_id', 'fee_amt', 'paid_fee', 'discount_amt', 'pay_mode', 'discount'], 'required'],
             [['student_id', 'fee_amt', 'paid_fee', 'discount_amt', 'pay_mode', 'discount'], 'integer'],
-            [['created_on'], 'safe'],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -45,10 +45,10 @@ class StudentAdmission extends \yii\db\ActiveRecord
               
               
                 $this->created_at=date("Y-m-d H:i:s");
-               $this->updated_at=date("Y-m-d H:i:s"); 
+              
                 return TRUE;
             }else{
-                $this->updated_at=date("Y-m-d H:i:s");
+               
                
                 return TRUE;
             }
@@ -151,7 +151,7 @@ class StudentAdmission extends \yii\db\ActiveRecord
             'paid_fee' => Yii::t('app', 'Paid Fee'),
             'discount_amt' => Yii::t('app', 'Discount Amt'),
             'pay_mode' => Yii::t('app', 'Pay Mode'),
-            'created_on' => Yii::t('app', 'Created On'),
+            'created_at' => Yii::t('app', 'Created On'),
             'discount' => Yii::t('app', 'Discount'),
         ];
     }

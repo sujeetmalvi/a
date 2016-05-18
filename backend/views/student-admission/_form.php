@@ -58,7 +58,7 @@ $sta=new StudentAdmission();
             <?= $form->field($model, 'paid_fee')->textInput() ?>
 
             <?= $form->field($model, 'pay_mode')->dropdownList(Arrayhelper::map(PaymentMode::find()->all(),'id','mode'),[
-                'prompt'=>'Please Select'
+                'prompt'=>'Please Select Payment Mode'
             ]) ?>
           </div>
         </div>
