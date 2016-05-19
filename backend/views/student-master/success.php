@@ -1,3 +1,0 @@
-<div>
-Admission Successfull.
-</div>

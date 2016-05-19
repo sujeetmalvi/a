@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
 	   "uran1980/yii2-pace-widget": "dev-master",
-       "kartik-v/yii2-widgets": "*"
+       "kartik-v/yii2-widgets": "*",
+       "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

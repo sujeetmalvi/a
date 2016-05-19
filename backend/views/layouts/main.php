@@ -90,6 +90,9 @@ AppAsset::register($this);
                 <li>
                     <a  href="index.php?r=student-catagory">Student Catagory</a>
                 </li>
+                <li>
+                    <a  href="index.php?r=session">Session</a>
+                </li>
             </ul>
         </li>';
 
