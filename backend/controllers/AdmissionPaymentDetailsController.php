@@ -8,6 +8,7 @@ use backend\models\AdmissionPaymentDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * AdmissionPaymentDetailsController implements the CRUD actions for AdmissionPaymentDetails model.
@@ -66,7 +67,7 @@ class AdmissionPaymentDetailsController extends Controller
         $model = new AdmissionPaymentDetails();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return Yii::$app->response->redirect(Url::to(['student-master/success', 'id' => $id,'adm'=>$adm]));
         } else {
             return $this->render('create', [
                 'model' => $model,

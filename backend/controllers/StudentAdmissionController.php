@@ -72,7 +72,7 @@ class StudentAdmissionController extends Controller
             $countBranches=StudentMaster::find()->where(['id'=>$id,'transport_status'=>'school'])->count();
             $student_adm=StudentMaster::find()->where(['id'=>$id])->one();
             $adm=$student_adm->adm_no;
-            $pay=StudentAdmission::find()->where(['id'=>$id])->one();
+            $pay=StudentAdmission::find()->where(['student_id'=>$id])->one();
             $pay_mode=$pay->pay_mode;
 
         if($countBranches > 0){

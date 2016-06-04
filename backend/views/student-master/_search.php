@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\Arrayhelper;
+use backend\models\ClassMaster;
 /* @var $this yii\web\View */
 /* @var $model backend\models\StudentMasterSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,15 +16,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php // $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'adm_no') ?>
 
-    <?= $form->field($model, 'dob') ?>
+    <?php // echo $form->field($model, 'dob') ?>
 
-    <?= $form->field($model, 'gender') ?>
+    <?= $form->field($model, 'gender')->dropDownlist([''=>'Gender','male'=>'male','female'=>'female']) ?>
 
     <?php // echo $form->field($model, 'bloog_group') ?>
 
@@ -57,7 +58,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'cur_pincode') ?>
 
-    <?php // echo $form->field($model, 'cur_contact') ?>
+    <?php  echo $form->field($model, 'cur_contact') ?>
 
     <?php // echo $form->field($model, 'per_h_no') ?>
 
@@ -75,11 +76,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'per_contact') ?>
 
-    <?php // echo $form->field($model, 'class') ?>
+    <?php  echo $form->field($model, 'class')->dropDownlist(Arrayhelper::map(ClassMaster::find()->all(),'id','name'),['prompt'=>' Class']) ?>
 
-    <?php // echo $form->field($model, 'section') ?>
+    <?php  echo $form->field($model, 'section') ?>
 
-    <?php // echo $form->field($model, 'roll_no') ?>
+    <?php  echo $form->field($model, 'roll_no') ?>
 
     <?php // echo $form->field($model, 'transport_status') ?>
 

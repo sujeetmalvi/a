@@ -13,14 +13,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="student-master-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'New Admission'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'cur_district',
             // 'cur_state',
             // 'cur_pincode',
-            // 'cur_contact',
+             'cur_contact',
             // 'per_h_no',
             // 'per_street_address:ntext',
             // 'per_area',
@@ -54,8 +54,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'per_state',
             // 'per_pincode',
             // 'per_contact',
-             'class',
-             'section',
+             [
+                'attribute'=>'class',
+                'value'=>'classmaster.name'
+             ],
+             //'class',
+           //  'section',
+             [
+                'attribute'=>'section',
+                'value'=>'sections.name'
+             ],
              'roll_no',
             // 'transport_status',
             // 'catagory',

@@ -10,7 +10,7 @@ use kartik\widgets\DatePicker;
 use backend\models\ClassMaster;
 use backend\models\Section;
 use backend\models\StudentCatagory;
-
+use backend\models\Session;
 
 
 /* @var $this yii\web\View */
@@ -21,7 +21,11 @@ use backend\models\StudentCatagory;
 <div class="student-master-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    <div class="row">
+        <div class="col-md-12">
+      <?=$form->field($model,'session_id')->dropDownList(Arrayhelper::map(Session::find()->all(),'id','sortname'),['prompt'=>'Select Session'])?> 
+      </div> 
+    </div>
     <div class="row">
         <div class="col-md-4">
 

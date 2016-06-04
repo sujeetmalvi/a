@@ -3,7 +3,8 @@
 namespace backend\models;
 
 use Yii;
-
+use backend\models\ClassMaster;
+use backend\models\Section;
 /**
  * This is the model class for table "student_master".
  *
@@ -45,6 +46,7 @@ use Yii;
  * @property integer $physically_disabled
  * @property integer $special_discount
  * @property string $created_at
+ * @property string $session_id
  */
 class StudentMaster extends \yii\db\ActiveRecord
 {
@@ -101,7 +103,7 @@ class StudentMaster extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'dob', 'gender', 'fname', 'mname', 'f_occupation', 'm_occupation', 'parent_contact', 'cur_h_no', 'cur_street_address', 'cur_area', 'cur_po', 'cur_district', 'cur_state', 'cur_pincode', 'cur_contact', 'per_h_no', 'per_street_address', 'per_area', 'per_po', 'per_district', 'per_state', 'per_pincode', 'per_contact', 'class', 'section', 'catagory', 'physically_disabled'], 'required'],
+            [['name', 'dob', 'gender', 'fname', 'mname', 'f_occupation', 'm_occupation', 'parent_contact', 'cur_h_no', 'cur_street_address', 'cur_area', 'cur_po', 'cur_district', 'cur_state', 'cur_pincode', 'cur_contact', 'per_h_no', 'per_street_address', 'per_area', 'per_po', 'per_district', 'per_state', 'per_pincode', 'per_contact', 'class', 'section', 'catagory', 'physically_disabled','session_id'], 'required'],
             [['dob', 'created_at'], 'safe'],
             [['cur_street_address', 'per_street_address', 'transport_status'], 'string'],
             [['cur_district', 'cur_state', 'cur_pincode', 'per_district', 'per_state', 'per_pincode', 'class', 'section', 'roll_no', 'catagory', 'physically_disabled', 'special_discount'], 'integer'],
@@ -161,6 +163,15 @@ class StudentMaster extends \yii\db\ActiveRecord
             'physically_disabled' => Yii::t('app', 'Physically Disabled'),
             'special_discount' => Yii::t('app', 'Special Discount'),
             'created_at' => Yii::t('app', 'Created At'),
+            'session_id'=>Yii::t('app','Session'),
         ];
+    }
+
+    public function getClassmaster(){
+         return $this->hasOne(ClassMaster::className(), ['id' => 'class']); 
+    }
+    public function getSections()
+    {
+         return $this->hasOne(Section::className(), ['id' => 'section']);
     }
 }
