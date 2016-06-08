@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2016 at 05:51 PM
+-- Generation Time: Jun 08, 2016 at 05:05 PM
 -- Server version: 5.7.9
 -- PHP Version: 7.0.0
 
@@ -19,6 +19,104 @@ SET time_zone = "+00:00";
 --
 -- Database: `a`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admission_payment_details`
+--
+
+DROP TABLE IF EXISTS `admission_payment_details`;
+CREATE TABLE IF NOT EXISTS `admission_payment_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) NOT NULL,
+  `adm_id` varchar(30) NOT NULL,
+  `cheq_no` varchar(255) NOT NULL,
+  `cheq_dt` date NOT NULL,
+  `bank_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admission_payment_details`
+--
+
+INSERT INTO `admission_payment_details` (`id`, `stu_id`, `adm_id`, `cheq_no`, `cheq_dt`, `bank_name`, `created_at`) VALUES
+(1, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:45:05'),
+(2, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:46:56'),
+(3, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:47:20'),
+(4, 7, '7', '454564', '2016-05-31', 'sbi', '2016-05-24 14:11:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `archieved_students`
+--
+
+DROP TABLE IF EXISTS `archieved_students`;
+CREATE TABLE IF NOT EXISTS `archieved_students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `adm_no` varchar(50) DEFAULT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(15) NOT NULL,
+  `bloog_group` varchar(12) DEFAULT NULL,
+  `stu_email` varchar(244) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `fname` varchar(222) NOT NULL,
+  `mname` varchar(222) NOT NULL,
+  `f_occupation` varchar(200) NOT NULL,
+  `m_occupation` varchar(200) NOT NULL,
+  `parent_contact` varchar(225) NOT NULL,
+  `parent_email` varchar(255) DEFAULT NULL,
+  `cur_h_no` varchar(255) NOT NULL,
+  `cur_street_address` text NOT NULL,
+  `cur_area` varchar(255) NOT NULL,
+  `cur_po` varchar(255) NOT NULL,
+  `cur_district` int(11) NOT NULL,
+  `cur_state` int(11) NOT NULL,
+  `cur_pincode` int(11) NOT NULL,
+  `cur_contact` varchar(255) NOT NULL,
+  `per_h_no` varchar(255) NOT NULL,
+  `per_street_address` text NOT NULL,
+  `per_area` varchar(255) NOT NULL,
+  `per_po` varchar(255) NOT NULL,
+  `per_district` int(11) NOT NULL,
+  `per_state` int(11) NOT NULL,
+  `per_pincode` int(11) NOT NULL,
+  `per_contact` varchar(255) NOT NULL,
+  `class` int(11) NOT NULL,
+  `section` int(11) NOT NULL,
+  `roll_no` int(11) DEFAULT NULL,
+  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
+  `catagory` int(11) NOT NULL,
+  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
+  `special_discount` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fee_payment_details`
+--
+
+DROP TABLE IF EXISTS `fee_payment_details`;
+CREATE TABLE IF NOT EXISTS `fee_payment_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) NOT NULL,
+  `adm_id` varchar(30) NOT NULL,
+  `cheq_no` varchar(255) NOT NULL,
+  `cheq_dt` date NOT NULL,
+  `bank_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,6 +138,288 @@ CREATE TABLE IF NOT EXISTS `migration` (
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m000000_000000_base', 1462951553),
 ('m130524_201442_init', 1462951558);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session`
+--
+
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE IF NOT EXISTS `session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `sortname` varchar(90) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`id`, `start_date`, `end_date`, `sortname`, `status`) VALUES
+(1, '2016-04-01', '2017-03-31', '2016-17', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `special_fee`
+--
+
+DROP TABLE IF EXISTS `special_fee`;
+CREATE TABLE IF NOT EXISTS `special_fee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `fee_type_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `pay_mode` int(11) NOT NULL,
+  `cheque_dt` date NOT NULL,
+  `cheque_no` varchar(220) NOT NULL,
+  `bank_name` varchar(220) NOT NULL,
+  `paid_amt` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_address`
+--
+
+DROP TABLE IF EXISTS `student_address`;
+CREATE TABLE IF NOT EXISTS `student_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) NOT NULL,
+  `cur_h_no` varchar(220) NOT NULL,
+  `cur_street_address` text NOT NULL,
+  `cur_area` varchar(222) NOT NULL,
+  `cur_po` varchar(222) NOT NULL,
+  `cur_district` int(11) NOT NULL,
+  `cur_state` int(11) NOT NULL,
+  `cur_pincode` int(11) NOT NULL,
+  `cur_contact` varchar(60) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_admission`
+--
+
+DROP TABLE IF EXISTS `student_admission`;
+CREATE TABLE IF NOT EXISTS `student_admission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `fee_amt` int(11) NOT NULL,
+  `paid_fee` int(11) NOT NULL,
+  `discount_amt` int(11) NOT NULL,
+  `pay_mode` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `discount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `student_id` (`student_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_admission`
+--
+
+INSERT INTO `student_admission` (`id`, `student_id`, `fee_amt`, `paid_fee`, `discount_amt`, `pay_mode`, `created_at`, `discount`) VALUES
+(2, 2, 5500, 4675, 4675, 2, '2016-05-18 09:46:17', 15),
+(3, 3, 5000, 4500, 4500, 1, '2016-05-19 08:14:54', 10),
+(4, 5, 5500, 4950, 4950, 2, '2016-05-20 23:34:42', 10),
+(5, 6, 5000, 4500, 4500, 2, '2016-05-22 00:49:29', 10),
+(6, 7, 5000, 4500, 4500, 1, '2016-05-24 08:41:20', 10),
+(7, 9, 0, 0, 0, 2, '2016-06-08 11:04:15', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_fee`
+--
+
+DROP TABLE IF EXISTS `student_fee`;
+CREATE TABLE IF NOT EXISTS `student_fee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fee_type` int(11) NOT NULL,
+  `stu_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `month_count` int(11) NOT NULL,
+  `from_month` date NOT NULL,
+  `to_month` date NOT NULL,
+  `net_amt` int(11) NOT NULL,
+  `late_fee` int(11) NOT NULL,
+  `total_amt` int(11) NOT NULL,
+  `special_discount` int(11) NOT NULL,
+  `payment_mode` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `stu_id` (`stu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_initial`
+--
+
+DROP TABLE IF EXISTS `student_initial`;
+CREATE TABLE IF NOT EXISTS `student_initial` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `adm_no` varchar(50) DEFAULT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(15) NOT NULL,
+  `bloog_group` varchar(12) DEFAULT NULL,
+  `stu_email` varchar(244) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `fname` varchar(222) NOT NULL,
+  `mname` varchar(222) NOT NULL,
+  `f_occupation` varchar(200) NOT NULL,
+  `m_occupation` varchar(200) NOT NULL,
+  `parent_contact` varchar(225) NOT NULL,
+  `parent_email` varchar(255) DEFAULT NULL,
+  `cur_h_no` varchar(255) NOT NULL,
+  `cur_street_address` text NOT NULL,
+  `cur_area` varchar(255) NOT NULL,
+  `cur_po` varchar(255) NOT NULL,
+  `cur_district` int(11) NOT NULL,
+  `cur_state` int(11) NOT NULL,
+  `cur_pincode` int(11) NOT NULL,
+  `cur_contact` varchar(255) NOT NULL,
+  `per_h_no` varchar(255) NOT NULL,
+  `per_street_address` text NOT NULL,
+  `per_area` varchar(255) NOT NULL,
+  `per_po` varchar(255) NOT NULL,
+  `per_district` int(11) NOT NULL,
+  `per_state` int(11) NOT NULL,
+  `per_pincode` int(11) NOT NULL,
+  `per_contact` varchar(255) NOT NULL,
+  `class` int(11) NOT NULL,
+  `section` int(11) NOT NULL,
+  `roll_no` int(11) DEFAULT NULL,
+  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
+  `catagory` int(11) NOT NULL,
+  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
+  `special_discount` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_initial`
+--
+
+INSERT INTO `student_initial` (`id`, `name`, `adm_no`, `dob`, `gender`, `bloog_group`, `stu_email`, `photo`, `fname`, `mname`, `f_occupation`, `m_occupation`, `parent_contact`, `parent_email`, `cur_h_no`, `cur_street_address`, `cur_area`, `cur_po`, `cur_district`, `cur_state`, `cur_pincode`, `cur_contact`, `per_h_no`, `per_street_address`, `per_area`, `per_po`, `per_district`, `per_state`, `per_pincode`, `per_contact`, `class`, `section`, `roll_no`, `transport_status`, `catagory`, `physically_disabled`, `special_discount`, `created_at`, `session_id`) VALUES
+(1, 'gabbar', '20161', '2016-05-05', 'Male', 'A1+', 'di@n.com', 'asd', 'asdmkasdm', 'mk', 'mk', 'mkm', 'km', 'km', '90/2', 'asdasd as dasld as dasm dkamsk mkasm kasmd kmskmd a', 'asdsdas', 'okokoko', 1, 1, 121111, '8484848', '90/2', 'sasdsdasdasdasdasdasdasdas', 'sadasdasdasd', 'asdasdasdasdas', 4, 2, 123123, 'asdasdasd', 1, 2, 1, 'school', 1, 0, NULL, '2016-05-14 09:03:51', 0),
+(2, 'Anil', '20161', '2016-05-25', 'Male', 'A1-', 'dfjsdfj@djf.com', 'aasidasd', 'asdijasoidjasoidjoi', 'jio', 'joi', 'joi', 'joi', 'joi', '212312884', '84', '84', '848484', 176, 13, 84, '84', '84848', '48', '48', '8484848', 2, 1, 48, '48', 1, 1, 1, 'school', 2, 0, NULL, '2016-05-18 09:43:24', 0),
+(3, 'gababsd', '20162', '2016-05-20', 'Male', 'A1-', 'sas@sdas', 'xxx5151', '5151', '515', '15', '1', '51', '51', '848', '484', '8', '848484', 1, 1, 48484, '48484', '8484', '8484', '8484', '8484', 1, 1, 84484, '8484', 1, 1, 2, 'self', 1, 0, NULL, '2016-05-19 08:14:45', 0),
+(5, 'humble', '20164', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 2, 'school', 1, 0, 100, '2016-05-20 23:34:29', 1),
+(6, 'yii', '20165', '2016-05-19', 'Male', 'B+', '8484', '84', '8484848', '48', '48', '48', '48', '48', '878787', '878', '78', '87878', 4, 2, 87, '878', '87', '87', '87', '8787', 4, 2, 8787, '8787', 1, 2, 3, 'self', 1, 0, 87878, '2016-05-22 00:49:20', 1),
+(7, 'Barak Obama', '20166', '2016-05-31', 'Male', 'O+', 'bobama@gmail.com', 'nahi h', 'asdmkasdm', 'husaini obama', 'business', 'housewife', '9912912313', 'deded', '848', '121219898', '89', '989898', 1, 1, 98, '98', '9898', '98', '98', '8787', 2, 1, 8787, '8787', 1, 2, 4, 'self', 1, 0, NULL, '2016-05-24 08:41:12', 1),
+(8, 'raghav', '20167', '2016-06-22', 'Male', 'B+', 'rag@nn.com', 'IMG_20160428_110954.jpg', 'asdasdas', 'newbei', 'assd', 'asdasd', '0909090', 'asds@na.cm', '45/8', 'asdasndin', 'inasidnasid', 'a848484', 2, 1, 84848, '848484', '848484', '8484a8sd4a8sd48asd484', '848484', '84848484', 2, 1, 848484, '84848484', 1, 1, 3, 'school', 1, 0, 10, '2016-06-04 00:35:56', 1),
+(9, 'Malhar Trivedi', '20168', '2000-03-02', 'Female', 'O+', '', 'IMG_20160427_084045.jpg', 'sonu trivedi', 'ahilya trivedi', 'business', 'houeswife', '9812989389', '', '45', 'new road', 'bhavnagar', 'deri road', 147, 12, 121515, '55515151', '15151', '515', '1', '5151', 253, 17, 515, '151', 2, 1, 1, 'school', 3, 0, NULL, '2016-06-08 11:04:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_master`
+--
+
+DROP TABLE IF EXISTS `student_master`;
+CREATE TABLE IF NOT EXISTS `student_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `adm_no` varchar(50) DEFAULT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(15) NOT NULL,
+  `bloog_group` varchar(12) DEFAULT NULL,
+  `stu_email` varchar(244) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `fname` varchar(222) NOT NULL,
+  `mname` varchar(222) NOT NULL,
+  `f_occupation` varchar(200) NOT NULL,
+  `m_occupation` varchar(200) NOT NULL,
+  `parent_contact` varchar(225) NOT NULL,
+  `parent_email` varchar(255) DEFAULT NULL,
+  `cur_h_no` varchar(255) NOT NULL,
+  `cur_street_address` text NOT NULL,
+  `cur_area` varchar(255) NOT NULL,
+  `cur_po` varchar(255) NOT NULL,
+  `cur_district` int(11) NOT NULL,
+  `cur_state` int(11) NOT NULL,
+  `cur_pincode` int(11) NOT NULL,
+  `cur_contact` varchar(255) NOT NULL,
+  `per_h_no` varchar(255) NOT NULL,
+  `per_street_address` text NOT NULL,
+  `per_area` varchar(255) NOT NULL,
+  `per_po` varchar(255) NOT NULL,
+  `per_district` int(11) NOT NULL,
+  `per_state` int(11) NOT NULL,
+  `per_pincode` int(11) NOT NULL,
+  `per_contact` varchar(255) NOT NULL,
+  `class` int(11) NOT NULL,
+  `section` int(11) NOT NULL,
+  `roll_no` int(11) DEFAULT NULL,
+  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
+  `catagory` int(11) NOT NULL,
+  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
+  `special_discount` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_master`
+--
+
+INSERT INTO `student_master` (`id`, `name`, `adm_no`, `dob`, `gender`, `bloog_group`, `stu_email`, `photo`, `fname`, `mname`, `f_occupation`, `m_occupation`, `parent_contact`, `parent_email`, `cur_h_no`, `cur_street_address`, `cur_area`, `cur_po`, `cur_district`, `cur_state`, `cur_pincode`, `cur_contact`, `per_h_no`, `per_street_address`, `per_area`, `per_po`, `per_district`, `per_state`, `per_pincode`, `per_contact`, `class`, `section`, `roll_no`, `transport_status`, `catagory`, `physically_disabled`, `special_discount`, `created_at`, `session_id`) VALUES
+(2, 'Anil', '20161', '2016-05-25', 'Male', 'A1-', 'dfjsdfj@djf.com', 'aasidasd', 'asdijasoidjasoidjoi', 'jio', 'joi', 'joi', 'joi', 'joi', '212312884', '84', '84', '848484', 176, 13, 84, '84', '84848', '48', '48', '8484848', 2, 1, 48, '48', 1, 1, 1, 'school', 2, 0, NULL, '2016-05-18 09:43:24', 0),
+(3, 'gababsd', '20162', '2016-05-20', 'Male', 'A1-', 'sas@sdas', 'xxx5151', '5151', '515', '15', '1', '51', '51', '848', '484', '8', '848484', 1, 1, 48484, '48484', '8484', '8484', '8484', '8484', 1, 1, 84484, '8484', 1, 1, 2, 'self', 1, 0, NULL, '2016-05-19 08:14:45', 0),
+(4, 'humble', '20163', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 1, 'school', 1, 0, 100, '2016-05-20 23:34:01', 1),
+(5, 'humble', '20164', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 2, 'school', 1, 0, 100, '2016-05-20 23:34:29', 1),
+(6, 'yii', '20165', '2016-05-19', 'Male', 'B+', '8484', '84', '8484848', '48', '48', '48', '48', '48', '878787', '878', '78', '87878', 4, 2, 87, '878', '87', '87', '87', '8787', 4, 2, 8787, '8787', 1, 2, 3, 'self', 1, 0, 87878, '2016-05-22 00:49:20', 1),
+(7, 'Barak Obama', '20166', '2016-05-31', 'Male', 'O+', 'bobama@gmail.com', 'nahi h', 'asdmkasdm', 'husaini obama', 'business', 'housewife', '9912912313', 'deded', '848', '121219898', '89', '989898', 1, 1, 98, '98', '9898', '98', '98', '8787', 2, 1, 8787, '8787', 1, 2, 4, 'self', 1, 0, NULL, '2016-05-24 08:41:12', 1),
+(8, 'raghav', '20167', '2016-06-22', 'Male', 'B+', 'rag@nn.com', 'IMG_20160428_110954.jpg', 'asdasdas', 'newbei', 'assd', 'asdasd', '0909090', 'asds@na.cm', '45/8', 'asdasndin', 'inasidnasid', 'a848484', 2, 1, 84848, '848484', '848484', '8484a8sd4a8sd48asd484', '848484', '84848484', 2, 1, 848484, '84848484', 1, 1, 3, 'school', 1, 0, 10, '2016-06-04 00:35:56', 1),
+(9, 'Malhar Trivedi', '20168', '2000-03-02', 'Female', 'O+', '', 'IMG_20160427_084045.jpg', 'sonu trivedi', 'ahilya trivedi', 'business', 'houeswife', '9812989389', '', '45', 'new road', 'bhavnagar', 'deri road', 147, 12, 121515, '55515151', '15151', '515', '1', '5151', 253, 17, 515, '151', 2, 1, 1, 'school', 3, 0, NULL, '2016-06-08 11:04:04', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_transport_details`
+--
+
+DROP TABLE IF EXISTS `student_transport_details`;
+CREATE TABLE IF NOT EXISTS `student_transport_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `route_id` int(11) NOT NULL,
+  `station_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `created_at` timestamp NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_transport_details`
+--
+
+INSERT INTO `student_transport_details` (`id`, `route_id`, `station_id`, `student_id`, `start_date`, `created_at`) VALUES
+(1, 1, 1, 2, '2016-05-24', '2016-05-18 09:51:31'),
+(2, 1, 1, 5, '2016-05-31', '2016-05-20 23:34:51'),
+(3, 1, 1, 9, '2016-06-30', '2016-06-08 11:04:24');
 
 -- --------------------------------------------------------
 
@@ -86,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `_class_master` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_class_master`
@@ -97,7 +477,21 @@ INSERT INTO `_class_master` (`id`, `name`, `status`, `created_at`, `updated_at`)
 (2, 'LKG', 1, '2016-05-11 16:46:22', '2016-05-11 16:46:22'),
 (3, 'UKG', 1, '2016-05-11 16:46:29', '2016-05-11 16:46:29'),
 (4, 'I', 1, '2016-05-11 16:46:36', '2016-05-11 16:46:36'),
-(5, 'II', 1, '2016-05-11 16:46:43', '2016-05-11 16:46:43');
+(5, 'II', 1, '2016-05-11 16:46:43', '2016-05-11 16:46:43'),
+(6, 'III', 1, '2016-05-12 15:02:57', '2016-05-12 15:02:57'),
+(7, 'IV', 1, '2016-05-12 15:03:11', '2016-05-12 15:03:11'),
+(8, 'V', 1, '2016-05-12 15:03:18', '2016-05-12 15:03:18'),
+(9, 'VI', 1, '2016-05-12 15:03:26', '2016-05-12 15:03:26'),
+(10, 'VII', 1, '2016-05-12 15:03:34', '2016-05-12 15:03:34'),
+(11, 'VIII', 1, '2016-05-12 15:03:45', '2016-05-12 15:03:45'),
+(12, 'IX', 1, '2016-05-12 15:03:56', '2016-05-12 15:03:56'),
+(13, 'X', 1, '2016-05-12 15:04:07', '2016-05-12 15:04:07'),
+(14, 'XI-ARTS', 1, '2016-05-12 15:04:22', '2016-05-12 15:04:51'),
+(15, 'XI-COM', 1, '2016-05-12 15:04:32', '2016-05-12 15:05:17'),
+(16, 'XI-SCI', 1, '2016-05-12 15:05:30', '2016-05-12 15:05:30'),
+(17, 'XII-ART', 1, '2016-05-12 15:05:41', '2016-05-12 15:05:41'),
+(18, 'XII-COM', 1, '2016-05-12 15:05:51', '2016-05-12 15:05:51'),
+(19, 'XII-SCI', 1, '2016-05-12 15:06:00', '2016-05-12 15:06:00');
 
 -- --------------------------------------------------------
 
@@ -110,12 +504,12 @@ CREATE TABLE IF NOT EXISTS `_class_section_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `class_id` (`class_id`,`section_id`),
   KEY `section_id` (`section_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_class_section_relation`
@@ -123,7 +517,12 @@ CREATE TABLE IF NOT EXISTS `_class_section_relation` (
 
 INSERT INTO `_class_section_relation` (`id`, `class_id`, `section_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(2, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 2, 1, '2016-06-08 21:39:47', '2016-06-08 21:39:47'),
+(4, 3, 2, '2016-06-08 21:39:59', '2016-06-08 21:39:59'),
+(5, 4, 1, '2016-06-08 21:40:07', '2016-06-08 21:40:07'),
+(6, 4, 2, '2016-06-08 21:40:15', '2016-06-08 21:40:15'),
+(7, 5, 1, '2016-06-08 21:40:25', '2016-06-08 21:40:25');
 
 -- --------------------------------------------------------
 
@@ -137,7 +536,7 @@ CREATE TABLE IF NOT EXISTS `_district` (
   `name` varchar(100) NOT NULL,
   `state_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=672 DEFAULT CHARSET=latin1;
@@ -832,10 +1231,10 @@ CREATE TABLE IF NOT EXISTS `_fee_master` (
   `name` varchar(90) NOT NULL,
   `type_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_fee_master`
@@ -843,7 +1242,8 @@ CREATE TABLE IF NOT EXISTS `_fee_master` (
 
 INSERT INTO `_fee_master` (`id`, `class_id`, `name`, `type_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '500', 2, '2016-05-11 17:21:35', '2016-05-11 17:21:35'),
-(2, 1, '1200', 1, '2016-05-11 17:21:49', '2016-05-11 17:21:49');
+(2, 1, '1200', 1, '2016-05-11 17:21:49', '2016-05-11 17:21:49'),
+(3, 1, '5000', 3, '2016-05-14 01:39:51', '2016-05-14 01:39:51');
 
 -- --------------------------------------------------------
 
@@ -859,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `_fee_type` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_fee_type`
@@ -867,7 +1267,8 @@ CREATE TABLE IF NOT EXISTS `_fee_type` (
 
 INSERT INTO `_fee_type` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Tution', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Transport', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(2, 'Transport', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Admission', 1, '2016-05-14 05:18:26', '2016-05-14 07:31:18');
 
 -- --------------------------------------------------------
 
@@ -880,7 +1281,7 @@ CREATE TABLE IF NOT EXISTS `_payment_mode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mode` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -905,7 +1306,7 @@ CREATE TABLE IF NOT EXISTS `_route` (
   `starting_point` varchar(90) NOT NULL,
   `end_point` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -928,7 +1329,7 @@ CREATE TABLE IF NOT EXISTS `_route_immediate_stations` (
   `route_id` int(11) NOT NULL,
   `name` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `route_id` (`route_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -951,7 +1352,7 @@ CREATE TABLE IF NOT EXISTS `_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(9) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -976,7 +1377,7 @@ CREATE TABLE IF NOT EXISTS `_state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
@@ -1033,13 +1434,22 @@ DROP TABLE IF EXISTS `_student_catagory`;
 CREATE TABLE IF NOT EXISTS `_student_catagory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
-  `discount_in_fee` varchar(11) NOT NULL,
-  `discount_in_adm` varchar(11) NOT NULL,
+  `discount_in_fee` varchar(11) NOT NULL COMMENT 'in percentage',
+  `discount_in_adm` varchar(11) NOT NULL COMMENT 'in percentage',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_student_catagory`
+--
+
+INSERT INTO `_student_catagory` (`id`, `name`, `discount_in_fee`, `discount_in_adm`, `created_at`, `updated_at`) VALUES
+(1, 'OBC', '10', '10', '2016-05-12 05:15:23', '2016-05-12 16:38:34'),
+(2, 'SC', '15', '15', '2016-05-12 11:28:29', '2016-05-12 14:30:42'),
+(3, 'GENERAL', '0', '0', '2016-05-12 08:22:32', '2016-05-12 11:36:33');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1463,7 @@ CREATE TABLE IF NOT EXISTS `_transport` (
   `name` varchar(50) NOT NULL,
   `status` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `number_plate` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -1081,7 +1491,14 @@ CREATE TABLE IF NOT EXISTS `_transport_route` (
   PRIMARY KEY (`id`),
   KEY `transport_id` (`transport_id`),
   KEY `route_id` (`route_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_transport_route`
+--
+
+INSERT INTO `_transport_route` (`id`, `transport_id`, `route_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 --
 -- Constraints for dumped tables
