@@ -13,7 +13,7 @@ use common\widgets\Alert;
 AppAsset::register($this);
 ?>
 <?php echo uran1980\yii\widgets\pace\Pace::widget([
-    'color' => 'red',
+    'color' => 'black',
     'theme' => 'flash',
 ]); ?>
 <?php $this->beginPage() ?>
@@ -32,7 +32,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Yes',
+        'brandLabel' => 'Yes Ishani',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

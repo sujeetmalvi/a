@@ -11,6 +11,7 @@ use backend\models\ClassMaster;
 use backend\models\Section;
 use backend\models\StudentCatagory;
 use backend\models\Session;
+use kartik\widgets\FileInput
 
 
 /* @var $this yii\web\View */
@@ -44,7 +45,9 @@ use backend\models\Session;
             <?= $form->field($model, 'bloog_group')->dropDownList([''=>'Please Select Blood Group','A1-'=>'A1-',
                     'A1+'=>'A1+','A2-'=>'A2-','A2+'=>'A2+','B-'=>'B-','B+'=>'B+','O-'=>'O-','O+'=>'0+']) ?>
             <?= $form->field($model, 'stu_email')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
+                                 'options' => ['accept' => 'image/*'],
+            ]); ?>
               </div>
         </div>
         

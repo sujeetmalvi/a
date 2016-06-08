@@ -105,6 +105,25 @@ class ClassSectionRelationController extends Controller
 
         return $this->redirect(['index']);
     }
+    public function actionLists($id){
+         $countBranches = ClassSectionRelation::find()->joinWith('section')
+                ->where(['class_id' => $id])
+                ->count();
+ 
+        $branches = ClassSectionRelation::find()->joinWith('section')
+                ->where(['class_id' => $id])
+                ->all();
+ 
+        if($countBranches > 0 )
+        {
+            foreach($branches as $branch ){
+                echo "<option value='".$branch->id."'>".$branch->section->name."</option>";
+            }
+        }
+        else{
+            echo "<option>  </option>";
+        }
+    }
 
     /**
      * Finds the ClassSectionRelation model based on its primary key value.

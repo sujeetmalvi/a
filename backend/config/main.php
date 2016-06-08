@@ -39,7 +39,15 @@ return [
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             
-        ]
+        ],
+        'assetManager' => [
+    'bundles' => [
+        'yii\bootstrap\BootstrapAsset' => [
+             'sourcePath' => null,
+             'css' => ['a/backend/web/css/bootstrap.min.css']
+        ],
+    ]
+]
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
