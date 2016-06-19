@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2016 at 05:05 PM
+-- Generation Time: Jun 19, 2016 at 11:20 AM
 -- Server version: 5.7.9
 -- PHP Version: 7.0.0
 
@@ -23,100 +23,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admission_payment_details`
+-- Table structure for table `addmission_payment_details`
 --
 
-DROP TABLE IF EXISTS `admission_payment_details`;
-CREATE TABLE IF NOT EXISTS `admission_payment_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stu_id` int(11) NOT NULL,
-  `adm_id` varchar(30) NOT NULL,
-  `cheq_no` varchar(255) NOT NULL,
-  `cheq_dt` date NOT NULL,
-  `bank_name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `stu_id` (`stu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `admission_payment_details`
---
-
-INSERT INTO `admission_payment_details` (`id`, `stu_id`, `adm_id`, `cheq_no`, `cheq_dt`, `bank_name`, `created_at`) VALUES
-(1, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:45:05'),
-(2, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:46:56'),
-(3, 3, '3', '8484848484', '2016-05-27', 'sbi', '2016-05-19 13:47:20'),
-(4, 7, '7', '454564', '2016-05-31', 'sbi', '2016-05-24 14:11:29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `archieved_students`
---
-
-DROP TABLE IF EXISTS `archieved_students`;
-CREATE TABLE IF NOT EXISTS `archieved_students` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `adm_no` varchar(50) DEFAULT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(15) NOT NULL,
-  `bloog_group` varchar(12) DEFAULT NULL,
-  `stu_email` varchar(244) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `fname` varchar(222) NOT NULL,
-  `mname` varchar(222) NOT NULL,
-  `f_occupation` varchar(200) NOT NULL,
-  `m_occupation` varchar(200) NOT NULL,
-  `parent_contact` varchar(225) NOT NULL,
-  `parent_email` varchar(255) DEFAULT NULL,
-  `cur_h_no` varchar(255) NOT NULL,
-  `cur_street_address` text NOT NULL,
-  `cur_area` varchar(255) NOT NULL,
-  `cur_po` varchar(255) NOT NULL,
-  `cur_district` int(11) NOT NULL,
-  `cur_state` int(11) NOT NULL,
-  `cur_pincode` int(11) NOT NULL,
-  `cur_contact` varchar(255) NOT NULL,
-  `per_h_no` varchar(255) NOT NULL,
-  `per_street_address` text NOT NULL,
-  `per_area` varchar(255) NOT NULL,
-  `per_po` varchar(255) NOT NULL,
-  `per_district` int(11) NOT NULL,
-  `per_state` int(11) NOT NULL,
-  `per_pincode` int(11) NOT NULL,
-  `per_contact` varchar(255) NOT NULL,
-  `class` int(11) NOT NULL,
-  `section` int(11) NOT NULL,
-  `roll_no` int(11) DEFAULT NULL,
-  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
-  `catagory` int(11) NOT NULL,
-  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
-  `special_discount` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+DROP TABLE IF EXISTS `addmission_payment_details`;
+CREATE TABLE IF NOT EXISTS `addmission_payment_details` (
+  `id` int(110) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `amt` varchar(11) NOT NULL,
+  `pay_mode` int(250) NOT NULL,
+  `pay_mode_detail` varchar(250) NOT NULL,
+  `remarks` text NOT NULL,
   `session_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fee_payment_details`
---
-
-DROP TABLE IF EXISTS `fee_payment_details`;
-CREATE TABLE IF NOT EXISTS `fee_payment_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stu_id` int(11) NOT NULL,
-  `adm_id` varchar(30) NOT NULL,
-  `cheq_no` varchar(255) NOT NULL,
-  `cheq_dt` date NOT NULL,
-  `bank_name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `stu_id` (`stu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -138,6 +59,41 @@ CREATE TABLE IF NOT EXISTS `migration` (
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m000000_000000_base', 1462951553),
 ('m130524_201442_init', 1462951558);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2014_10_12_000000_create_users_table', 1),
+('2014_10_12_100000_create_password_resets_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -165,171 +121,38 @@ INSERT INTO `session` (`id`, `start_date`, `end_date`, `sortname`, `status`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `special_fee`
---
-
-DROP TABLE IF EXISTS `special_fee`;
-CREATE TABLE IF NOT EXISTS `special_fee` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stu_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
-  `section_id` int(11) NOT NULL,
-  `fee_type_id` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `pay_mode` int(11) NOT NULL,
-  `cheque_dt` date NOT NULL,
-  `cheque_no` varchar(220) NOT NULL,
-  `bank_name` varchar(220) NOT NULL,
-  `paid_amt` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `stu_id` (`stu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `student_address`
 --
 
 DROP TABLE IF EXISTS `student_address`;
 CREATE TABLE IF NOT EXISTS `student_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stu_id` int(11) NOT NULL,
-  `cur_h_no` varchar(220) NOT NULL,
-  `cur_street_address` text NOT NULL,
-  `cur_area` varchar(222) NOT NULL,
-  `cur_po` varchar(222) NOT NULL,
-  `cur_district` int(11) NOT NULL,
-  `cur_state` int(11) NOT NULL,
-  `cur_pincode` int(11) NOT NULL,
-  `cur_contact` varchar(60) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `stu_id` (`stu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `student_admission`
---
-
-DROP TABLE IF EXISTS `student_admission`;
-CREATE TABLE IF NOT EXISTS `student_admission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
-  `fee_amt` int(11) NOT NULL,
-  `paid_fee` int(11) NOT NULL,
-  `discount_amt` int(11) NOT NULL,
-  `pay_mode` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `discount` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `student_admission`
---
-
-INSERT INTO `student_admission` (`id`, `student_id`, `fee_amt`, `paid_fee`, `discount_amt`, `pay_mode`, `created_at`, `discount`) VALUES
-(2, 2, 5500, 4675, 4675, 2, '2016-05-18 09:46:17', 15),
-(3, 3, 5000, 4500, 4500, 1, '2016-05-19 08:14:54', 10),
-(4, 5, 5500, 4950, 4950, 2, '2016-05-20 23:34:42', 10),
-(5, 6, 5000, 4500, 4500, 2, '2016-05-22 00:49:29', 10),
-(6, 7, 5000, 4500, 4500, 1, '2016-05-24 08:41:20', 10),
-(7, 9, 0, 0, 0, 2, '2016-06-08 11:04:15', 0);
+  `h_no` varchar(120) NOT NULL,
+  `street_address` text NOT NULL,
+  `post_office` varchar(120) NOT NULL,
+  `district` int(11) NOT NULL,
+  `state` int(11) NOT NULL,
+  `country` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_fee`
+-- Table structure for table `student_education`
 --
 
-DROP TABLE IF EXISTS `student_fee`;
-CREATE TABLE IF NOT EXISTS `student_fee` (
+DROP TABLE IF EXISTS `student_education`;
+CREATE TABLE IF NOT EXISTS `student_education` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fee_type` int(11) NOT NULL,
-  `stu_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
-  `month_count` int(11) NOT NULL,
-  `from_month` date NOT NULL,
-  `to_month` date NOT NULL,
-  `net_amt` int(11) NOT NULL,
-  `late_fee` int(11) NOT NULL,
-  `total_amt` int(11) NOT NULL,
-  `special_discount` int(11) NOT NULL,
-  `payment_mode` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `stu_id` (`stu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `student_initial`
---
-
-DROP TABLE IF EXISTS `student_initial`;
-CREATE TABLE IF NOT EXISTS `student_initial` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `adm_no` varchar(50) DEFAULT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(15) NOT NULL,
-  `bloog_group` varchar(12) DEFAULT NULL,
-  `stu_email` varchar(244) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `fname` varchar(222) NOT NULL,
-  `mname` varchar(222) NOT NULL,
-  `f_occupation` varchar(200) NOT NULL,
-  `m_occupation` varchar(200) NOT NULL,
-  `parent_contact` varchar(225) NOT NULL,
-  `parent_email` varchar(255) DEFAULT NULL,
-  `cur_h_no` varchar(255) NOT NULL,
-  `cur_street_address` text NOT NULL,
-  `cur_area` varchar(255) NOT NULL,
-  `cur_po` varchar(255) NOT NULL,
-  `cur_district` int(11) NOT NULL,
-  `cur_state` int(11) NOT NULL,
-  `cur_pincode` int(11) NOT NULL,
-  `cur_contact` varchar(255) NOT NULL,
-  `per_h_no` varchar(255) NOT NULL,
-  `per_street_address` text NOT NULL,
-  `per_area` varchar(255) NOT NULL,
-  `per_po` varchar(255) NOT NULL,
-  `per_district` int(11) NOT NULL,
-  `per_state` int(11) NOT NULL,
-  `per_pincode` int(11) NOT NULL,
-  `per_contact` varchar(255) NOT NULL,
-  `class` int(11) NOT NULL,
-  `section` int(11) NOT NULL,
-  `roll_no` int(11) DEFAULT NULL,
-  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
-  `catagory` int(11) NOT NULL,
-  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
-  `special_discount` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `session_id` int(11) NOT NULL,
+  `roll_id` int(11) NOT NULL,
+  `addmission_no` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `student_initial`
---
-
-INSERT INTO `student_initial` (`id`, `name`, `adm_no`, `dob`, `gender`, `bloog_group`, `stu_email`, `photo`, `fname`, `mname`, `f_occupation`, `m_occupation`, `parent_contact`, `parent_email`, `cur_h_no`, `cur_street_address`, `cur_area`, `cur_po`, `cur_district`, `cur_state`, `cur_pincode`, `cur_contact`, `per_h_no`, `per_street_address`, `per_area`, `per_po`, `per_district`, `per_state`, `per_pincode`, `per_contact`, `class`, `section`, `roll_no`, `transport_status`, `catagory`, `physically_disabled`, `special_discount`, `created_at`, `session_id`) VALUES
-(1, 'gabbar', '20161', '2016-05-05', 'Male', 'A1+', 'di@n.com', 'asd', 'asdmkasdm', 'mk', 'mk', 'mkm', 'km', 'km', '90/2', 'asdasd as dasld as dasm dkamsk mkasm kasmd kmskmd a', 'asdsdas', 'okokoko', 1, 1, 121111, '8484848', '90/2', 'sasdsdasdasdasdasdasdasdas', 'sadasdasdasd', 'asdasdasdasdas', 4, 2, 123123, 'asdasdasd', 1, 2, 1, 'school', 1, 0, NULL, '2016-05-14 09:03:51', 0),
-(2, 'Anil', '20161', '2016-05-25', 'Male', 'A1-', 'dfjsdfj@djf.com', 'aasidasd', 'asdijasoidjasoidjoi', 'jio', 'joi', 'joi', 'joi', 'joi', '212312884', '84', '84', '848484', 176, 13, 84, '84', '84848', '48', '48', '8484848', 2, 1, 48, '48', 1, 1, 1, 'school', 2, 0, NULL, '2016-05-18 09:43:24', 0),
-(3, 'gababsd', '20162', '2016-05-20', 'Male', 'A1-', 'sas@sdas', 'xxx5151', '5151', '515', '15', '1', '51', '51', '848', '484', '8', '848484', 1, 1, 48484, '48484', '8484', '8484', '8484', '8484', 1, 1, 84484, '8484', 1, 1, 2, 'self', 1, 0, NULL, '2016-05-19 08:14:45', 0),
-(5, 'humble', '20164', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 2, 'school', 1, 0, 100, '2016-05-20 23:34:29', 1),
-(6, 'yii', '20165', '2016-05-19', 'Male', 'B+', '8484', '84', '8484848', '48', '48', '48', '48', '48', '878787', '878', '78', '87878', 4, 2, 87, '878', '87', '87', '87', '8787', 4, 2, 8787, '8787', 1, 2, 3, 'self', 1, 0, 87878, '2016-05-22 00:49:20', 1),
-(7, 'Barak Obama', '20166', '2016-05-31', 'Male', 'O+', 'bobama@gmail.com', 'nahi h', 'asdmkasdm', 'husaini obama', 'business', 'housewife', '9912912313', 'deded', '848', '121219898', '89', '989898', 1, 1, 98, '98', '9898', '98', '98', '8787', 2, 1, 8787, '8787', 1, 2, 4, 'self', 1, 0, NULL, '2016-05-24 08:41:12', 1),
-(8, 'raghav', '20167', '2016-06-22', 'Male', 'B+', 'rag@nn.com', 'IMG_20160428_110954.jpg', 'asdasdas', 'newbei', 'assd', 'asdasd', '0909090', 'asds@na.cm', '45/8', 'asdasndin', 'inasidnasid', 'a848484', 2, 1, 84848, '848484', '848484', '8484a8sd4a8sd48asd484', '848484', '84848484', 2, 1, 848484, '84848484', 1, 1, 3, 'school', 1, 0, 10, '2016-06-04 00:35:56', 1),
-(9, 'Malhar Trivedi', '20168', '2000-03-02', 'Female', 'O+', '', 'IMG_20160427_084045.jpg', 'sonu trivedi', 'ahilya trivedi', 'business', 'houeswife', '9812989389', '', '45', 'new road', 'bhavnagar', 'deri road', 147, 12, 121515, '55515151', '15151', '515', '1', '5151', 253, 17, 515, '151', 2, 1, 1, 'school', 3, 0, NULL, '2016-06-08 11:04:04', 1);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -340,86 +163,34 @@ INSERT INTO `student_initial` (`id`, `name`, `adm_no`, `dob`, `gender`, `bloog_g
 DROP TABLE IF EXISTS `student_master`;
 CREATE TABLE IF NOT EXISTS `student_master` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `adm_no` varchar(50) DEFAULT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(15) NOT NULL,
-  `bloog_group` varchar(12) DEFAULT NULL,
-  `stu_email` varchar(244) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `fname` varchar(222) NOT NULL,
-  `mname` varchar(222) NOT NULL,
-  `f_occupation` varchar(200) NOT NULL,
-  `m_occupation` varchar(200) NOT NULL,
-  `parent_contact` varchar(225) NOT NULL,
-  `parent_email` varchar(255) DEFAULT NULL,
-  `cur_h_no` varchar(255) NOT NULL,
-  `cur_street_address` text NOT NULL,
-  `cur_area` varchar(255) NOT NULL,
-  `cur_po` varchar(255) NOT NULL,
-  `cur_district` int(11) NOT NULL,
-  `cur_state` int(11) NOT NULL,
-  `cur_pincode` int(11) NOT NULL,
-  `cur_contact` varchar(255) NOT NULL,
-  `per_h_no` varchar(255) NOT NULL,
-  `per_street_address` text NOT NULL,
-  `per_area` varchar(255) NOT NULL,
-  `per_po` varchar(255) NOT NULL,
-  `per_district` int(11) NOT NULL,
-  `per_state` int(11) NOT NULL,
-  `per_pincode` int(11) NOT NULL,
-  `per_contact` varchar(255) NOT NULL,
-  `class` int(11) NOT NULL,
-  `section` int(11) NOT NULL,
-  `roll_no` int(11) DEFAULT NULL,
-  `transport_status` enum('school','self') NOT NULL DEFAULT 'self',
-  `catagory` int(11) NOT NULL,
-  `physically_disabled` int(11) NOT NULL COMMENT '0:no;1:yes',
-  `special_discount` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `session_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `student_master`
---
-
-INSERT INTO `student_master` (`id`, `name`, `adm_no`, `dob`, `gender`, `bloog_group`, `stu_email`, `photo`, `fname`, `mname`, `f_occupation`, `m_occupation`, `parent_contact`, `parent_email`, `cur_h_no`, `cur_street_address`, `cur_area`, `cur_po`, `cur_district`, `cur_state`, `cur_pincode`, `cur_contact`, `per_h_no`, `per_street_address`, `per_area`, `per_po`, `per_district`, `per_state`, `per_pincode`, `per_contact`, `class`, `section`, `roll_no`, `transport_status`, `catagory`, `physically_disabled`, `special_discount`, `created_at`, `session_id`) VALUES
-(2, 'Anil', '20161', '2016-05-25', 'Male', 'A1-', 'dfjsdfj@djf.com', 'aasidasd', 'asdijasoidjasoidjoi', 'jio', 'joi', 'joi', 'joi', 'joi', '212312884', '84', '84', '848484', 176, 13, 84, '84', '84848', '48', '48', '8484848', 2, 1, 48, '48', 1, 1, 1, 'school', 2, 0, NULL, '2016-05-18 09:43:24', 0),
-(3, 'gababsd', '20162', '2016-05-20', 'Male', 'A1-', 'sas@sdas', 'xxx5151', '5151', '515', '15', '1', '51', '51', '848', '484', '8', '848484', 1, 1, 48484, '48484', '8484', '8484', '8484', '8484', 1, 1, 84484, '8484', 1, 1, 2, 'self', 1, 0, NULL, '2016-05-19 08:14:45', 0),
-(4, 'humble', '20163', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 1, 'school', 1, 0, 100, '2016-05-20 23:34:01', 1),
-(5, 'humble', '20164', '2016-05-18', 'Male', 'B+', 'fab@m.com', 'adasdijoi', 'ioijoij', 'oijo', 'ijo', 'ijoij', 'oijoij', 'oijoijoi', '15151', '51515', '5151', '445454', 34, 4, 54545, '545454', '545454', '545', '45', '54545454', 34, 4, 545, '45', 1, 2, 2, 'school', 1, 0, 100, '2016-05-20 23:34:29', 1),
-(6, 'yii', '20165', '2016-05-19', 'Male', 'B+', '8484', '84', '8484848', '48', '48', '48', '48', '48', '878787', '878', '78', '87878', 4, 2, 87, '878', '87', '87', '87', '8787', 4, 2, 8787, '8787', 1, 2, 3, 'self', 1, 0, 87878, '2016-05-22 00:49:20', 1),
-(7, 'Barak Obama', '20166', '2016-05-31', 'Male', 'O+', 'bobama@gmail.com', 'nahi h', 'asdmkasdm', 'husaini obama', 'business', 'housewife', '9912912313', 'deded', '848', '121219898', '89', '989898', 1, 1, 98, '98', '9898', '98', '98', '8787', 2, 1, 8787, '8787', 1, 2, 4, 'self', 1, 0, NULL, '2016-05-24 08:41:12', 1),
-(8, 'raghav', '20167', '2016-06-22', 'Male', 'B+', 'rag@nn.com', 'IMG_20160428_110954.jpg', 'asdasdas', 'newbei', 'assd', 'asdasd', '0909090', 'asds@na.cm', '45/8', 'asdasndin', 'inasidnasid', 'a848484', 2, 1, 84848, '848484', '848484', '8484a8sd4a8sd48asd484', '848484', '84848484', 2, 1, 848484, '84848484', 1, 1, 3, 'school', 1, 0, 10, '2016-06-04 00:35:56', 1),
-(9, 'Malhar Trivedi', '20168', '2000-03-02', 'Female', 'O+', '', 'IMG_20160427_084045.jpg', 'sonu trivedi', 'ahilya trivedi', 'business', 'houeswife', '9812989389', '', '45', 'new road', 'bhavnagar', 'deri road', 147, 12, 121515, '55515151', '15151', '515', '1', '5151', 253, 17, 515, '151', 2, 1, 1, 'school', 3, 0, NULL, '2016-06-08 11:04:04', 1);
+  `name` varchar(120) NOT NULL,
+  `do` date NOT NULL,
+  `gender` enum('male','female') NOT NULL,
+  `photo` text NOT NULL,
+  `contact` varchar(190) NOT NULL,
+  `from_session` int(11) NOT NULL,
+  `to_session` int(11) NOT NULL,
+  `addmission_no` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `from_session` (`from_session`),
+  KEY `to_session` (`to_session`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_transport_details`
+-- Table structure for table `student_transport`
 --
 
-DROP TABLE IF EXISTS `student_transport_details`;
-CREATE TABLE IF NOT EXISTS `student_transport_details` (
+DROP TABLE IF EXISTS `student_transport`;
+CREATE TABLE IF NOT EXISTS `student_transport` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
   `station_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `created_at` timestamp NOT NULL,
+  `session_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `student_transport_details`
---
-
-INSERT INTO `student_transport_details` (`id`, `route_id`, `station_id`, `student_id`, `start_date`, `created_at`) VALUES
-(1, 1, 1, 2, '2016-05-24', '2016-05-18 09:51:31'),
-(2, 1, 1, 5, '2016-05-31', '2016-05-20 23:34:51'),
-(3, 1, 1, 9, '2016-06-30', '2016-06-08 11:04:24');
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -450,6 +221,32 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'NeH-55TNiuH_bLFqmD0v_XEqIDK-_7MQ', '$2y$13$ypQpoC0fFQ4BHT20kZvF7eG3ozmt9DDTmM3DP5a/t.GBqyHx8ZygW', NULL, 'admin@admin.com', 10, 1462951562, 1462951562);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', '$2y$10$bXnBcRlBy2hIXupdrXk7bOAssIqGBB40QIektoTzHqlPAEfpbCkve', '5HmzJmTCXor25tnpEgYkglNQ2v9X0xpga6byhJBlISrDIEByIBWWOrmFAX95', '2016-06-16 11:41:40', '2016-06-18 03:24:07');
 
 -- --------------------------------------------------------
 
@@ -523,6 +320,28 @@ INSERT INTO `_class_section_relation` (`id`, `class_id`, `section_id`, `created_
 (5, 4, 1, '2016-06-08 21:40:07', '2016-06-08 21:40:07'),
 (6, 4, 2, '2016-06-08 21:40:15', '2016-06-08 21:40:15'),
 (7, 5, 1, '2016-06-08 21:40:25', '2016-06-08 21:40:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_country`
+--
+
+DROP TABLE IF EXISTS `_country`;
+CREATE TABLE IF NOT EXISTS `_country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_country`
+--
+
+INSERT INTO `_country` (`id`, `name`) VALUES
+(1, 'INDIA'),
+(2, 'Nepal'),
+(3, 'dytyftftf');
 
 -- --------------------------------------------------------
 
@@ -1306,16 +1125,17 @@ CREATE TABLE IF NOT EXISTS `_route` (
   `starting_point` varchar(90) NOT NULL,
   `end_point` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_route`
 --
 
 INSERT INTO `_route` (`id`, `starting_point`, `end_point`, `created_at`, `updated_at`) VALUES
-(1, 'Sector 37', 'Sector 91', '2016-05-11 17:29:03', '2016-05-11 17:29:03');
+(1, 'Sector 37', 'Sector 91', '2016-05-11 17:29:03', '2016-05-11 17:29:03'),
+(2, 'Sector 46', 'Eros', '2016-06-13 03:36:32', '2016-06-13 03:36:32');
 
 -- --------------------------------------------------------
 
@@ -1329,17 +1149,28 @@ CREATE TABLE IF NOT EXISTS `_route_immediate_stations` (
   `route_id` int(11) NOT NULL,
   `name` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `route_id` (`route_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_route_immediate_stations`
 --
 
 INSERT INTO `_route_immediate_stations` (`id`, `route_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Palla', '2016-05-11 17:34:04', '2016-05-11 17:34:04');
+(1, 1, 'Palla', '2016-05-11 17:34:04', '2016-05-11 17:34:04'),
+(2, 1, 'Sehatpur', '2016-06-13 04:27:40', '2016-06-13 04:27:40'),
+(3, 1, 'Sehatpur petrol pump', '2016-06-13 04:28:04', '2016-06-13 04:28:04'),
+(4, 1, 'Surya Vihar Phase I', '2016-06-13 04:28:25', '2016-06-13 04:28:25'),
+(5, 1, 'Surya Vihar phase 2', '2016-06-13 04:28:43', '2016-06-13 04:28:43'),
+(6, 1, 'Sector 91', '2016-06-13 04:28:59', '2016-06-13 04:28:59'),
+(7, 2, 'Sarai', '2016-06-13 04:29:14', '2016-06-13 04:29:14'),
+(8, 2, 'Green Field colony', '2016-06-13 04:29:34', '2016-06-13 04:29:34'),
+(9, 2, 'Omaxe green Valley', '2016-06-13 04:29:55', '2016-06-13 04:29:55'),
+(10, 2, 'Lakadpur', '2016-06-13 04:30:20', '2016-06-13 04:30:20'),
+(11, 2, 'Surajkund', '2016-06-13 04:30:44', '2016-06-13 04:30:44'),
+(12, 2, 'Eros', '2016-06-13 04:30:57', '2016-06-13 04:30:57');
 
 -- --------------------------------------------------------
 
@@ -1376,8 +1207,7 @@ DROP TABLE IF EXISTS `_state`;
 CREATE TABLE IF NOT EXISTS `_state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `country_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
@@ -1386,43 +1216,43 @@ CREATE TABLE IF NOT EXISTS `_state` (
 -- Dumping data for table `_state`
 --
 
-INSERT INTO `_state` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Andaman and Nicobar Island', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(2, 'Andhra Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(3, 'Arunachal Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(4, 'Assam', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(5, 'Bihar', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(6, 'Chandigarh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(7, 'Chhattisgarh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(8, 'Dadra and Nagar Haveli', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(9, 'Daman and Diu', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(10, 'Delhi', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(11, 'Goa', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(12, 'Gujarat', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(13, 'Haryana', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(14, 'Himachal Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(15, 'Jammu and Kashmir', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(16, 'Jharkhand', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(17, 'Karnataka', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(18, 'Kerala', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(19, 'Lakshadweep', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(20, 'Madhya Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(21, 'Maharashtra', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(22, 'Manipur', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(23, 'Meghalaya', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(24, 'Mizoram', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(25, 'Nagaland', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(26, 'Odisha', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(27, 'Puducherry', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(28, 'Punjab', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(29, 'Rajasthan', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(30, 'Sikkim', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(31, 'Tamil Nadu', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(32, 'Telangana', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(33, 'Tripura', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(34, 'Uttar Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(35, 'Uttarakhand', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(36, 'West Bengal', '2016-05-11 16:56:48', '2016-05-11 16:56:48');
+INSERT INTO `_state` (`id`, `name`, `country_id`) VALUES
+(1, 'Andaman and Nicobar Island', 1),
+(2, 'Andhra Pradesh', 1),
+(3, 'Arunachal Pradesh', 1),
+(4, 'Assam', 1),
+(5, 'Bihar', 1),
+(6, 'Chandigarh', 1),
+(7, 'Chhattisgarh', 1),
+(8, 'Dadra and Nagar Haveli', 1),
+(9, 'Daman and Diu', 1),
+(10, 'Delhi', 1),
+(11, 'Goa', 1),
+(12, 'Gujarat', 1),
+(13, 'Haryana', 1),
+(14, 'Himachal Pradesh', 1),
+(15, 'Jammu and Kashmir', 1),
+(16, 'Jharkhand', 1),
+(17, 'Karnataka', 1),
+(18, 'Kerala', 1),
+(19, 'Lakshadweep', 1),
+(20, 'Madhya Pradesh', 1),
+(21, 'Maharashtra', 1),
+(22, 'Manipur', 1),
+(23, 'Meghalaya', 1),
+(24, 'Mizoram', 1),
+(25, 'Nagaland', 1),
+(26, 'Odisha', 1),
+(27, 'Puducherry', 1),
+(28, 'Punjab', 1),
+(29, 'Rajasthan', 1),
+(30, 'Sikkim', 1),
+(31, 'Tamil Nadu', 1),
+(32, 'Telangana', 1),
+(33, 'Tripura', 1),
+(34, 'Uttar Pradesh', 1),
+(35, 'Uttarakhand', 1),
+(36, 'West Bengal', 1);
 
 -- --------------------------------------------------------
 
@@ -1454,6 +1284,28 @@ INSERT INTO `_student_catagory` (`id`, `name`, `discount_in_fee`, `discount_in_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `_subject_type`
+--
+
+DROP TABLE IF EXISTS `_subject_type`;
+CREATE TABLE IF NOT EXISTS `_subject_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(190) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_subject_type`
+--
+
+INSERT INTO `_subject_type` (`id`, `name`) VALUES
+(1, 'elective'),
+(2, 'electionation'),
+(3, 'fhfhyfuy');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `_transport`
 --
 
@@ -1463,17 +1315,18 @@ CREATE TABLE IF NOT EXISTS `_transport` (
   `name` varchar(50) NOT NULL,
   `status` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `number_plate` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_transport`
 --
 
 INSERT INTO `_transport` (`id`, `name`, `status`, `created_at`, `updated_at`, `number_plate`) VALUES
-(1, 'Bus', 1, '2016-05-11 17:46:29', '2016-05-11 17:46:29', 'HR 21 AD 4567');
+(1, 'Bus', 1, '2016-05-11 17:46:29', '2016-05-11 17:46:29', 'HR 21 AD 4567'),
+(2, 'Bus', 1, '2016-06-13 04:33:19', '2016-06-13 04:33:19', 'HR 42 BC 4201');
 
 -- --------------------------------------------------------
 
@@ -1486,19 +1339,20 @@ CREATE TABLE IF NOT EXISTS `_transport_route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `transport_id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `transport_id` (`transport_id`),
   KEY `route_id` (`route_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_transport_route`
 --
 
 INSERT INTO `_transport_route` (`id`, `transport_id`, `route_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 2, 2, '2016-06-13 10:03:59', '2016-06-13 10:03:59');
 
 --
 -- Constraints for dumped tables
