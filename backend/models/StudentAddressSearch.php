@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\StudentMaster;
+use backend\models\StudentAddress;
 
 /**
- * StudentMasterSearch represents the model behind the search form about `backend\models\StudentMaster`.
+ * StudentAddressSearch represents the model behind the search form about `backend\models\StudentAddress`.
  */
-class StudentMasterSearch extends StudentMaster
+class StudentAddressSearch extends StudentAddress
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class StudentMasterSearch extends StudentMaster
     public function rules()
     {
         return [
-            [['id', 'from_session', 'to_session'], 'integer'],
-            [['name', 'do', 'gender', 'photo', 'contact', 'addmission_no'], 'safe'],
+            [['id', 'student_id', 'district', 'state', 'country'], 'integer'],
+            [['h_no', 'street_address', 'post_office'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class StudentMasterSearch extends StudentMaster
      */
     public function search($params)
     {
-        $query = StudentMaster::find();
+        $query = StudentAddress::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +60,15 @@ class StudentMasterSearch extends StudentMaster
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'do' => $this->do,
-            'from_session' => $this->from_session,
-            'to_session' => $this->to_session,
+            'student_id' => $this->student_id,
+            'district' => $this->district,
+            'state' => $this->state,
+            'country' => $this->country,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'contact', $this->contact])
-            ->andFilterWhere(['like', 'addmission_no', $this->addmission_no]);
+        $query->andFilterWhere(['like', 'h_no', $this->h_no])
+            ->andFilterWhere(['like', 'street_address', $this->street_address])
+            ->andFilterWhere(['like', 'post_office', $this->post_office]);
 
         return $dataProvider;
     }

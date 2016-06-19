@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\StudentMaster;
+use backend\models\StudentEducation;
 
 /**
- * StudentMasterSearch represents the model behind the search form about `backend\models\StudentMaster`.
+ * StudentEducationSearch represents the model behind the search form about `backend\models\StudentEducation`.
  */
-class StudentMasterSearch extends StudentMaster
+class StudentEducationSearch extends StudentEducation
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class StudentMasterSearch extends StudentMaster
     public function rules()
     {
         return [
-            [['id', 'from_session', 'to_session'], 'integer'],
-            [['name', 'do', 'gender', 'photo', 'contact', 'addmission_no'], 'safe'],
+            [['id', 'class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class StudentMasterSearch extends StudentMaster
      */
     public function search($params)
     {
-        $query = StudentMaster::find();
+        $query = StudentEducation::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +59,12 @@ class StudentMasterSearch extends StudentMaster
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'do' => $this->do,
-            'from_session' => $this->from_session,
-            'to_session' => $this->to_session,
+            'class_id' => $this->class_id,
+            'section_id' => $this->section_id,
+            'session_id' => $this->session_id,
+            'roll_id' => $this->roll_id,
+            'addmission_no' => $this->addmission_no,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'contact', $this->contact])
-            ->andFilterWhere(['like', 'addmission_no', $this->addmission_no]);
 
         return $dataProvider;
     }
