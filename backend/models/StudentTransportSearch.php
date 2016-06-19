@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\StudentMaster;
+use backend\models\StudentTransport;
 
 /**
- * StudentMasterSearch represents the model behind the search form about `backend\models\StudentMaster`.
+ * StudentTransportSearch represents the model behind the search form about `backend\models\StudentTransport`.
  */
-class StudentMasterSearch extends StudentMaster
+class StudentTransportSearch extends StudentTransport
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class StudentMasterSearch extends StudentMaster
     public function rules()
     {
         return [
-            [['id', 'from_session', 'to_session'], 'integer'],
-            [['name', 'do', 'gender', 'photo', 'contact', 'addmission_no'], 'safe'],
+            [['id', 'student_id', 'route_id', 'station_id', 'session_id'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class StudentMasterSearch extends StudentMaster
      */
     public function search($params)
     {
-        $query = StudentMaster::find();
+        $query = StudentTransport::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +59,11 @@ class StudentMasterSearch extends StudentMaster
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'do' => $this->do,
-            'from_session' => $this->from_session,
-            'to_session' => $this->to_session,
+            'student_id' => $this->student_id,
+            'route_id' => $this->route_id,
+            'station_id' => $this->station_id,
+            'session_id' => $this->session_id,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'photo', $this->photo])
-            ->andFilterWhere(['like', 'contact', $this->contact])
-            ->andFilterWhere(['like', 'addmission_no', $this->addmission_no]);
 
         return $dataProvider;
     }
