@@ -14,7 +14,7 @@ use backend\models\FeeMaster;
  * @property integer $paid_fee
  * @property integer $discount_amt
  * @property integer $pay_mode
- * @property string $created_on
+ * @property string $created_at
  * @property integer $discount
  */
 class StudentAdmission extends \yii\db\ActiveRecord

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use backend\models\Route;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\RouteImmediateStations */
@@ -12,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'route_id')->textInput() ?>
+    <?= $form->field($model, 'route_id')->dropDownList(ArrayHelper::map(Route::find()->all(),'id','end_point'),['prompt'=>'Please Select route']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

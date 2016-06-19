@@ -47,9 +47,11 @@ use backend\models\Section;
  * @property integer $special_discount
  * @property string $created_at
  * @property string $session_id
+ * @property string $image
  */
 class StudentMaster extends \yii\db\ActiveRecord
 {
+    public $image;
     /**
      * @inheritdoc
      */
@@ -57,6 +59,8 @@ class StudentMaster extends \yii\db\ActiveRecord
     {
         return 'student_master';
     }
+
+
 
 
     /**
@@ -116,6 +120,8 @@ class StudentMaster extends \yii\db\ActiveRecord
             [['fname', 'mname'], 'string', 'max' => 222],
             [['f_occupation', 'm_occupation'], 'string', 'max' => 200],
             [['parent_contact'], 'string', 'max' => 225],
+            [['image'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
         ];
     }
 
