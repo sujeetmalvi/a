@@ -5,21 +5,19 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "test".
+ * This is the model class for table "_country".
  *
  * @property integer $id
  * @property string $name
- * @property string $address
- * @property integer $mobile
  */
-class Test extends \yii\db\ActiveRecord
+class Country extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'test';
+        return '_country';
     }
 
     /**
@@ -28,9 +26,7 @@ class Test extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'mobile'], 'required'],
-            [['address'], 'string'],
-            [['mobile'], 'integer'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 120],
         ];
     }
@@ -43,8 +39,6 @@ class Test extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'address' => Yii::t('app', 'Address'),
-            'mobile' => Yii::t('app', 'Mobile'),
         ];
     }
 }

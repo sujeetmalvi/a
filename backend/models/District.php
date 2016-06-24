@@ -12,8 +12,7 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property integer $state_id
  * @property string $name
- * @property string $created_at
- * @property string $updated_at
+
  *
  * @property State $state
  */
@@ -41,19 +40,7 @@ class District extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * timestamp Behaviour
-     */
 
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
 
 
 
@@ -66,8 +53,7 @@ class District extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'state_id' => Yii::t('app', 'State ID'),
             'name' => Yii::t('app', 'Name'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 

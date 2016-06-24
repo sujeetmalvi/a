@@ -42,8 +42,8 @@ class StudentTransport extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'student_id' => Yii::t('app', 'Student ID'),
-            'route_id' => Yii::t('app', 'Route ID'),
-            'station_id' => Yii::t('app', 'Station ID'),
+            'route_id' => Yii::t('app', 'Route'),
+            'station_id' => Yii::t('app', 'Station'),
             'session_id' => Yii::t('app', 'Session ID'),
         ];
     }

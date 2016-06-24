@@ -19,7 +19,7 @@ class TransportSearch extends Transport
     {
         return [
             [['id', 'status'], 'integer'],
-            [['name', 'created_at', 'updated_at', 'number_plate'], 'safe'],
+            [['name', 'number_plate'], 'safe'],
         ];
     }
 
@@ -61,8 +61,8 @@ class TransportSearch extends Transport
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            //'created_at' => $this->created_at,
+           // 'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

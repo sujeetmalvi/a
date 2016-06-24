@@ -11,8 +11,6 @@ use yii\behaviours\TimestampBehavior;
  *
  * @property integer $id
  * @property string $mode
- * @property string $created_at
- * @property string $updated_at
  */
 class PaymentMode extends \yii\db\ActiveRecord
 {
@@ -25,19 +23,6 @@ class PaymentMode extends \yii\db\ActiveRecord
     }
 
 
-    /**
-     * timestamp Behaviour
-     */
-
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
 
 
 
@@ -62,8 +47,6 @@ class PaymentMode extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'mode' => Yii::t('app', 'Mode'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 }

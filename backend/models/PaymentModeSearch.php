@@ -19,7 +19,7 @@ class PaymentModeSearch extends PaymentMode
     {
         return [
             [['id'], 'integer'],
-            [['mode', 'created_at', 'updated_at'], 'safe'],
+            [['mode'], 'safe'],
         ];
     }
 
@@ -60,9 +60,7 @@ class PaymentModeSearch extends PaymentMode
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+          ]);
 
         $query->andFilterWhere(['like', 'mode', $this->mode]);
 

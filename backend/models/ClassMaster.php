@@ -12,8 +12,7 @@ use yii\db\Expression;
  * @property integer $id
  * @property string $name
  * @property integer $status
- * @property string $created_at
- * @property string $updated_at
+
  *
  * @property ClassSectionRelation[] $classSectionRelations
  * @property Section[] $sections
@@ -29,17 +28,7 @@ class ClassMaster extends \yii\db\ActiveRecord
         return '_class_master';
     }
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new Expression('NOW()'),
-            ],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -64,8 +53,7 @@ class ClassMaster extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 

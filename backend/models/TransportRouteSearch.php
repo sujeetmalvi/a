@@ -19,7 +19,7 @@ class TransportRouteSearch extends TransportRoute
     {
         return [
             [['id', 'transport_id', 'route_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+           // [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -62,8 +62,8 @@ class TransportRouteSearch extends TransportRoute
             'id' => $this->id,
             'transport_id' => $this->transport_id,
             'route_id' => $this->route_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+           // 'created_at' => $this->created_at,
+           // 'updated_at' => $this->updated_at,
         ]);
 
         return $dataProvider;

@@ -19,7 +19,7 @@ class FeeTypeSearch extends FeeType
     {
         return [
             [['id', 'status'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,8 +61,7 @@ class FeeTypeSearch extends FeeType
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

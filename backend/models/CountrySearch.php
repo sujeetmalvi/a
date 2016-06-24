@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\StudentEducation;
+use backend\models\Country;
 
 /**
- * StudentEductionSearch represents the model behind the search form about `backend\models\StudentEducation`.
+ * CountrySearch represents the model behind the search form about `backend\models\Country`.
  */
-class StudentEductionSearch extends StudentEducation
+class CountrySearch extends Country
 {
     /**
      * @inheritdoc
@@ -18,7 +18,8 @@ class StudentEductionSearch extends StudentEducation
     public function rules()
     {
         return [
-            [['id', 'class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no'], 'integer'],
+            [['id'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class StudentEductionSearch extends StudentEducation
      */
     public function search($params)
     {
-        $query = StudentEducation::find();
+        $query = Country::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +60,9 @@ class StudentEductionSearch extends StudentEducation
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'class_id' => $this->class_id,
-            'section_id' => $this->section_id,
-            'session_id' => $this->session_id,
-            'roll_id' => $this->roll_id,
-            'addmission_no' => $this->addmission_no,
         ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

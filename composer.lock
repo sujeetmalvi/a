@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2094a0fc3cb1228ba853340c32f18948",
-    "content-hash": "ad6fed7a326ea4a449f5ddd34b0e682b",
+    "hash": "aacbfe258c6f750eacb747ee32576c16",
+    "content-hash": "c0ef1fb6b5f0a3564a5b17cf3108e813",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -300,6 +300,51 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:28:07"
+        },
+        {
+            "name": "drsdre/yii2-wizardwidget",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/drsdre/yii2-wizardwidget.git",
+                "reference": "d975e750c80cf9f2b3623cba4ac1d966f0c237f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/drsdre/yii2-wizardwidget/zipball/d975e750c80cf9f2b3623cba4ac1d966f0c237f5",
+                "reference": "d975e750c80cf9f2b3623cba4ac1d966f0c237f5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "drsdre\\wizardwidget\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "A.F.Schuurman",
+                    "email": "andre.schuurman@gmail.com"
+                }
+            ],
+            "description": "Multi step wizard widget using tabs to guide a user through steps to complete a task. Based on the Form wizard (using tabs) from lukepzak (see http://bootsnipp.com/snippets/featured/form-wizard-using-tabs).",
+            "keywords": [
+                "extension",
+                "tabs",
+                "ui",
+                "widget",
+                "wizard",
+                "yii2"
+            ],
+            "time": "2015-12-03 13:48:54"
         },
         {
             "name": "ezyang/htmlpurifier",

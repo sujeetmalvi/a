@@ -19,7 +19,7 @@ class FeeMasterSearch extends FeeMaster
     {
         return [
             [['id', 'class_id', 'type_id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -62,8 +62,6 @@ class FeeMasterSearch extends FeeMaster
             'id' => $this->id,
             'class_id' => $this->class_id,
             'type_id' => $this->type_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

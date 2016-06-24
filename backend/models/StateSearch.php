@@ -19,7 +19,7 @@ class StateSearch extends State
     {
         return [
             [['id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -60,8 +60,8 @@ class StateSearch extends State
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+           // 'created_at' => $this->created_at,
+           // 'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

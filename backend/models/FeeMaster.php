@@ -4,7 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\db\Expression;
-use yii\behaviours\TimestampBehavior;
+
 use backend\models\ClassMaster;
 /**
  * This is the model class for table "_fee_master".
@@ -13,9 +13,7 @@ use backend\models\ClassMaster;
  * @property integer $class_id
  * @property string $name
  * @property integer $type_id
- * @property string $created_at
- * @property string $updated_at
- *
+
  * @property FeeType $type
  */
 class FeeMaster extends \yii\db\ActiveRecord
@@ -28,36 +26,6 @@ class FeeMaster extends \yii\db\ActiveRecord
         return '_fee_master';
     }
 
-    /**
-     * timestamp Behaviour
-     */
-
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
-     public function beforeSave($insert){
-        if(parent::beforeSave($insert)){
-             if($this->isNewRecord){
-              
-              
-                $this->created_at=date("Y-m-d H:i:s");
-               $this->updated_at=date("Y-m-d H:i:s"); 
-                return TRUE;
-            }else{
-                $this->updated_at=date("Y-m-d H:i:s");
-               
-                return TRUE;
-            }
-        }else{
-            return FALSE;
-        }
-    }
 
 
     /**
@@ -84,8 +52,7 @@ class FeeMaster extends \yii\db\ActiveRecord
             'class_id' => Yii::t('app', 'Class '),
             'name' => Yii::t('app', 'Amount'),
             'type_id' => Yii::t('app', 'Type'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 

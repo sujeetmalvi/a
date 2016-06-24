@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\State;
-use backend\models\StateSearch;
+use backend\models\Country;
+use backend\models\CountrySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * StateController implements the CRUD actions for State model.
+ * CountryController implements the CRUD actions for Country model.
  */
-class StateController extends Controller
+class CountryController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class StateController extends Controller
     }
 
     /**
-     * Lists all State models.
+     * Lists all Country models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StateSearch();
+        $searchModel = new CountrySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class StateController extends Controller
     }
 
     /**
-     * Displays a single State model.
+     * Displays a single Country model.
      * @param integer $id
      * @return mixed
      */
@@ -58,13 +57,13 @@ class StateController extends Controller
     }
 
     /**
-     * Creates a new State model.
+     * Creates a new Country model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new State();
+        $model = new Country();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,9 +74,8 @@ class StateController extends Controller
         }
     }
 
-
     /**
-     * Updates an existing State model.
+     * Updates an existing Country model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +94,7 @@ class StateController extends Controller
     }
 
     /**
-     * Deletes an existing State model.
+     * Deletes an existing Country model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,38 +106,16 @@ class StateController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionLists($id)
-    {
-        $countBranches = State::find()
-            ->where(['country_id' => $id])
-            ->count();
-
-        $branches = State::find()
-            ->where(['country_id' => $id])
-            ->all();
-
-        if($countBranches > 0 )
-        {
-            foreach($branches as $branch ){
-                echo "<option value='".$branch->id."'>".$branch->name."</option>";
-            }
-        }
-        else{
-            echo "<option> - </option>";
-        }
-
-    }
-
     /**
-     * Finds the State model based on its primary key value.
+     * Finds the Country model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return State the loaded model
+     * @return Country the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = State::findOne($id)) !== null) {
+        if (($model = Country::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

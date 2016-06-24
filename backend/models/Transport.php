@@ -11,8 +11,6 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property string $name
  * @property integer $status
- * @property string $created_at
- * @property string $updated_at
  * @property string $number_plate
  *
  * @property TransportRoute[] $transportRoutes
@@ -27,19 +25,6 @@ class Transport extends \yii\db\ActiveRecord
         return '_transport';
     }
 
-    /**
-     * timestamp Behaviour
-     */
-
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
 
 
     /**
@@ -65,8 +50,7 @@ class Transport extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'number_plate' => Yii::t('app', 'Number Plate'),
+
         ];
     }
 

@@ -12,8 +12,7 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property string $name
  * @property integer $status
- * @property string $created_at
- * @property string $updated_at
+
  *
  * @property FeeMaster[] $feeMasters
  */
@@ -40,19 +39,7 @@ class FeeType extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * timestamp Behaviour
-     */
 
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
 
 
 
@@ -65,8 +52,7 @@ class FeeType extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 

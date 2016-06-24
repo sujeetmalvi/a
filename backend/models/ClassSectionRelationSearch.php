@@ -19,7 +19,7 @@ class ClassSectionRelationSearch extends ClassSectionRelation
     {
         return [
             [['id', 'class_id', 'section_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+
         ];
     }
 
@@ -62,8 +62,7 @@ class ClassSectionRelationSearch extends ClassSectionRelation
             'id' => $this->id,
             'class_id' => $this->class_id,
             'section_id' => $this->section_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+
         ]);
 
         return $dataProvider;

@@ -13,6 +13,7 @@ use Yii;
  * @property integer $session_id
  * @property integer $roll_id
  * @property integer $addmission_no
+ * @property integer $student_id
  */
 class StudentEducation extends \yii\db\ActiveRecord
 {
@@ -30,9 +31,17 @@ class StudentEducation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no'], 'required'],
-            [['id', 'class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no'], 'integer'],
+            [['class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no','student_id'], 'required'],
+            [['class_id', 'section_id', 'session_id', 'roll_id', 'addmission_no','student_id'], 'integer'],
         ];
+    }
+
+    public function getRollno($class_id,$section_id)
+    {
+        $max = $this->find()->where(['class_id'=>$class_id,'section_id'=>$section_id])->select('id')->max('id');
+        return $max=$max+1;
+
+
     }
 
     /**
@@ -42,11 +51,12 @@ class StudentEducation extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'class_id' => Yii::t('app', 'Class ID'),
-            'section_id' => Yii::t('app', 'Section ID'),
-            'session_id' => Yii::t('app', 'Session ID'),
-            'roll_id' => Yii::t('app', 'Roll ID'),
-            'addmission_no' => Yii::t('app', 'Addmission No'),
+            'class_id' => Yii::t('app', 'Class '),
+            'student_id'=>Yii::t('app','Student id'),
+            'section_id' => Yii::t('app', 'Section '),
+            'session_id' => Yii::t('app', 'Session '),
+            'roll_id' => Yii::t('app', 'Roll Number'),
+            'addmission_no' => Yii::t('app', 'Addmission Number'),
         ];
     }
 }

@@ -19,7 +19,7 @@ class RouteImmediateStationsSearch extends RouteImmediateStations
     {
         return [
             [['id', 'route_id'], 'integer'],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,8 +61,6 @@ class RouteImmediateStationsSearch extends RouteImmediateStations
         $query->andFilterWhere([
             'id' => $this->id,
             'route_id' => $this->route_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

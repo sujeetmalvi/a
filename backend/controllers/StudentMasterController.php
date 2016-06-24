@@ -2,12 +2,19 @@
 
 namespace backend\controllers;
 
+use backend\models\StudentAddress;
+
 use Yii;
 use backend\models\StudentMaster;
+use backend\models\StudentTransport;
+use backend\models\StudentEducation;
 use backend\models\StudentMasterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+//use yii\db\Transaction;
+use yii\base\Exception;
+use yii\web\UploadedFile;
 
 /**
  * StudentMasterController implements the CRUD actions for StudentMaster model.
@@ -64,12 +71,78 @@ class StudentMasterController extends Controller
     public function actionCreate()
     {
         $model = new StudentMaster();
+        $student_transport= new StudentTransport();
+        $student_education = new StudentEducation();
+        $student_address = new StudentAddress();
+        $adm_no=$model->getAddmissionNo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $student_transport->load(Yii::$app->request->post()) && $student_education->load(Yii::$app->request->post()) && $student_address->load(Yii::$app->request->post())) {
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+            try{
+                Yii::$app->params['studentuploadPath'] = Yii::$app->basePath . '/web/uploads/student_profile_image/';
+
+                $image = UploadedFile::getInstance($model, 'photo');
+              //  print_r($image);exit;
+                // store the source file name
+                $imagename=$image->name;
+
+                $ext =explode(".", $imagename);
+
+                // generate a unique file name
+                $model->photo = Yii::$app->security->generateRandomString().".{$ext[1]}";
+
+                // the path to save file, you can set an uploadPath
+                // in Yii::$app->params (as used in example below)
+                $path = Yii::$app->params['studentuploadPath'] . $model->photo;
+                $image->saveAs($path);
+                if($model->save()==false)
+                    throw new Exception('Unable to save record');
+                else
+                $student_education->roll_id=$student_education->getRollno($student_education->class_id,$student_education->section_id);
+
+                $student_education->addmission_no=$model->addmission_no;
+                $student_education->session_id=$model->from_session;
+                $student_education->student_id=$model->id;
+                if($student_education->save()==false) {
+
+                    throw new Exception('Unable to save educational record');
+                }
+                else
+                $student_transport->session_id=$model->from_session;
+                $student_transport->student_id=$model->id;
+                if($student_transport->save()==false) {
+                    throw new Exception('Unable to save Transport  record');
+                }
+                else
+                    $student_address->student_id=$model->id;
+                if($student_address->save()){
+                    $transaction->commit();
+                }else throw new Exception('Unable to save Address record');
+
+
+            }
+            catch(Exception $e) {
+                $transaction->rollback();
+                return $this->render('create', [
+                    'model' => $model,
+                    'transport'=>$student_transport,
+                    'education'=>$student_education,
+                    'address'=>$student_address,
+                    'adm_no'=>$adm_no
+                ]);
+            }
+
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'transport'=>$student_transport,
+                'education'=>$student_education,
+                'address'=>$student_address,
+                'adm_no'=>$adm_no
             ]);
         }
     }
@@ -92,6 +165,8 @@ class StudentMasterController extends Controller
             ]);
         }
     }
+
+
 
     /**
      * Deletes an existing StudentMaster model.

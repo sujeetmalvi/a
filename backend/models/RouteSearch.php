@@ -19,7 +19,7 @@ class RouteSearch extends Route
     {
         return [
             [['id'], 'integer'],
-            [['starting_point', 'end_point', 'created_at', 'updated_at'], 'safe'],
+            [['starting_point', 'end_point'], 'safe'],
         ];
     }
 
@@ -60,8 +60,6 @@ class RouteSearch extends Route
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'starting_point', $this->starting_point])

@@ -18,7 +18,7 @@ class SectionSearch extends Section
     public function rules()
     {
         return [
-            [['id', 'updated_at', 'created_at'], 'integer'],
+            [['id'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -60,8 +60,6 @@ class SectionSearch extends Section
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'updated_at' => $this->updated_at,
-            'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

@@ -12,8 +12,7 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property string $starting_point
  * @property string $end_point
- * @property string $created_at
- * @property string $updated_at
+
  *
  * @property RouteImmediateStations[] $routeImmediateStations
  * @property TransportRoute[] $transportRoutes
@@ -41,21 +40,6 @@ class Route extends \yii\db\ActiveRecord
     }
 
     /**
-     * timestamp Behaviour
-     */
-
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
-
-
-    /**
      * @inheritdoc
      */
     public function attributeLabels()
@@ -64,8 +48,7 @@ class Route extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'starting_point' => Yii::t('app', 'Starting Point'),
             'end_point' => Yii::t('app', 'End Point'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 

@@ -12,9 +12,7 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property integer $class_id
  * @property integer $section_id
- * @property string $created_at
- * @property string $updated_at
- *
+
  * @property Section $section
  * @property ClassMaster $class
  */
@@ -28,19 +26,7 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
         return '_class_section_relation';
     }
 
-    /**
-     * timestamp Behaviour
-     */
 
-    public function behaviours(){
-        return [
-            'class'=>TimestampBehavior::classname(),
-            'createdAtAttribute' => 'created_at',
-            'updatedAtAttribute' => 'updated_at',
-            'value' => new Expression('NOW()'),
-        ];
-
-    }
 
 
 
@@ -68,8 +54,7 @@ class ClassSectionRelation extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'class_id' => Yii::t('app', 'Class'),
             'section_id' => Yii::t('app', 'Section'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+
         ];
     }
 
