@@ -14,7 +14,7 @@ use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php echo uran1980\yii\widgets\pace\Pace::widget([
-    'color' => 'black',
+    'color' => 'red',
     'theme' => 'flash',
 ]); ?>
 <?php $this->beginPage() ?>
@@ -33,69 +33,16 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Yes ERP',
+        'brandLabel' => 'School Manager',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        //configuration menu starts here
-
-        $menuItems[]='<li><a href="index.php?r=student-master">Admission</a></li>';
-
-         $menuItems[]='
-         <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Configuration <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a  href="index.php?r=class-master">Class</a>
-                </li>
-               <li>
-                    <a  href="index.php?r=section">Section</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=class-section-relation">Class Section Assign</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=fee-master">Fee </a>
-                </li>
-                <li>
-                    <a  href="index.php?r=fee-type">Fee Type</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=district">District</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=state">State</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=payment-mode">Payment Mode</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=route">Route</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=route-immediate-stations">Route Stations</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=transport">Transport</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=transport-route">Transport Route</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=student-catagory">Student Catagory</a>
-                </li>
-                <li>
-                    <a  href="index.php?r=session">Session</a>
-                </li>
-            </ul>
-        </li>';
 
 
 
@@ -131,7 +78,7 @@ echo SideNav::widget([
         // not just as 'controller' even if default action is used.
         ['label' => 'Home', 'icon' => 'home', 'url' => Url::to(['/site'])],
 
-        ['label' => 'Configuration', 'icon' => 'tags', 'items' => [
+        ['label' => 'Configuration', 'icon' => 'cog', 'items' => [
 
             ['label' => 'Class and Section', 'icon' => 'bullhorn', 'items' => [
                 ['label' => 'Class', 'url' => Url::to(['/class-master'])],
