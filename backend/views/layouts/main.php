@@ -9,7 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
+use kartik\sidenav\SideNav;
 AppAsset::register($this);
 ?>
 <?php echo uran1980\yii\widgets\pace\Pace::widget([
@@ -115,12 +115,43 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid">
+   <div class="row">
+
+<div class="col-md-3">
+    <?php 
+
+echo SideNav::widget([
+    'type' => SideNav::TYPE_DEFAULT,
+    'heading' => 'Welcome',
+    'items' => [
+        [
+            'url' => '',
+            'label' => 'Home',
+            'icon' => 'home'
+        ],
+        [
+            'label' => 'Help',
+            'icon' => 'question-sign',
+            'items' => [
+                ['label' => 'About', 'icon'=>'info-sign', 'url'=>'#'],
+                ['label' => 'Contact', 'icon'=>'phone', 'url'=>'#'],
+            ],
+        ],
+    ],
+]);
+
+
+    ?>
+ </div>
+ <div class="col-md-9">   
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
+</div>        
+    </div>
     </div>
 </div>
 
