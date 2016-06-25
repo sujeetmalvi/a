@@ -47,8 +47,8 @@ class AddmissionPaymentDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'student_id' => Yii::t('app', 'Student ID'),
-            'class_id' => Yii::t('app', 'Class ID'),
+            'student_id' => Yii::t('app', 'Student id'),
+            'class_id' => Yii::t('app', 'Class'),
             'amt' => Yii::t('app', 'Amt'),
             'pay_mode' => Yii::t('app', 'Pay Mode'),
             'pay_mode_detail' => Yii::t('app', 'Pay Mode Detail'),

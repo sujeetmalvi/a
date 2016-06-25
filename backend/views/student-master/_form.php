@@ -11,7 +11,7 @@ use kartik\widgets\FileInput;
 ?>
 
 <div class="student-master-form">
-
+    <?php // if(isset($exception))echo $exception->getMessage();     ?>
     <?php $form = ActiveForm::begin([ 'options'=>['enctype'=>'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'addmission_no')->textInput(['value' =>$adm_no,'readonly'=>'readonly']) ?>

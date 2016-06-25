@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'transport'=>$transport,
         'education'=>$education,
         'address'=>$address,
-        'adm_no'=>$adm_no
+        'adm_no'=>$adm_no,
+       // 'exception'=>$exception
     ]) ?>
 
 </div>

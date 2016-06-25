@@ -2,23 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\ClassMaster;
-use backend\models\FeeMaster;
-use backend\models\StudentCatagory;
-use backend\models\StudentEducation;
-use backend\models\StudentTransport;
 use Yii;
-use backend\models\AddmissionPaymentDetails;
-use backend\models\AddmissionPaymentDetailsSearch;
+use backend\models\FeeBreakup;
+use backend\models\FeeBreakupSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\StudentMaster;
 
 /**
- * AddmissionPaymentDetailsController implements the CRUD actions for AddmissionPaymentDetails model.
+ * FeeBreakupController implements the CRUD actions for FeeBreakup model.
  */
-class AddmissionPaymentDetailsController extends Controller
+class FeeBreakupController extends Controller
 {
     /**
      * @inheritdoc
@@ -36,12 +30,12 @@ class AddmissionPaymentDetailsController extends Controller
     }
 
     /**
-     * Lists all AddmissionPaymentDetails models.
+     * Lists all FeeBreakup models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AddmissionPaymentDetailsSearch();
+        $searchModel = new FeeBreakupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -51,7 +45,7 @@ class AddmissionPaymentDetailsController extends Controller
     }
 
     /**
-     * Displays a single AddmissionPaymentDetails model.
+     * Displays a single FeeBreakup model.
      * @param integer $id
      * @return mixed
      */
@@ -63,51 +57,25 @@ class AddmissionPaymentDetailsController extends Controller
     }
 
     /**
-     * Creates a new AddmissionPaymentDetails model.
+     * Creates a new FeeBreakup model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new AddmissionPaymentDetails();
-        $student_data= new StudentMaster();
-        $education= new StudentEducation();
-        $student=$student_data->findOne($id);
-      //  print_r($student);exit;
-        $class_id=$education->findOne(['student_id'=>$id]);
-        $fee=FeeMaster::findOne(['class_id'=>$class_id->class_id,'type_id'=>'3']);
-        $transport = StudentTransport::find()
-            ->where(['student_id' => $id])
-            ->count();
-        if($transport>0){
-            $t_fee=FeeMaster::findOne(['class_id'=>$class_id->class_id,'type_id'=>'2']);
-            $tps=$t_fee->name;
-        }else{
-            $tps=0;
-        }
-        $discount=StudentCatagory::findOne(['id'=>$student->catagory]);
-        $cal=$discount->discount_in_adm;
-        $amount_per=$fee->name/$cal;
-        $total=$amount_per+$amount_per+$tps;
-        $total=ceil($total);
-
-
+        $model = new FeeBreakup();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'student'=>$student,
-                'amt'=>$total,
-                'education'=>$education,
-                'class_id'=>$class_id->class_id,
             ]);
         }
     }
 
     /**
-     * Updates an existing AddmissionPaymentDetails model.
+     * Updates an existing FeeBreakup model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -126,7 +94,7 @@ class AddmissionPaymentDetailsController extends Controller
     }
 
     /**
-     * Deletes an existing AddmissionPaymentDetails model.
+     * Deletes an existing FeeBreakup model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -139,15 +107,15 @@ class AddmissionPaymentDetailsController extends Controller
     }
 
     /**
-     * Finds the AddmissionPaymentDetails model based on its primary key value.
+     * Finds the FeeBreakup model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AddmissionPaymentDetails the loaded model
+     * @return FeeBreakup the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AddmissionPaymentDetails::findOne($id)) !== null) {
+        if (($model = FeeBreakup::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

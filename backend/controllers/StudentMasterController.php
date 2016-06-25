@@ -15,6 +15,7 @@ use yii\filters\VerbFilter;
 //use yii\db\Transaction;
 use yii\base\Exception;
 use yii\web\UploadedFile;
+use yii\helpers\Url;
 
 /**
  * StudentMasterController implements the CRUD actions for StudentMaster model.
@@ -96,8 +97,9 @@ class StudentMasterController extends Controller
                 // in Yii::$app->params (as used in example below)
                 $path = Yii::$app->params['studentuploadPath'] . $model->photo;
                 $image->saveAs($path);
-                if($model->save()==false)
+                if($model->save()==false) {
                     throw new Exception('Unable to save record');
+                }
                 else
                 $student_education->roll_id=$student_education->getRollno($student_education->class_id,$student_education->section_id);
 
@@ -129,20 +131,23 @@ class StudentMasterController extends Controller
                     'transport'=>$student_transport,
                     'education'=>$student_education,
                     'address'=>$student_address,
-                    'adm_no'=>$adm_no
+                    'adm_no'=>$adm_no,
+                    'exception'=>$e,
                 ]);
             }
 
 
 
-            return $this->redirect(['view', 'id' => $model->id]);
+           return Yii::$app->response->redirect(Url::to(['addmission-payment-details/create', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'transport'=>$student_transport,
                 'education'=>$student_education,
                 'address'=>$student_address,
-                'adm_no'=>$adm_no
+                'adm_no'=>$adm_no,
+               // 'exception'=>'',
+               // 'error'=>$e;
             ]);
         }
     }
