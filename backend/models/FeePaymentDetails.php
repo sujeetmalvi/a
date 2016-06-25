@@ -1,19 +1,16 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
 /**
- * This is the model class for table "fee_payment_details".
+ * This is the model class for table "_fee_payment_details".
  *
  * @property integer $id
- * @property integer $stu_id
- * @property string $adm_id
- * @property string $cheq_no
- * @property string $cheq_dt
- * @property string $bank_name
- * @property string $created_at
+ * @property integer $fee_id
+ * @property integer $fee_type_id
+ * @property string $amount
  */
 class FeePaymentDetails extends \yii\db\ActiveRecord
 {
@@ -22,7 +19,7 @@ class FeePaymentDetails extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'fee_payment_details';
+        return '_fee_payment_details';
     }
 
     /**
@@ -31,11 +28,9 @@ class FeePaymentDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['stu_id', 'adm_id', 'cheq_no', 'cheq_dt', 'bank_name'], 'required'],
-            [['stu_id'], 'integer'],
-            [['cheq_dt', 'created_at'], 'safe'],
-            [['adm_id'], 'string', 'max' => 30],
-            [['cheq_no', 'bank_name'], 'string', 'max' => 255],
+            [['fee_id', 'fee_type_id', 'amount'], 'required'],
+            [['fee_id', 'fee_type_id'], 'integer'],
+            [['amount'], 'string', 'max' => 120],
         ];
     }
 
@@ -46,12 +41,9 @@ class FeePaymentDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'stu_id' => Yii::t('app', 'Stu ID'),
-            'adm_id' => Yii::t('app', 'Adm ID'),
-            'cheq_no' => Yii::t('app', 'Cheq No'),
-            'cheq_dt' => Yii::t('app', 'Cheq Dt'),
-            'bank_name' => Yii::t('app', 'Bank Name'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'fee_id' => Yii::t('app', 'Fee ID'),
+            'fee_type_id' => Yii::t('app', 'Fee Type ID'),
+            'amount' => Yii::t('app', 'Amount'),
         ];
     }
 }
