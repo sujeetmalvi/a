@@ -19,11 +19,13 @@
     /*border-left: 3px solid transparent;*/
 }
 .nav>li>a:hover {
-    background-color: #006687;
+    background-color: #006677;
 }
 .kv-sidenav .indicator {
     font-size: 10px;
     font-weight: 100;
 }
-
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus { color: #fff; background:#006687; }
 

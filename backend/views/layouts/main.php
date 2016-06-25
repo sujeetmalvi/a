@@ -67,8 +67,8 @@ AppAsset::register($this);
    <div class="row box2">
 
 <div class="col-md-2 box1">
-    <?php 
-$item='home';
+    <?php
+    $item=Yii::$app->controller->action->uniqueId;
 $type='u';
 echo SideNav::widget([
     'type' => SideNav::TYPE_DEFAULT,
@@ -76,33 +76,33 @@ echo SideNav::widget([
     'items' => [
         // Important: you need to specify url as 'controller/action',
         // not just as 'controller' even if default action is used.
-        ['label' => 'Home', 'icon' => 'home', 'url' => Url::to(['/site'])],
+        ['label' => 'Home', 'icon' => 'home', 'url' => Url::to(['/site']),'active' => ($item == 'site/index')],
 
         ['label' => 'Configuration', 'icon' => 'cog', 'items' => [
 
-            ['label' => 'Class and Section', 'icon' => 'bullhorn', 'items' => [
-                ['label' => 'Class', 'url' => Url::to(['/class-master'])],
-                ['label' => 'Section', 'url' => Url::to(['/section'])],
-                ['label' => 'Class Section Assign', 'url' => Url::to(['/class-section-relation'])],
+            ['label' => 'Class and Section', 'icon' => '', 'items' => [
+                ['label' => 'Class', 'url' => Url::to(['/class-master']),'active' => ($item == 'class-master/index')],
+                ['label' => 'Section', 'url' => Url::to(['/section']),'active' => ($item == 'section/index')],
+                ['label' => 'Class Section Assign', 'url' => Url::to(['/class-section-relation']),'active' => ($item == 'class-section-relation/index')],
             ]],
             ['label' => 'Fee & Payment','icon'=>'','items'=>[
-                ['label' => 'Fee', 'url' => Url::to(['/fee-master'])],
-                ['label' => 'Fee Type', 'url' => Url::to(['/fee-type'])],
-                ['label' => 'Payment Mode', 'url' => Url::to(['/payment-mode'])],
+                ['label' => 'Fee', 'url' => Url::to(['/fee-master']),'active' => ($item == 'fee-master/index')],
+                ['label' => 'Fee Type', 'url' => Url::to(['/fee-type']),'active' => ($item == 'fee-type/index')],
+                ['label' => 'Payment Mode', 'url' => Url::to(['/payment-mode']),'active' => ($item == 'payment-mode/index')],
             ]],
             ['label'=> 'Location','icon'=>'','items'=>[
-                ['label' => 'Country', 'url' => Url::to(['/fee-master'])],
-                ['label' => 'State', 'url' => Url::to(['/state'])],
-                ['label' => 'District', 'url' => Url::to(['/district'])],
+                ['label' => 'Country', 'url' => Url::to(['/country']),'active' => ($item == 'country/index')],
+                ['label' => 'State', 'url' => Url::to(['/state']),'active' => ($item == 'state/index')],
+                ['label' => 'District', 'url' => Url::to(['/district']),'active' => ($item == 'district/index')],
             ]],
             ['label'=> 'Transport','icon'=>'','items'=>[
-                ['label' => 'Transport', 'url' => Url::to(['/transport'])],
-                ['label' => 'Transport Route', 'url' => Url::to(['/transport-route'])],
-                ['label' => 'Route', 'url' => Url::to(['/route'])],
-                ['label' => 'Route Stations', 'url' => Url::to(['/route-immediate-stations'])]
+                ['label' => 'Transport', 'url' => Url::to(['/transport']),'active' => ($item == 'transport/index')],
+                ['label' => 'Transport Route', 'url' => Url::to(['/transport-route']),'active' => ($item == 'transport-route/index')],
+                ['label' => 'Route', 'url' => Url::to(['/route']),'active' => ($item == 'route/index')],
+                ['label' => 'Route Stations', 'url' => Url::to(['/route-immediate-stations']),'active' => ($item == 'route-immediate-stations/index')]
             ]],
-            ['label' => 'Student Category', 'url' => Url::to(['/student-catagory','icon'=>''])],
-            ['label' => 'Session', 'url' => Url::to(['/session','icon'=>''])],
+            ['label' => 'Student Category', 'url' => Url::to(['/student-catagory','icon'=>'']),'active' => ($item == 'student-catagory/index')],
+            ['label' => 'Session', 'url' => Url::to(['/session','icon'=>'']),'active' => ($item == 'session/index')],
         ]],
 
         ['label' => 'Books', 'icon' => 'book', 'items' => [
