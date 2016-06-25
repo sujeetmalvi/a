@@ -87,6 +87,7 @@ class AddmissionPaymentDetailsController extends Controller
         }
         $discount=StudentCatagory::findOne(['id'=>$student->catagory]);
         $cal=$discount->discount_in_adm;
+        if($cal==0)$cal=1;
         $amount_per=$fee->name/$cal;
         $total=$amount_per+$amount_per+$tps;
         $total=ceil($total);
@@ -94,7 +95,8 @@ class AddmissionPaymentDetailsController extends Controller
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            return $this->render('receipt', ['id' =>$id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
