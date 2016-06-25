@@ -105,9 +105,10 @@ echo SideNav::widget([
             ['label' => 'Session', 'url' => Url::to(['/session','icon'=>'']),'active' => ($item == 'session/index')],
         ]],
 
-        ['label' => 'Books', 'icon' => 'book', 'items' => [
-            ['label' => ' New Arrivals', 'url' => Url::to(['/site/new-arrivals'])],
-            ['label' => ' Most Popular', 'url' => Url::to(['/site/most-popular'])],
+        ['label' => 'Student', 'icon' => 'user', 'items' => [
+            ['label' => ' New Admission', 'url' => Url::to(['/student-master/create']),'active' => ($item == 'student-master/create')],
+            ['label' => ' Upgrade Admission', 'url' => Url::to(['/site/new-arrivals']),'active' => ($item == 'session/index')],
+            ['label' => ' Student List ', 'url' => Url::to(['/student-master/index']),'active' => ($item == 'student-master/index')],
             ['label' => 'Read Online', 'icon' => 'cloud', 'items' => [
                 ['label' => 'Online 1', 'url' => Url::to(['/site/online-1'])],
                 ['label' => 'Online 2', 'url' => Url::to(['/site/online-2'])]
