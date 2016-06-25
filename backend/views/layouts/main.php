@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 use kartik\sidenav\SideNav;
+use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php echo uran1980\yii\widgets\pace\Pace::widget([
@@ -116,28 +117,57 @@ AppAsset::register($this);
     ?>
 
     <div class="container-fluid">
-   <div class="row">
+   <div class="row box2">
 
-<div class="col-md-3">
+<div class="col-md-2 box1">
     <?php 
-
+$item='home';
+$type='u';
 echo SideNav::widget([
     'type' => SideNav::TYPE_DEFAULT,
-    'heading' => 'Welcome',
+
     'items' => [
-        [
-            'url' => '',
-            'label' => 'Home',
-            'icon' => 'home'
-        ],
-        [
-            'label' => 'Help',
-            'icon' => 'question-sign',
-            'items' => [
-                ['label' => 'About', 'icon'=>'info-sign', 'url'=>'#'],
-                ['label' => 'Contact', 'icon'=>'phone', 'url'=>'#'],
-            ],
-        ],
+        // Important: you need to specify url as 'controller/action',
+        // not just as 'controller' even if default action is used.
+        ['label' => 'Home', 'icon' => 'home', 'url' => Url::to(['/site'])],
+
+        ['label' => 'Configuration', 'icon' => 'tags', 'items' => [
+
+            ['label' => 'Class and Section', 'icon' => 'bullhorn', 'items' => [
+                ['label' => 'Class', 'url' => Url::to(['/class-master'])],
+                ['label' => 'Section', 'url' => Url::to(['/section'])],
+                ['label' => 'Class Section Assign', 'url' => Url::to(['/class-section-relation'])],
+            ]],
+            ['label' => 'Fee & Payment','icon'=>'','items'=>[
+                ['label' => 'Fee', 'url' => Url::to(['/fee-master'])],
+                ['label' => 'Fee Type', 'url' => Url::to(['/fee-type'])],
+                ['label' => 'Payment Mode', 'url' => Url::to(['/payment-mode'])],
+            ]],
+            ['label'=> 'Location','icon'=>'','items'=>[
+                ['label' => 'Country', 'url' => Url::to(['/fee-master'])],
+                ['label' => 'State', 'url' => Url::to(['/state'])],
+                ['label' => 'District', 'url' => Url::to(['/district'])],
+            ]],
+            ['label'=> 'Transport','icon'=>'','items'=>[
+                ['label' => 'Transport', 'url' => Url::to(['/transport'])],
+                ['label' => 'Transport Route', 'url' => Url::to(['/transport-route'])],
+                ['label' => 'Route', 'url' => Url::to(['/route'])],
+                ['label' => 'Route Stations', 'url' => Url::to(['/route-immediate-stations'])]
+            ]],
+            ['label' => 'Student Category', 'url' => Url::to(['/student-catagory','icon'=>''])],
+            ['label' => 'Session', 'url' => Url::to(['/session','icon'=>''])],
+        ]],
+
+        ['label' => 'Books', 'icon' => 'book', 'items' => [
+            ['label' => ' New Arrivals', 'url' => Url::to(['/site/new-arrivals'])],
+            ['label' => ' Most Popular', 'url' => Url::to(['/site/most-popular'])],
+            ['label' => 'Read Online', 'icon' => 'cloud', 'items' => [
+                ['label' => 'Online 1', 'url' => Url::to(['/site/online-1'])],
+                ['label' => 'Online 2', 'url' => Url::to(['/site/online-2'])]
+            ]],
+        ]],
+
+        ['label' => 'Profile', 'icon' => 'user', 'url' => Url::to(['/site/profile'])],
     ],
 ]);
 
