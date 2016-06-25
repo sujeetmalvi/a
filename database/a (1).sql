@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 12, 2016 at 03:08 PM
--- Server version: 5.5.47-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Host: 127.0.0.1
+-- Generation Time: Jun 19, 2016 at 03:56 PM
+-- Server version: 5.7.9
+-- PHP Version: 7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `a`
@@ -23,9 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `addmission_payment_details`
+--
+
+DROP TABLE IF EXISTS `addmission_payment_details`;
+CREATE TABLE IF NOT EXISTS `addmission_payment_details` (
+  `id` int(110) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `amt` varchar(11) NOT NULL,
+  `pay_mode` int(250) NOT NULL,
+  `pay_mode_detail` varchar(250) NOT NULL,
+  `remarks` text NOT NULL,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migration`
 --
 
+DROP TABLE IF EXISTS `migration`;
 CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
@@ -43,9 +63,142 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2014_10_12_000000_create_users_table', 1),
+('2014_10_12_100000_create_password_resets_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session`
+--
+
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE IF NOT EXISTS `session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `sortname` varchar(90) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`id`, `start_date`, `end_date`, `sortname`, `status`) VALUES
+(1, '2016-04-01', '2017-03-31', '2016-17', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_address`
+--
+
+DROP TABLE IF EXISTS `student_address`;
+CREATE TABLE IF NOT EXISTS `student_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `h_no` varchar(120) NOT NULL,
+  `street_address` text NOT NULL,
+  `post_office` varchar(120) NOT NULL,
+  `district` int(11) NOT NULL,
+  `state` int(11) NOT NULL,
+  `country` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_education`
+--
+
+DROP TABLE IF EXISTS `student_education`;
+CREATE TABLE IF NOT EXISTS `student_education` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  `roll_id` int(11) NOT NULL,
+  `addmission_no` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_master`
+--
+
+DROP TABLE IF EXISTS `student_master`;
+CREATE TABLE IF NOT EXISTS `student_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  `do` date NOT NULL,
+  `gender` enum('male','female') NOT NULL,
+  `photo` text NOT NULL,
+  `contact` varchar(190) NOT NULL,
+  `from_session` int(11) NOT NULL,
+  `to_session` int(11) NOT NULL,
+  `addmission_no` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `from_session` (`from_session`),
+  KEY `to_session` (`to_session`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_transport`
+--
+
+DROP TABLE IF EXISTS `student_transport`;
+CREATE TABLE IF NOT EXISTS `student_transport` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `route_id` int(11) NOT NULL,
+  `station_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -60,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -72,9 +225,36 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', '$2y$10$bXnBcRlBy2hIXupdrXk7bOAssIqGBB40QIektoTzHqlPAEfpbCkve', '5HmzJmTCXor25tnpEgYkglNQ2v9X0xpga6byhJBlISrDIEByIBWWOrmFAX95', '2016-06-16 11:41:40', '2016-06-18 03:24:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `_class_master`
 --
 
+DROP TABLE IF EXISTS `_class_master`;
 CREATE TABLE IF NOT EXISTS `_class_master` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(9) NOT NULL,
@@ -83,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `_class_master` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_class_master`
@@ -116,16 +296,17 @@ INSERT INTO `_class_master` (`id`, `name`, `status`, `created_at`, `updated_at`)
 -- Table structure for table `_class_section_relation`
 --
 
+DROP TABLE IF EXISTS `_class_section_relation`;
 CREATE TABLE IF NOT EXISTS `_class_section_relation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `class_id` (`class_id`,`section_id`),
   KEY `section_id` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_class_section_relation`
@@ -133,7 +314,103 @@ CREATE TABLE IF NOT EXISTS `_class_section_relation` (
 
 INSERT INTO `_class_section_relation` (`id`, `class_id`, `section_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(2, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 2, 1, '2016-06-08 21:39:47', '2016-06-08 21:39:47'),
+(4, 3, 2, '2016-06-08 21:39:59', '2016-06-08 21:39:59'),
+(5, 4, 1, '2016-06-08 21:40:07', '2016-06-08 21:40:07'),
+(6, 4, 2, '2016-06-08 21:40:15', '2016-06-08 21:40:15'),
+(7, 5, 1, '2016-06-08 21:40:25', '2016-06-08 21:40:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_class_subject_assign`
+--
+
+DROP TABLE IF EXISTS `_class_subject_assign`;
+CREATE TABLE IF NOT EXISTS `_class_subject_assign` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_country`
+--
+
+DROP TABLE IF EXISTS `_country`;
+CREATE TABLE IF NOT EXISTS `_country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_country`
+--
+
+INSERT INTO `_country` (`id`, `name`) VALUES
+(1, 'INDIA'),
+(2, 'Nepal'),
+(3, 'dytyftftf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_degree`
+--
+
+DROP TABLE IF EXISTS `_degree`;
+CREATE TABLE IF NOT EXISTS `_degree` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  `degree_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_degree_type`
+--
+
+DROP TABLE IF EXISTS `_degree_type`;
+CREATE TABLE IF NOT EXISTS `_degree_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_department`
+--
+
+DROP TABLE IF EXISTS `_department`;
+CREATE TABLE IF NOT EXISTS `_department` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(130) NOT NULL,
+  `sub_department_status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_designation`
+--
+
+DROP TABLE IF EXISTS `_designation`;
+CREATE TABLE IF NOT EXISTS `_designation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -141,6 +418,7 @@ INSERT INTO `_class_section_relation` (`id`, `class_id`, `section_id`, `created_
 -- Table structure for table `_district`
 --
 
+DROP TABLE IF EXISTS `_district`;
 CREATE TABLE IF NOT EXISTS `_district` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -149,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `_district` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=672 ;
+) ENGINE=InnoDB AUTO_INCREMENT=672 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_district`
@@ -834,6 +1112,7 @@ INSERT INTO `_district` (`id`, `name`, `state_id`, `created_at`, `updated_at`) V
 -- Table structure for table `_fee_master`
 --
 
+DROP TABLE IF EXISTS `_fee_master`;
 CREATE TABLE IF NOT EXISTS `_fee_master` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_id` int(11) NOT NULL,
@@ -843,7 +1122,7 @@ CREATE TABLE IF NOT EXISTS `_fee_master` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_fee_master`
@@ -851,7 +1130,45 @@ CREATE TABLE IF NOT EXISTS `_fee_master` (
 
 INSERT INTO `_fee_master` (`id`, `class_id`, `name`, `type_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '500', 2, '2016-05-11 17:21:35', '2016-05-11 17:21:35'),
-(2, 1, '1200', 1, '2016-05-11 17:21:49', '2016-05-11 17:21:49');
+(2, 1, '1200', 1, '2016-05-11 17:21:49', '2016-05-11 17:21:49'),
+(3, 1, '5000', 3, '2016-05-14 01:39:51', '2016-05-14 01:39:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_fee_payment_details`
+--
+
+DROP TABLE IF EXISTS `_fee_payment_details`;
+CREATE TABLE IF NOT EXISTS `_fee_payment_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fee_id` int(11) NOT NULL,
+  `fee_type_id` int(11) NOT NULL,
+  `amount` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_fee_record_submission`
+--
+
+DROP TABLE IF EXISTS `_fee_record_submission`;
+CREATE TABLE IF NOT EXISTS `_fee_record_submission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `session_id` int(11) NOT NULL,
+  `amount` varchar(120) NOT NULL,
+  `for_month` date NOT NULL,
+  `to_month` date NOT NULL,
+  `pay_mode_id` int(11) NOT NULL,
+  `pay_mode-detail` text NOT NULL,
+  `remarks` text NOT NULL,
+  `emp_id` text NOT NULL,
+  `created_on` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -859,6 +1176,7 @@ INSERT INTO `_fee_master` (`id`, `class_id`, `name`, `type_id`, `created_at`, `u
 -- Table structure for table `_fee_type`
 --
 
+DROP TABLE IF EXISTS `_fee_type`;
 CREATE TABLE IF NOT EXISTS `_fee_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
@@ -866,7 +1184,7 @@ CREATE TABLE IF NOT EXISTS `_fee_type` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_fee_type`
@@ -874,7 +1192,25 @@ CREATE TABLE IF NOT EXISTS `_fee_type` (
 
 INSERT INTO `_fee_type` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Tution', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Transport', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(2, 'Transport', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Admission', 1, '2016-05-14 05:18:26', '2016-05-14 07:31:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_notification_student`
+--
+
+DROP TABLE IF EXISTS `_notification_student`;
+CREATE TABLE IF NOT EXISTS `_notification_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `massage` text NOT NULL,
+  `date_time` timestamp NOT NULL,
+  `session_id` int(11) NOT NULL,
+  `seen_status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -882,13 +1218,14 @@ INSERT INTO `_fee_type` (`id`, `name`, `status`, `created_at`, `updated_at`) VAL
 -- Table structure for table `_payment_mode`
 --
 
+DROP TABLE IF EXISTS `_payment_mode`;
 CREATE TABLE IF NOT EXISTS `_payment_mode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mode` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_payment_mode`
@@ -905,21 +1242,23 @@ INSERT INTO `_payment_mode` (`id`, `mode`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `_route`
 --
 
+DROP TABLE IF EXISTS `_route`;
 CREATE TABLE IF NOT EXISTS `_route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `starting_point` varchar(90) NOT NULL,
   `end_point` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_route`
 --
 
 INSERT INTO `_route` (`id`, `starting_point`, `end_point`, `created_at`, `updated_at`) VALUES
-(1, 'Sector 37', 'Sector 91', '2016-05-11 17:29:03', '2016-05-11 17:29:03');
+(1, 'Sector 37', 'Sector 91', '2016-05-11 17:29:03', '2016-05-11 17:29:03'),
+(2, 'Sector 46', 'Eros', '2016-06-13 03:36:32', '2016-06-13 03:36:32');
 
 -- --------------------------------------------------------
 
@@ -927,22 +1266,34 @@ INSERT INTO `_route` (`id`, `starting_point`, `end_point`, `created_at`, `update
 -- Table structure for table `_route_immediate_stations`
 --
 
+DROP TABLE IF EXISTS `_route_immediate_stations`;
 CREATE TABLE IF NOT EXISTS `_route_immediate_stations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `route_id` int(11) NOT NULL,
   `name` varchar(90) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `route_id` (`route_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_route_immediate_stations`
 --
 
 INSERT INTO `_route_immediate_stations` (`id`, `route_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Palla', '2016-05-11 17:34:04', '2016-05-11 17:34:04');
+(1, 1, 'Palla', '2016-05-11 17:34:04', '2016-05-11 17:34:04'),
+(2, 1, 'Sehatpur', '2016-06-13 04:27:40', '2016-06-13 04:27:40'),
+(3, 1, 'Sehatpur petrol pump', '2016-06-13 04:28:04', '2016-06-13 04:28:04'),
+(4, 1, 'Surya Vihar Phase I', '2016-06-13 04:28:25', '2016-06-13 04:28:25'),
+(5, 1, 'Surya Vihar phase 2', '2016-06-13 04:28:43', '2016-06-13 04:28:43'),
+(6, 1, 'Sector 91', '2016-06-13 04:28:59', '2016-06-13 04:28:59'),
+(7, 2, 'Sarai', '2016-06-13 04:29:14', '2016-06-13 04:29:14'),
+(8, 2, 'Green Field colony', '2016-06-13 04:29:34', '2016-06-13 04:29:34'),
+(9, 2, 'Omaxe green Valley', '2016-06-13 04:29:55', '2016-06-13 04:29:55'),
+(10, 2, 'Lakadpur', '2016-06-13 04:30:20', '2016-06-13 04:30:20'),
+(11, 2, 'Surajkund', '2016-06-13 04:30:44', '2016-06-13 04:30:44'),
+(12, 2, 'Eros', '2016-06-13 04:30:57', '2016-06-13 04:30:57');
 
 -- --------------------------------------------------------
 
@@ -950,6 +1301,7 @@ INSERT INTO `_route_immediate_stations` (`id`, `route_id`, `name`, `created_at`,
 -- Table structure for table `_section`
 --
 
+DROP TABLE IF EXISTS `_section`;
 CREATE TABLE IF NOT EXISTS `_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(9) NOT NULL,
@@ -957,7 +1309,7 @@ CREATE TABLE IF NOT EXISTS `_section` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_section`
@@ -971,59 +1323,199 @@ INSERT INTO `_section` (`id`, `name`, `updated_at`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `_special_course`
+--
+
+DROP TABLE IF EXISTS `_special_course`;
+CREATE TABLE IF NOT EXISTS `_special_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(120) NOT NULL,
+  `course_start_date` date NOT NULL,
+  `course_end_date` date NOT NULL,
+  `course_duration` varchar(120) NOT NULL,
+  `course-fee` decimal(10,2) NOT NULL,
+  `for_class` varchar(255) NOT NULL,
+  `compulsary` enum('yes','no') NOT NULL,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_special_course-fee`
+--
+
+DROP TABLE IF EXISTS `_special_course-fee`;
+CREATE TABLE IF NOT EXISTS `_special_course-fee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `amt` varchar(120) NOT NULL,
+  `pay_mode` int(11) NOT NULL,
+  `pay_detail` varchar(120) NOT NULL,
+  `remarks` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_staff_academic`
+--
+
+DROP TABLE IF EXISTS `_staff_academic`;
+CREATE TABLE IF NOT EXISTS `_staff_academic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
+  `year` year(4) NOT NULL,
+  `percentage` varchar(190) NOT NULL,
+  `degree_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_staff_address_current`
+--
+
+DROP TABLE IF EXISTS `_staff_address_current`;
+CREATE TABLE IF NOT EXISTS `_staff_address_current` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
+  `h_no` varchar(120) NOT NULL,
+  `street_address` text NOT NULL,
+  `post_office` varchar(120) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_staff_address_permanent`
+--
+
+DROP TABLE IF EXISTS `_staff_address_permanent`;
+CREATE TABLE IF NOT EXISTS `_staff_address_permanent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
+  `h_no` varchar(120) NOT NULL,
+  `street_address` text NOT NULL,
+  `post_office` varchar(120) NOT NULL,
+  `district_id` int(11) NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_staff_master`
+--
+
+DROP TABLE IF EXISTS `_staff_master`;
+CREATE TABLE IF NOT EXISTS `_staff_master` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  `title` varchar(120) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `sub_department_id` int(11) NOT NULL,
+  `designation_id` int(11) NOT NULL,
+  `joining_date` date NOT NULL,
+  `leaving_date` date NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_staff_type`
+--
+
+DROP TABLE IF EXISTS `_staff_type`;
+CREATE TABLE IF NOT EXISTS `_staff_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(130) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `_state`
 --
 
+DROP TABLE IF EXISTS `_state`;
 CREATE TABLE IF NOT EXISTS `_state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(90) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `country_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_state`
 --
 
-INSERT INTO `_state` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Andaman and Nicobar Island', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(2, 'Andhra Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(3, 'Arunachal Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(4, 'Assam', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(5, 'Bihar', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(6, 'Chandigarh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(7, 'Chhattisgarh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(8, 'Dadra and Nagar Haveli', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(9, 'Daman and Diu', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(10, 'Delhi', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(11, 'Goa', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(12, 'Gujarat', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(13, 'Haryana', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(14, 'Himachal Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(15, 'Jammu and Kashmir', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(16, 'Jharkhand', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(17, 'Karnataka', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(18, 'Kerala', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(19, 'Lakshadweep', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(20, 'Madhya Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(21, 'Maharashtra', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(22, 'Manipur', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(23, 'Meghalaya', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(24, 'Mizoram', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(25, 'Nagaland', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(26, 'Odisha', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(27, 'Puducherry', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(28, 'Punjab', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(29, 'Rajasthan', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(30, 'Sikkim', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(31, 'Tamil Nadu', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(32, 'Telangana', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(33, 'Tripura', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(34, 'Uttar Pradesh', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(35, 'Uttarakhand', '2016-05-11 16:56:48', '2016-05-11 16:56:48'),
-(36, 'West Bengal', '2016-05-11 16:56:48', '2016-05-11 16:56:48');
+INSERT INTO `_state` (`id`, `name`, `country_id`) VALUES
+(1, 'Andaman and Nicobar Island', 1),
+(2, 'Andhra Pradesh', 1),
+(3, 'Arunachal Pradesh', 1),
+(4, 'Assam', 1),
+(5, 'Bihar', 1),
+(6, 'Chandigarh', 1),
+(7, 'Chhattisgarh', 1),
+(8, 'Dadra and Nagar Haveli', 1),
+(9, 'Daman and Diu', 1),
+(10, 'Delhi', 1),
+(11, 'Goa', 1),
+(12, 'Gujarat', 1),
+(13, 'Haryana', 1),
+(14, 'Himachal Pradesh', 1),
+(15, 'Jammu and Kashmir', 1),
+(16, 'Jharkhand', 1),
+(17, 'Karnataka', 1),
+(18, 'Kerala', 1),
+(19, 'Lakshadweep', 1),
+(20, 'Madhya Pradesh', 1),
+(21, 'Maharashtra', 1),
+(22, 'Manipur', 1),
+(23, 'Meghalaya', 1),
+(24, 'Mizoram', 1),
+(25, 'Nagaland', 1),
+(26, 'Odisha', 1),
+(27, 'Puducherry', 1),
+(28, 'Punjab', 1),
+(29, 'Rajasthan', 1),
+(30, 'Sikkim', 1),
+(31, 'Tamil Nadu', 1),
+(32, 'Telangana', 1),
+(33, 'Tripura', 1),
+(34, 'Uttar Pradesh', 1),
+(35, 'Uttarakhand', 1),
+(36, 'West Bengal', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_student_attendance`
+--
+
+DROP TABLE IF EXISTS `_student_attendance`;
+CREATE TABLE IF NOT EXISTS `_student_attendance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `session_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1031,6 +1523,7 @@ INSERT INTO `_state` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `_student_catagory`
 --
 
+DROP TABLE IF EXISTS `_student_catagory`;
 CREATE TABLE IF NOT EXISTS `_student_catagory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
@@ -1040,7 +1533,7 @@ CREATE TABLE IF NOT EXISTS `_student_catagory` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_student_catagory`
@@ -1054,25 +1547,77 @@ INSERT INTO `_student_catagory` (`id`, `name`, `discount_in_fee`, `discount_in_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `_sub-department`
+--
+
+DROP TABLE IF EXISTS `_sub-department`;
+CREATE TABLE IF NOT EXISTS `_sub-department` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `department_id` int(11) NOT NULL,
+  `name` varchar(130) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_subject`
+--
+
+DROP TABLE IF EXISTS `_subject`;
+CREATE TABLE IF NOT EXISTS `_subject` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) NOT NULL,
+  `subject_type` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `_subject_type`
+--
+
+DROP TABLE IF EXISTS `_subject_type`;
+CREATE TABLE IF NOT EXISTS `_subject_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(190) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `_subject_type`
+--
+
+INSERT INTO `_subject_type` (`id`, `name`) VALUES
+(1, 'elective'),
+(2, 'electionation'),
+(3, 'fhfhyfuy');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `_transport`
 --
 
+DROP TABLE IF EXISTS `_transport`;
 CREATE TABLE IF NOT EXISTS `_transport` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `status` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `number_plate` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_transport`
 --
 
 INSERT INTO `_transport` (`id`, `name`, `status`, `created_at`, `updated_at`, `number_plate`) VALUES
-(1, 'Bus', 1, '2016-05-11 17:46:29', '2016-05-11 17:46:29', 'HR 21 AD 4567');
+(1, 'Bus', 1, '2016-05-11 17:46:29', '2016-05-11 17:46:29', 'HR 21 AD 4567'),
+(2, 'Bus', 1, '2016-06-13 04:33:19', '2016-06-13 04:33:19', 'HR 42 BC 4201');
 
 -- --------------------------------------------------------
 
@@ -1080,23 +1625,25 @@ INSERT INTO `_transport` (`id`, `name`, `status`, `created_at`, `updated_at`, `n
 -- Table structure for table `_transport_route`
 --
 
+DROP TABLE IF EXISTS `_transport_route`;
 CREATE TABLE IF NOT EXISTS `_transport_route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `transport_id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `transport_id` (`transport_id`),
   KEY `route_id` (`route_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `_transport_route`
 --
 
 INSERT INTO `_transport_route` (`id`, `transport_id`, `route_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 2, 2, '2016-06-13 10:03:59', '2016-06-13 10:03:59');
 
 --
 -- Constraints for dumped tables
