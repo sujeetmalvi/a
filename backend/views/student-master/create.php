@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="student-master-create">
 
-    
+
 
     <?= $this->render('_form', [
         'model' => $model,

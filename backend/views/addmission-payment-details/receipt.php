@@ -8,4 +8,4 @@
 ?>
 
 
-Your admission is successful. You can Print Your Receipt <a href="index.php?r=receipt/admission&id<?=$id?>">Here</a>
+Your admission is successful. You can Print Your Receipt <a href="index.php?r=receipt/admission&id=<?=$id?>">Here</a>

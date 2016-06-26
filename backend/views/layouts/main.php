@@ -64,8 +64,9 @@ AppAsset::register($this);
     ?>
 
     <div class="container-fluid">
-   <div class="row box2">
 
+   <div class="row box2">
+<?php  if (!Yii::$app->user->isGuest) { ?>
 <div class="col-md-2 box1">
     <?php
     $item=Yii::$app->controller->action->uniqueId;
@@ -122,6 +123,7 @@ echo SideNav::widget([
 
     ?>
  </div>
+ <?php } ?>
  <div class="col-md-9">   
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
