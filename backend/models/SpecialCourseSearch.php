@@ -63,7 +63,7 @@ class SpecialCourseSearch extends SpecialCourse
             'id' => $this->id,
             'course_start_date' => $this->course_start_date,
             'course_end_date' => $this->course_end_date,
-            'course-fee' => $this->course-fee,
+            //'course-fee' => $this->course_fee,
             'session_id' => $this->session_id,
         ]);
 

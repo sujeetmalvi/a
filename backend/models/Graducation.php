@@ -17,7 +17,7 @@ class Graducation extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '_graducation';
+        return '_graduation';
     }
 
     /**

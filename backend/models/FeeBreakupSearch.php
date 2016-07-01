@@ -18,7 +18,7 @@ class FeeBreakupSearch extends FeeBreakup
     public function rules()
     {
         return [
-            [['id', 'fee_type_id', 'amt'], 'integer'],
+            [['id', 'fee_type_id','class_id', 'amt'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -62,6 +62,7 @@ class FeeBreakupSearch extends FeeBreakup
             'id' => $this->id,
             'fee_type_id' => $this->fee_type_id,
             'amt' => $this->amt,
+            'class_id'=>$this->class_id
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

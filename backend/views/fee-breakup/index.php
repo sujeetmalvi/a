@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\FeeBreakupSearch */
@@ -24,8 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'fee_type_id',
+           // 'id',
+            [
+              'attribute'=> 'fee_type_id',
+              'value'=>'feetype.name',
+              'filter' => Html::activeDropDownList($searchModel, 'fee_type_id', ArrayHelper::map(\backend\models\FeeType::find()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Fee Type to filter'])
+            ],
+            [
+                'attribute'=> 'class_id',
+                'value'=>'classname.name',
+                'filter' => Html::activeDropDownList($searchModel, 'class_id', ArrayHelper::map(\backend\models\ClassMaster::find()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Class to filter'])
+            ],
             'name',
             'amt',
 

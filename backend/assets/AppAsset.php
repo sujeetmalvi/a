@@ -13,14 +13,19 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        'css/global.css'
+       // 'css/global.css',
+//		'admin/dist/css/AdminLTE.min.css',
+//		'admin/dist/css/skins/skin-blue.min.css',
+//		'font/css/font-awesome.min.css'
 
 
     ];
     public $js = [
+//		'admin/dist/js/app.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+		'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

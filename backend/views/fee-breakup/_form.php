@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fee_type_id')->textInput() ?>
+    <?= $form->field($model, 'fee_type_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\FeeType::find()->all(),'id','name'),['prompt'=>'Select Fee Type']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

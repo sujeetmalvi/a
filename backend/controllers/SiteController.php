@@ -1,11 +1,13 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\StudentMaster;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+
 
 /**
  * Site controller
@@ -55,7 +57,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $students= new StudentMaster();
+        $total_students=$students->find()->count();
+        return $this->render('index',[
+            'total_students'=>$total_students
+        ]);
     }
 
     public function actionLogin()

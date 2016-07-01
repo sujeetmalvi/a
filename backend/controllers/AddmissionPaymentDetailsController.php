@@ -79,7 +79,7 @@ class AddmissionPaymentDetailsController extends Controller
         $transport = StudentTransport::find()
             ->where(['student_id' => $id])
             ->count();
-        if($transport>0){
+        if($transport->route_id!='3'){
             $t_fee=FeeMaster::findOne(['class_id'=>$class_id->class_id,'type_id'=>'2']);
             $tps=$t_fee->name;
         }else{

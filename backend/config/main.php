@@ -9,6 +9,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name'=>'MSE',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -84,13 +85,19 @@ return [
             
         ],
         'assetManager' => [
-    'bundles' => [
-        'yii\bootstrap\BootstrapAsset' => [
-             'sourcePath' => null,
-             'css' => ['a/backend/web/css/bootstrap.min.css']
+            'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-blue',
+                ],
+            ],
         ],
-    ]
-]
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-advanced-app'
+                ],
+            ],
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

@@ -34,7 +34,7 @@ use kartik\widgets\FileInput;
         'options' => ['accept' => 'image/*'],
     ]); ?>
 
-    <?= $form->field($model, 'contact')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'contact')->textInput(['maxlength' => '10']) ?>
 
     <?= $form->field($model, 'catagory')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\StudentCatagory::find()->all(),'id','name'),['prompt'=>'Please Select Catagory']) ?>
 
