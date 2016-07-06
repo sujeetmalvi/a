@@ -13,7 +13,7 @@ use dmstr\widgets\Alert;
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]
         ) ?>
-    </section>
+    </section><br/>
 
     <section class="content">
         <?= Alert::widget() ?>

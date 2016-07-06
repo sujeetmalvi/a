@@ -43,8 +43,6 @@ class ClassMasterSearch extends ClassMaster
     {
         $query = ClassMaster::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,11 +55,9 @@ class ClassMasterSearch extends ClassMaster
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

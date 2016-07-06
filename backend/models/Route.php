@@ -3,8 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\Expression;
-use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_route".
@@ -12,10 +10,9 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property string $starting_point
  * @property string $end_point
-
  *
  * @property RouteImmediateStations[] $routeImmediateStations
- * @property TransportRoute[] $transportRoutes
+ * @property StudentTransport[] $studentTransports
  */
 class Route extends \yii\db\ActiveRecord
 {
@@ -34,7 +31,6 @@ class Route extends \yii\db\ActiveRecord
     {
         return [
             [['starting_point', 'end_point'], 'required'],
-           
             [['starting_point', 'end_point'], 'string', 'max' => 90],
         ];
     }
@@ -48,7 +44,6 @@ class Route extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'starting_point' => Yii::t('app', 'Starting Point'),
             'end_point' => Yii::t('app', 'End Point'),
-
         ];
     }
 
@@ -63,8 +58,8 @@ class Route extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTransportRoutes()
+    public function getStudentTransports()
     {
-        return $this->hasMany(TransportRoute::className(), ['route_id' => 'id']);
+        return $this->hasMany(StudentTransport::className(), ['route_id' => 'id']);
     }
 }

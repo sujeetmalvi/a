@@ -43,8 +43,6 @@ class DistrictSearch extends District
     {
         $query = District::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,7 +55,6 @@ class DistrictSearch extends District
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'state_id' => $this->state_id,

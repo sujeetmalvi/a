@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Graducation;
+use backend\models\Graduation;
 
 /**
- * GraducationSearch represents the model behind the search form about `backend\models\Graducation`.
+ * GraduationSearch represents the model behind the search form about `backend\models\Graduation`.
  */
-class GraducationSearch extends Graducation
+class GraduationSearch extends Graduation
 {
     /**
      * @inheritdoc
@@ -41,9 +41,7 @@ class GraducationSearch extends Graducation
      */
     public function search($params)
     {
-        $query = Graducation::find();
-
-        // add conditions that should always apply here
+        $query = Graduation::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,7 +55,6 @@ class GraducationSearch extends Graducation
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);

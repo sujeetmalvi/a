@@ -1,8 +1,7 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Session */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,30 +11,21 @@ use kartik\widgets\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Enter Start date ...'],
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-mm-dd'
-                ]
-            ]);  ?>
+    <?= $form->field($model, 'start_date')->textInput() ?>
 
-    <?= $form->field($model, 'end_date')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Enter End date ...'],
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-mm-dd'
-                ]
-            ]);  ?>
+    <?= $form->field($model, 'end_date')->textInput() ?>
 
     <?= $form->field($model, 'sortname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Active', 'Inactive' => 'Inactive', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'status')->textInput() ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+  
+	<?php if (!Yii::$app->request->isAjax){ ?>
+	  	<div class="form-group">
+	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	    </div>
+	<?php } ?>
 
     <?php ActiveForm::end(); ?>
-
+    
 </div>

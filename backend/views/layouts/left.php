@@ -83,9 +83,9 @@
                                 'icon' => 'fa fa-circle-o',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => 'Graduation ', 'icon' => 'fa fa-circle-o', 'url' => ['/graducation'],],
-                                    ['label' => 'Post Graduation', 'icon' => 'fa fa-circle-o', 'url' => ['/state'],],
-                                    ['label' => 'University', 'icon' => 'fa fa-circle-o', 'url' => ['/district'],],
+                                    ['label' => 'Graduation ', 'icon' => 'fa fa-circle-o', 'url' => ['/graduation'],],
+                                    ['label' => 'Post Graduation', 'icon' => 'fa fa-circle-o', 'url' => ['/post-graduation'],],
+                                    ['label' => 'University', 'icon' => 'fa fa-circle-o', 'url' => ['/university'],],
 
 
 

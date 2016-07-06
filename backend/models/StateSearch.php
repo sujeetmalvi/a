@@ -18,7 +18,7 @@ class StateSearch extends State
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'country_id'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -43,8 +43,6 @@ class StateSearch extends State
     {
         $query = State::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,11 +55,9 @@ class StateSearch extends State
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-           // 'created_at' => $this->created_at,
-           // 'updated_at' => $this->updated_at,
+            'country_id' => $this->country_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

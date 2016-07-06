@@ -43,8 +43,6 @@ class PostGraduationSearch extends PostGraduation
     {
         $query = PostGraduation::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,7 +55,6 @@ class PostGraduationSearch extends PostGraduation
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);

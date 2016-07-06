@@ -3,8 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\Expression;
-use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_route_immediate_stations".
@@ -14,6 +12,7 @@ use yii\behaviours\TimestampBehavior;
  * @property string $name
  *
  * @property Route $route
+ * @property StudentTransport[] $studentTransports
  */
 class RouteImmediateStations extends \yii\db\ActiveRecord
 {
@@ -25,8 +24,6 @@ class RouteImmediateStations extends \yii\db\ActiveRecord
         return '_route_immediate_stations';
     }
 
-
-
     /**
      * @inheritdoc
      */
@@ -35,7 +32,6 @@ class RouteImmediateStations extends \yii\db\ActiveRecord
         return [
             [['route_id', 'name'], 'required'],
             [['route_id'], 'integer'],
-          
             [['name'], 'string', 'max' => 90],
             [['route_id'], 'exist', 'skipOnError' => true, 'targetClass' => Route::className(), 'targetAttribute' => ['route_id' => 'id']],
         ];
@@ -48,7 +44,7 @@ class RouteImmediateStations extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'route_id' => Yii::t('app', 'Route'),
+            'route_id' => Yii::t('app', 'Route ID'),
             'name' => Yii::t('app', 'Name'),
         ];
     }
@@ -59,5 +55,13 @@ class RouteImmediateStations extends \yii\db\ActiveRecord
     public function getRoute()
     {
         return $this->hasOne(Route::className(), ['id' => 'route_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudentTransports()
+    {
+        return $this->hasMany(StudentTransport::className(), ['station_id' => 'id']);
     }
 }

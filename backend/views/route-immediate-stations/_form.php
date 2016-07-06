@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\models\Route;
@@ -14,15 +13,17 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'route_id')->dropDownList(ArrayHelper::map(Route::find()->all(),'id','end_point'),['prompt'=>'Please Select route']) ?>
+	<?= $form->field($model, 'route_id')->dropDownList(ArrayHelper::map(Route::find()->all(),'id','end_point'),['prompt'=>'Please Select route']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+  
+	<?php if (!Yii::$app->request->isAjax){ ?>
+	  	<div class="form-group">
+	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	    </div>
+	<?php } ?>
 
     <?php ActiveForm::end(); ?>
-
+    
 </div>

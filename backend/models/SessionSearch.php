@@ -18,8 +18,8 @@ class SessionSearch extends Session
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['start_date', 'end_date', 'sortname', 'status'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['start_date', 'end_date', 'sortname'], 'safe'],
         ];
     }
 
@@ -43,8 +43,6 @@ class SessionSearch extends Session
     {
         $query = Session::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,15 +55,14 @@ class SessionSearch extends Session
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'sortname', $this->sortname])
-            ->andFilterWhere(['like', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'sortname', $this->sortname]);
 
         return $dataProvider;
     }

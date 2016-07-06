@@ -14,6 +14,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+         'gridview' => [
+            'class' => '\kartik\grid\Module',
+        ],
         'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',
 

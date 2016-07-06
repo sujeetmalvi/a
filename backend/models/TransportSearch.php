@@ -43,8 +43,6 @@ class TransportSearch extends Transport
     {
         $query = Transport::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,12 +55,9 @@ class TransportSearch extends Transport
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            //'created_at' => $this->created_at,
-           // 'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

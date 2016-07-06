@@ -5,19 +5,19 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "_graducation".
+ * This is the model class for table "_university".
  *
  * @property integer $id
  * @property string $name
  */
-class Graducation extends \yii\db\ActiveRecord
+class University extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '_graduation';
+        return '_university';
     }
 
     /**
@@ -27,7 +27,7 @@ class Graducation extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 120],
+            [['name'], 'string'],
         ];
     }
 

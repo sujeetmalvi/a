@@ -19,7 +19,6 @@ class TransportRouteSearch extends TransportRoute
     {
         return [
             [['id', 'transport_id', 'route_id'], 'integer'],
-           // [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -43,8 +42,6 @@ class TransportRouteSearch extends TransportRoute
     {
         $query = TransportRoute::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,13 +54,10 @@ class TransportRouteSearch extends TransportRoute
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'transport_id' => $this->transport_id,
             'route_id' => $this->route_id,
-           // 'created_at' => $this->created_at,
-           // 'updated_at' => $this->updated_at,
         ]);
 
         return $dataProvider;

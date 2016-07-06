@@ -3,8 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\Expression;
-use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_fee_type".
@@ -12,9 +10,10 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property string $name
  * @property integer $status
-
  *
+ * @property FeeBreakup[] $feeBreakups
  * @property FeeMaster[] $feeMasters
+ * @property FeePaymentDetails[] $feePaymentDetails
  */
 class FeeType extends \yii\db\ActiveRecord
 {
@@ -34,14 +33,9 @@ class FeeType extends \yii\db\ActiveRecord
         return [
             [['name', 'status'], 'required'],
             [['status'], 'integer'],
-           
             [['name'], 'string', 'max' => 90],
         ];
     }
-
-
-
-
 
     /**
      * @inheritdoc
@@ -52,8 +46,15 @@ class FeeType extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'status' => Yii::t('app', 'Status'),
-
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFeeBreakups()
+    {
+        return $this->hasMany(FeeBreakup::className(), ['fee_type_id' => 'id']);
     }
 
     /**
@@ -62,5 +63,13 @@ class FeeType extends \yii\db\ActiveRecord
     public function getFeeMasters()
     {
         return $this->hasMany(FeeMaster::className(), ['type_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFeePaymentDetails()
+    {
+        return $this->hasMany(FeePaymentDetails::className(), ['fee_type_id' => 'id']);
     }
 }

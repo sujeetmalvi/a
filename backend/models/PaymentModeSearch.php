@@ -43,8 +43,6 @@ class PaymentModeSearch extends PaymentMode
     {
         $query = PaymentMode::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,10 +55,9 @@ class PaymentModeSearch extends PaymentMode
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-          ]);
+        ]);
 
         $query->andFilterWhere(['like', 'mode', $this->mode]);
 

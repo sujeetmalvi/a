@@ -3,7 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use backend\models\FeeType;
 use backend\models\ClassMaster;
 
 /**
@@ -14,6 +13,8 @@ use backend\models\ClassMaster;
  * @property string $name
  * @property integer $amt
  * @property integer $class_id
+ *
+ * @property FeeType $feeType
  */
 class FeeBreakup extends \yii\db\ActiveRecord
 {
@@ -31,26 +32,11 @@ class FeeBreakup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fee_type_id','class_id', 'name', 'amt'], 'required'],
-            [['fee_type_id','class_id', 'amt'], 'integer'],
+            [['fee_type_id', 'name', 'amt', 'class_id'], 'required'],
+            [['fee_type_id', 'amt', 'class_id'], 'integer'],
             [['name'], 'string', 'max' => 120],
+            [['fee_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => FeeType::className(), 'targetAttribute' => ['fee_type_id' => 'id']],
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFeetype()
-    {
-        return $this->hasOne(FeeType::className(), ['id' => 'fee_type_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClassname()
-    {
-        return $this->hasOne(ClassMaster::className(), ['id' => 'class_id']);
     }
 
     /**
@@ -60,10 +46,25 @@ class FeeBreakup extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'fee_type_id' => Yii::t('app', 'Fee Type ID'),
+            'fee_type_id' => Yii::t('app', 'Fee Type '),
             'name' => Yii::t('app', 'Name'),
             'amt' => Yii::t('app', 'Amt'),
-            'class_id'=>Yii::t('app','Class')
+            'class_id' => Yii::t('app', 'Class'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFeeType()
+    {
+        return $this->hasOne(FeeType::className(), ['id' => 'fee_type_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClassname()
+    {
+        return $this->hasOne(ClassMaster::className(), ['id' => 'class_id']);
     }
 }

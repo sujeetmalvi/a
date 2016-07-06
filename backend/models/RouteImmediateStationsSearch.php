@@ -43,8 +43,6 @@ class RouteImmediateStationsSearch extends RouteImmediateStations
     {
         $query = RouteImmediateStations::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,7 +55,6 @@ class RouteImmediateStationsSearch extends RouteImmediateStations
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'route_id' => $this->route_id,

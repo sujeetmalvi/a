@@ -3,8 +3,6 @@
 namespace backend\models;
 
 use Yii;
-use yii\db\Expression;
-use yii\behaviours\TimestampBehavior;
 
 /**
  * This is the model class for table "_transport_route".
@@ -12,10 +10,6 @@ use yii\behaviours\TimestampBehavior;
  * @property integer $id
  * @property integer $transport_id
  * @property integer $route_id
-
- *
- * @property Route $route
- * @property Transport $transport
  */
 class TransportRoute extends \yii\db\ActiveRecord
 {
@@ -35,9 +29,6 @@ class TransportRoute extends \yii\db\ActiveRecord
         return [
             [['transport_id', 'route_id'], 'required'],
             [['transport_id', 'route_id'], 'integer'],
-            
-            [['route_id'], 'exist', 'skipOnError' => true, 'targetClass' => Route::className(), 'targetAttribute' => ['route_id' => 'id']],
-            [['transport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Transport::className(), 'targetAttribute' => ['transport_id' => 'id']],
         ];
     }
 
@@ -52,7 +43,6 @@ class TransportRoute extends \yii\db\ActiveRecord
             'route_id' => Yii::t('app', 'Route ID'),
         ];
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */

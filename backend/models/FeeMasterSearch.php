@@ -43,8 +43,6 @@ class FeeMasterSearch extends FeeMaster
     {
         $query = FeeMaster::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,7 +55,6 @@ class FeeMasterSearch extends FeeMaster
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'class_id' => $this->class_id,
