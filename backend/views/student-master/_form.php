@@ -4,100 +4,59 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
 use kartik\widgets\FileInput;
+use kartik\tabs\TabsX;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\StudentMaster */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<?php //print_r($exception); ?>
 <div class="student-master-form">
-    <?php // if(isset($exception))echo $exception->getMessage();     ?>
-    <?php $form = ActiveForm::begin([ 'options'=>['enctype'=>'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin([ 'options'=>['enctype'=>'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'addmission_no')->textInput(['value' =>$adm_no,'readonly'=>'readonly']) ?>
+    <?php
+    $wizard_config = [
+        'id' => 'stepwizard',
+        'steps' => [
+            1 => [
+                'title' => 'Basic information',
+                'icon' => 'glyphicon glyphicon-user',
+                'content' => $this->render('_basic',['model'=>$model,'form'=>$form,'adm_no'=>$adm_no]),
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'do')->widget(DateControl::classname(), [
-        'type'=>DateControl::FORMAT_DATE,
-        'ajaxConversion'=>true,
-        'options' => [
-            'pluginOptions' => [
-                'autoclose' => true
-            ]
-        ]
-    ]); ?>
-
-    <?= $form->field($model, 'gender')->dropDownList([ 'male' => 'Male', 'female' => 'Female', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'image/*'],
-    ]); ?>
-
-    <?= $form->field($model, 'contact')->textInput(['maxlength' => '10']) ?>
-
-    <?= $form->field($model, 'catagory')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\StudentCatagory::find()->all(),'id','name'),['prompt'=>'Please Select Catagory']) ?>
-
-    <?= $form->field($model, 'from_session')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Session::find()->all(),'id','sortname')) ?>
-
-
-
-
-
-
-
-<!--    education details -->
-
-    <?= $form->field($education, 'class_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\ClassMaster::find()->all(),'id','name'),['prompt'=>'Select Class',
-        'onchange'=>'$.post( "index.php?r=section/lists&id='.'"+$(this).val(), function( data ){
-                                         $( "select#studenteducation-section_id" ).html( data );
-                                           });',]) ?>
-
-    <?= $form->field($education, 'section_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Section::find()->all(),'id','name'),
-        ['prompt'=>'Select Section']) ?>
-
-<!--    transport details-->
-
-    <?= $form->field($transport, 'route_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Route::find()->all(),
-        'id','end_point'),['prompt'=>'Select Route',
-        'onchange'=>'$.post( "index.php?r=route-immediate-stations/lists&id='.'"+$(this).val(), function( data ){
-                                         $( "select#studenttransport-station_id" ).html( data );
-                                           });'
-    ]) ?>
-
-    <?= $form->field($transport, 'station_id')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\RouteImmediateStations::find()->all(),'id','name'),['prompt'=>'Select Intermediate Station']) ?>
-
-<!--   address details-->
-
-    <?= $form->field($address, 'h_no')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($address, 'street_address')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($address, 'post_office')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($address, 'country')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\Country::find()->all(),'id','name'),['prompt'=>'Please Select Country',
-        'onchange'=>'$.post( "index.php?r=state/lists&id='.'"+$(this).val(), function( data ){
-                                         $( "select#studentaddress-state" ).html( data );
-                                           });'
-    ]) ?>
+            ],
+            2 => [
+                'title' => 'Address Details',
+                'icon' => 'glyphicon glyphicon-home',
+                'content' => $this->render('_address',['address'=>$address,'form'=>$form,'adm_no'=>$adm_no]),
+                'skippable' => false,
+            ],
+            3 => [
+                'title' => 'Guardian information',
+                'icon' => 'glyphicon glyphicon-eye-open',
+                'content' => $this->render('_parent',['guardian'=>$guardian,'form'=>$form,'adm_no'=>$adm_no]),
+                'skippable' => false,
+            ],
+            4 => [
+                'title' => 'Academic Details',
+                'icon' => 'glyphicon glyphicon-cloud-upload',
+                'content' => $this->render('_education',['education'=>$education,'form'=>$form,'adm_no'=>$adm_no]),
+                'skippable' => false,
+            ],
+            5 => [
+                'title' => 'Transport Details',
+                'icon' => 'glyphicon glyphicon-transfer',
+                'content' =>$this->render('_transport',['model'=>$model,'transport'=>$transport,'form'=>$form,'adm_no'=>$adm_no]),
+            ],
+        ],
+        //'complete_content' => "You are done!", // Optional final screen
+        'start_step' => 1, // Optional, start with a specific step
+    ];
+    ?>
 
 
-    <?= $form->field($address, 'state')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\State::find()->all(),'id','name'),[
-        'prompt'=>'Please Select State',
-        'onchange'=>'$.post( "index.php?r=district/lists&id='.'"+$(this).val(), function( data ){
-                                         $( "select#studentaddress-district" ).html( data );
-                                           });'
-    ]) ?>
+    <?= \drsdre\wizardwidget\WizardWidget::widget($wizard_config); ?>
 
-    <?= $form->field($address, 'district')->dropDownList(\yii\helpers\ArrayHelper::map(\backend\models\District::find()->all(),'id','name'),['prompt'=>'Select District'])  ?>
-
-
-
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
 
-</div>
+    <?php ActiveForm::end(); ?>

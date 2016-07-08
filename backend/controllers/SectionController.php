@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Section;
 use backend\models\SectionSearch;
+use backend\models\ClassSectionRelation;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -267,5 +268,28 @@ class SectionController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    public function actionLists($id)
+    {
+        $countBranches = ClassSectionRelation::find()
+            ->where(['class_id' => $id])
+            ->count();
+
+        $branches = Section::find()
+            ->select('_section.name as name,_section.id as id')
+            ->leftJoin('_class_section_relation', '`_class_section_relation`.`section_id` = `_section`.`id`')
+            ->where(['_class_section_relation.class_id' => $id])
+            ->all();
+
+        if($countBranches > 0 )
+        {
+            foreach($branches as $branch ){
+                echo "<option value='".$branch->id."'>".$branch->name."</option>";
+            }
+        }
+        else{
+            echo "<option> - </option>";
+        }
+
     }
 }

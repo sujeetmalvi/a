@@ -268,4 +268,25 @@ class DistrictController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function actionLists($id)
+    {
+        $countBranches = District::find()
+            ->where(['state_id' => $id])
+            ->count();
+
+        $branches = District::find()
+            ->where(['state_id' => $id])
+            ->all();
+
+        if($countBranches > 0 )
+        {
+            foreach($branches as $branch ){
+                echo "<option value='".$branch->id."'>".$branch->name."</option>";
+            }
+        }
+        else{
+            echo "<option> - </option>";
+        }
+
+    }
 }

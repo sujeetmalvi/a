@@ -59,4 +59,19 @@ class StudentEducation extends \yii\db\ActiveRecord
             'addmission_no' => Yii::t('app', 'Addmission Number'),
         ];
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSection()
+    {
+        return $this->hasOne(Section::className(), ['id' => 'section_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClass()
+    {
+        return $this->hasOne(ClassMaster::className(), ['id' => 'class_id']);
+    }
 }

@@ -268,4 +268,26 @@ class RouteImmediateStationsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionLists($id)
+    {
+        $countBranches = RouteImmediateStations::find()
+            ->where(['route_id' => $id])
+            ->count();
+
+        $branches = RouteImmediateStations::find()
+            ->where(['route_id' => $id])
+            ->all();
+
+        if($countBranches > 0 )
+        {
+            foreach($branches as $branch ){
+                echo "<option value='".$branch->id."'>".$branch->name."</option>";
+            }
+        }
+        else{
+            echo "<option> - </option>";
+        }
+
+    }
 }

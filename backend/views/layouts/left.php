@@ -1,4 +1,7 @@
 <aside class="main-sidebar">
+<?php if(Yii::$app->user->isGuest){
+    Yii::$app->response->redirect(Url::to(['login']));
+} ?>
 
     <section class="sidebar">
 
@@ -123,7 +126,9 @@
                         'icon' => 'fa fa-user',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Admission ', 'icon' => 'fa fa-circle-o', 'url' => ['/student-master'],],
+                            ['label' => 'New Admission ', 'icon' => 'fa fa-circle-o', 'url' => ['/student-master/create'],],
+                            ['label' => 'Upgrade Admission ', 'icon' => 'fa fa-circle-o', 'url' => ['/student-master/upgrade'],],
+                            ['label' => 'Students List ', 'icon' => 'fa fa-circle-o', 'url' => ['/student-master/'],],
                             ['label' => 'Fee ', 'icon' => 'fa fa-circle-o', 'url' => ['/fee-record-submission'],],
 
                         ],

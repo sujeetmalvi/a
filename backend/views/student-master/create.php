@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'education'=>$education,
         'address'=>$address,
         'adm_no'=>$adm_no,
-       // 'exception'=>$exception
+        'guardian'=>$guardian,
+        'exception'=>$exception
     ]) ?>
 
 </div>

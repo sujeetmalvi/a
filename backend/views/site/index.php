@@ -16,7 +16,7 @@ $this->title = 'Dashboard';
             <div class="icon">
                 <i class="fa fa-user"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <span class="fa fa-arrow-circle-right"></span></a>
+            <a href="index.php?r=student-master" class="small-box-footer">More info <span class="fa fa-arrow-circle-right"></span></a>
         </div>
     </div>
     <!-- ./col -->

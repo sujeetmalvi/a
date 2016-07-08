@@ -24,20 +24,76 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+<div class="row">
+    <div class="col-md-3 col-md-offset-4">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
-            'do',
-            'gender',
-            'photo:ntext',
-            'contact',
-            'from_session',
-            'to_session',
-            'addmission_no',
+           // 'id',
+           // 'name',
+           // 'do',
+           // 'gender',
+            [
+                'attribute'=>'photo',
+                'label'=>false,
+                 'value'=>$model->photo,
+                'format' => ['image',['width'=>'200','height'=>'200']],
+            ],
+           // 'contact',
+           // 'from_session',
+           // 'to_session',
+           // 'addmission_no',
         ],
     ]) ?>
+ </div>
 
+</div>
+<div class="row">
+   <div class="col-md-12">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="row">
+<div class="col-md-12">
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            // 'id',
+             'name',
+             'do',
+             'gender',
+            //[
+              //  'attribute'=>'photo',
+               // 'value'=>$model->photo,
+               // 'format' => ['image',['width'=>'200','height'=>'200']],
+           // ],
+             'contact',
+            [
+                'attribute'=>'class_id',
+                'value'=>$model->education->class->name,
+            ],
+            [
+                'attribute'=>'section',
+                'value'=>$model->education->section->name,
+            ],
+            [
+                'attribute'=>'roll_no',
+                'value'=>$model->education->roll_id
+            ],
+            [
+                'attribute'=>'address',
+                'value'=>$model->addresses->street_address
+            ],
+            [
+                'attribute'=>'from_session',
+                'value'=>$model->session->sortname,
+            ],
+           //  'from_session',
+            // 'to_session',
+             'addmission_no',
+        ],
+    ]) ?>
+    </div>
+    </div>
+     </div>
+    </div>
 </div>

@@ -14,10 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'New Admission'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
+    </p>
+    <div class="panel panel-primary">
+        <div class="panel-body">
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,7 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'do',
             'gender',
            // 'photo:ntext',
-            // 'contact',
+            [
+                'attribute'=>'photo',
+              //  'value'=>$model->photo,
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ],
+             'contact',
+
             // 'from_session',
             // 'to_session',
              'addmission_no',
@@ -38,3 +44,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+ </div>
+    </div>

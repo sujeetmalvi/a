@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\StaffMaster;
-use backend\models\StaffMasterSearch;
+use backend\models\StudentGuardian;
+use backend\models\StudentGuardianSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * StaffMasterController implements the CRUD actions for StaffMaster model.
+ * StudentGuardianController implements the CRUD actions for StudentGuardian model.
  */
-class StaffMasterController extends Controller
+class StudentGuardianController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Lists all StaffMaster models.
+     * Lists all StudentGuardian models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StaffMasterSearch();
+        $searchModel = new StudentGuardianSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Displays a single StaffMaster model.
+     * Displays a single StudentGuardian model.
      * @param integer $id
      * @return mixed
      */
@@ -58,13 +57,13 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Creates a new StaffMaster model.
+     * Creates a new StudentGuardian model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new StaffMaster();
+        $model = new StudentGuardian();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +75,7 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Updates an existing StaffMaster model.
+     * Updates an existing StudentGuardian model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +94,7 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Deletes an existing StaffMaster model.
+     * Deletes an existing StudentGuardian model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,15 +107,15 @@ class StaffMasterController extends Controller
     }
 
     /**
-     * Finds the StaffMaster model based on its primary key value.
+     * Finds the StudentGuardian model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return StaffMaster the loaded model
+     * @return StudentGuardian the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = StaffMaster::findOne($id)) !== null) {
+        if (($model = StudentGuardian::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

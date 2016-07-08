@@ -12,7 +12,8 @@ use backend\models\StudentMasterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-//use yii\db\Transaction;
+use backend\models\StudentGuardian;
+use yii\db\Transaction;
 use yii\base\Exception;
 use yii\web\UploadedFile;
 use yii\helpers\Url;
@@ -75,9 +76,10 @@ class StudentMasterController extends Controller
         $student_transport= new StudentTransport();
         $student_education = new StudentEducation();
         $student_address = new StudentAddress();
+        $guardian= new StudentGuardian();
         $adm_no=$model->getAddmissionNo();
 
-        if ($model->load(Yii::$app->request->post()) && $student_transport->load(Yii::$app->request->post()) && $student_education->load(Yii::$app->request->post()) && $student_address->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $student_transport->load(Yii::$app->request->post()) && $student_education->load(Yii::$app->request->post()) && $student_address->load(Yii::$app->request->post()) && $guardian->load(Yii::$app->request->post())) {
             $connection = \Yii::$app->db;
             $transaction = $connection->beginTransaction();
             try{
@@ -97,10 +99,13 @@ class StudentMasterController extends Controller
                 // in Yii::$app->params (as used in example below)
                 $path = Yii::$app->params['studentuploadPath'] . $model->photo;
                 $image->saveAs($path);
+                $model->photo=$path;
                 if($model->save()==false) {
+                    //print_r($model->errors);exit;
                     throw new Exception('Unable to save record');
                 }
                 else
+
                 $student_education->roll_id=$student_education->getRollno($student_education->class_id,$student_education->section_id);
 
                 $student_education->addmission_no=$model->addmission_no;
@@ -119,6 +124,8 @@ class StudentMasterController extends Controller
                 else
                     $student_address->student_id=$model->id;
                 if($student_address->save()){
+                  $guardian->student_id=$model->id;
+                    $guardian->save();
                     $transaction->commit();
                 }else throw new Exception('Unable to save Address record');
 
@@ -132,6 +139,7 @@ class StudentMasterController extends Controller
                     'education'=>$student_education,
                     'address'=>$student_address,
                     'adm_no'=>$adm_no,
+                    'guardian'=>$guardian,
                     'exception'=>$e,
                 ]);
             }
@@ -146,7 +154,8 @@ class StudentMasterController extends Controller
                 'education'=>$student_education,
                 'address'=>$student_address,
                 'adm_no'=>$adm_no,
-               // 'exception'=>'',
+                'guardian'=>$guardian,
+               'exception'=>'',
                // 'error'=>$e;
             ]);
         }
